@@ -6,12 +6,11 @@ use Test::More;
 
 use_ok 'Music::Dice';
 
-new_ok 'Music::Dice';
-
-my $obj = new_ok 'Music::Dice' => [
-    verbose => 1,
-];
-
-is $obj->verbose, 1, 'verbose';
+subtest defaults => sub {
+    my $obj = new_ok 'Music::Dice';
+    is $obj->verbose, 0, 'verbose';
+    is_deeply $obj->chord_voices, [3,4], 'chord_voices';
+    ok defined $obj->d_chord_voices->roll, 'd_chord_voices';
+};
 
 done_testing();
