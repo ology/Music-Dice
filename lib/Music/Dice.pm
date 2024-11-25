@@ -60,6 +60,27 @@ sub _build_d_chord_voices {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 d_remove_chord
+
+  $result = $md->d_remove_chord->roll;
+
+Returns a value between C<1> and the last B<chord_voices> entry (e.g. C<4>).
+
+=cut
+
+has d_remove_chord => (
+    is => 'lazy',
+);
+
+sub _build_d_remove_chord {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [ 1 .. $self->chord_voices->[-1] ];
+        choose_weighted($choices, [ (1) x @$choices ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 verbose
 
   $verbose = $md->verbose;
