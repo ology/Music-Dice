@@ -7,6 +7,8 @@ our $VERSION = '0.0100';
 use Moo;
 use strictures 2;
 use Carp qw(croak);
+use Games::Dice::Advanced ();
+use List::Util::WeightedChoice qw( choose_weighted);
 use namespace::clean;
 
 =head1 SYNOPSIS
@@ -20,6 +22,43 @@ use namespace::clean;
 C<Music::Dice> defines and plays musical dice games.
 
 =head1 ATTRIBUTES
+
+=head2 chord_voices
+
+  $chord_voices = $md->chord_voices;
+  $md->chord_voices($n);
+
+The number of voices in a chord given as an array reference.
+
+Default: C<[3,4]>
+
+=cut
+
+has chord_voices => (
+    is      => 'lazy',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [ 3, 4 ] },
+);
+
+=head2 d_chord_voices
+
+  $result = $md->d_chord_voices->roll;
+
+Returns one of the B<chord_voices> with equal probability.
+
+=cut
+
+has d_chord_voices => (
+    is => 'lazy',
+);
+
+sub _build_d_chord_voices {
+    my ($self) = @_;
+    my $d = sub {
+        choose_weighted($self->chord_voices, [ (1) x @{ $self->chord_voices } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
 
 =head2 verbose
 
