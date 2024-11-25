@@ -10,6 +10,7 @@ subtest defaults => sub {
     is $obj->verbose, 0, 'verbose';
     is_deeply $obj->chord_voices, [3,4], 'chord_voices';
     ok defined $obj->d_chord_voices->roll, 'd_chord_voices';
+    ok defined $obj->d_remove_chord->roll, 'd_remove_chord';
 };
 
 done_testing();
