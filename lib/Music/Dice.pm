@@ -23,6 +23,46 @@ C<Music::Dice> defines and plays musical dice games.
 
 =head1 ATTRIBUTES
 
+=head2 notes
+
+  $notes = $md->notes;
+  $md->notes(\@notes);
+
+The available to choose.
+
+Default: C<[qw(C Df D Ef E F Gf G Af A Bf B)]> (the chromatic scale)
+
+Alternately, you could give the constructor sharps (C<s>) instead of
+flats (C<f>) - or just the notes of the desired scale or mode.
+
+=cut
+
+has notes => (
+    is      => 'lazy',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [qw( C Df D Ef E F Gf G Af A Bf B )] },
+);
+
+=head2 d_note
+
+  $result = $md->d_note->roll;
+
+Returns one of the B<notes> with equal probability.
+
+=cut
+
+has d_note => (
+    is => 'lazy',
+);
+
+sub _build_d_note {
+    my ($self) = @_;
+    my $d = sub {
+        choose_weighted($self->notes, [ (1) x @{ $self->notes } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_voices
 
   $chord_voices = $md->chord_voices;
