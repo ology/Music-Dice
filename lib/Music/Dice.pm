@@ -186,7 +186,7 @@ sub _build_d_note_chromatic {
     no warnings 'qw';
     my $d = sub {
         my $keypref = $self->flats ? 'b' : '#';
-        my $choices = [ get_scale_notes($self->scale_note, $self->scale_name, 0, $keypref) ];
+        my $choices = [ get_scale_notes($self->scale_note, 'chromatic', 0, $keypref) ];
         return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
