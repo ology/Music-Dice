@@ -8,7 +8,7 @@ use Moo;
 use strictures 2;
 use Carp qw(croak);
 use Games::Dice::Advanced ();
-use List::Util::WeightedChoice qw(choose_weighted);
+use List::Util::WeightedChoice qw(choose_weighted); # because we may weight in the future
 use Music::Scales qw(get_scale_notes get_scale_nums);
 use namespace::clean;
 
