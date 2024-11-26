@@ -8,7 +8,8 @@ use Moo;
 use strictures 2;
 use Carp qw(croak);
 use Games::Dice::Advanced ();
-use List::Util::WeightedChoice qw( choose_weighted);
+use List::Util::WeightedChoice qw(choose_weighted);
+use Music::Scales qw(get_scale_notes get_scale_nums);
 use namespace::clean;
 
 =head1 SYNOPSIS
@@ -23,24 +24,61 @@ C<Music::Dice> defines and plays musical dice games.
 
 =head1 ATTRIBUTES
 
+=head2 scale_note
+
+  $note = $md->scale_note;
+
+The (uppercase) tonic of the scale, used for B<notes>.
+
+Default: C<C>
+
+=cut
+
+has scale_note => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a valid note name" unless $_[0] =~ /^[A-G][b#]?$/ },
+    default => sub { 'C' },
+);
+
+=head2 scale_name
+
+  $note = $md->scale_name;
+
+The (lowecase) name of the scale, used for B<notes>.
+
+Default: C<chromatic>
+
+=cut
+
+has scale_name => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a valid scale name" unless $_[0] =~ /^[a-z]+$/ },
+    default => sub { 'chromatic' },
+);
+
 =head2 notes
 
   $notes = $md->notes;
 
 The user-definable named pitches from which to choose.
 
-Default: C<[C Df D Ef E F Gf G Af A Bf B]>
+Default: C<[C Db D Eb E F Gb G Ab A Bb B]> (the chromatic scale)
 
 Any scale may be given in the constructor. For accidentals, either
-sharps (C<s>, C<#>, etc.) or flats (C<f>, C<b>, etc.) may be provided.
+sharps (C<#>) or flats (C<b>) may be provided.
 
 =cut
 
 has notes => (
-    is      => 'lazy',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [qw( C Df D Ef E F Gf G Af A Bf B )] },
+    is => 'lazy',
 );
+
+sub _build_notes {
+    my ($self) = @_;
+    my $keypref = $self->flats ? 'b' : '#';
+    my @notes = get_scale_notes($self->scale_note, $self->scale_name, 0, $keypref);
+    return \@notes;
+}
 
 =head2 d_note
 
@@ -73,10 +111,16 @@ Default: 12 C<1>s
 =cut
 
 has intervals => (
-    is      => 'lazy',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [ (1) x 12 ] },
+    is => 'lazy',
 );
+
+sub _build_intervals {
+    my ($self) = @_;
+    my @nums = get_scale_nums($self->scale_name);
+    my @intervals = map { $nums[$_] - $nums[$_ - 1] } 1 .. $#nums;
+    push @intervals, 12 - $nums[-1] - $nums[0];
+    return \@intervals;
+}
 
 =head2 d_interval
 
@@ -129,7 +173,7 @@ has d_note_chromatic => (
 sub _build_d_note_chromatic {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [qw( C Df D Ef E F Gf G Af A Bf B )];
+        my $choices = [qw( C Db D Eb E F Gb G Ab A Bb B )];
         choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
