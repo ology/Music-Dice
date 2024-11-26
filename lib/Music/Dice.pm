@@ -111,7 +111,7 @@ sub _build_notes {
 
   $result = $md->d_note->roll;
 
-Returns one of the B<notes> with equal probability.
+Returns one of the B<notes>, with equal probability.
 
 =cut
 
@@ -131,7 +131,7 @@ sub _build_d_note {
 
   $intervals = $md->intervals;
 
-Returns one of the B<intervals> with equal probability.
+Returns one of the note B<intervals>, with equal probability.
 
 Default: 12 C<1>s
 
