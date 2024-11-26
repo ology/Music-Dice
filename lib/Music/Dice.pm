@@ -26,22 +26,20 @@ C<Music::Dice> defines and plays musical dice games.
 =head2 notes
 
   $notes = $md->notes;
-  $md->notes(\@notes);
 
-The available named pitches from which to choose.
+The user-definable named pitches from which to choose.
 
-Default: C<[C D E F G A B]>
+Default: C<[C Df D Ef E F Gf G Af A Bf B]>
 
-Alternately, you could give the constructor any scale, like the
-chromatic (C<[C Df D Ef E F Gf G Af A Bf B]>), with either sharps
-(C<s>, C<#>, etc.) or flats (C<f>, C<b>, etc.).
+Any scale may be given in the constructor. For accidentals, either
+sharps (C<s>, C<#>, etc.) or flats (C<f>, C<b>, etc.) may be provided.
 
 =cut
 
 has notes => (
     is      => 'lazy',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [qw( C D E F G A B )] },
+    default => sub { [qw( C Df D Ef E F Gf G Af A Bf B )] },
 );
 
 =head2 d_note
@@ -64,10 +62,82 @@ sub _build_d_note {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 intervals
+
+  $intervals = $md->intervals;
+
+The available intervals to choose.
+
+Default: 12 C<1>s
+
+=cut
+
+has intervals => (
+    is      => 'lazy',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [ (1) x 12 ] },
+);
+
+=head2 d_interval
+
+  $result = $md->d_interval->roll;
+
+Returns one of the B<intervals> with equal probability.
+
+=cut
+
+has d_interval => (
+    is => 'lazy',
+);
+
+sub _build_d_interval {
+    my ($self) = @_;
+    my $d = sub {
+        choose_weighted($self->intervals, [ (1) x @{ $self->intervals } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 flats
+
+  $flats = $md->flats;
+
+Use either flats or sharps in the returned notes.
+
+Default: C<1> (use flats not sharps)
+
+=cut
+
+has flats => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
+    default => sub { 1 },
+);
+
+=head2 d_note_chromatic
+
+  $result = $md->d_note_chromatic->roll;
+
+Returns one of the chromatic scale notes with equal probability.
+
+=cut
+
+has d_note_chromatic => (
+    is => 'lazy',
+);
+
+sub _build_d_note_chromatic {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [qw( C Df D Ef E F Gf G Af A Bf B )];
+        choose_weighted($choices, [ (1) x @$choices ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
-  $md->chord_voices_nums($n);
 
 The number of voices in a chord given as an array reference.
 
@@ -121,57 +191,6 @@ sub _build_d_remove_chord_num {
     };
     return Games::Dice::Advanced->new($d);
 }
-
-=head2 intervals
-
-  $intervals = $md->intervals;
-  $md->intervals(\@intervals);
-
-The available intervals to choose.
-
-Default: C<[2 2 1 2 2 2 1]> (the intervals of the major scale)
-
-=cut
-
-has intervals => (
-    is      => 'lazy',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [qw( 2 2 1 2 2 2 1 )] },
-);
-
-=head2 d_interval
-
-  $result = $md->d_interval->roll;
-
-Returns one of the B<intervals> with equal probability.
-
-=cut
-
-has d_interval => (
-    is => 'lazy',
-);
-
-sub _build_d_interval {
-    my ($self) = @_;
-    my $d = sub {
-        choose_weighted($self->intervals, [ (1) x @{ $self->intervals } ])
-    };
-    return Games::Dice::Advanced->new($d);
-}
-
-=head2 verbose
-
-  $verbose = $md->verbose;
-
-Show progress.
-
-=cut
-
-has verbose => (
-    is      => 'ro',
-    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
-    default => sub { 0 },
-);
 
 =head1 METHODS
 
