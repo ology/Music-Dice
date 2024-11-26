@@ -13,10 +13,13 @@ subtest defaults => sub {
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
 };
 
-subtest scale => sub {
+subtest scales => sub {
     my $obj = new_ok 'Music::Dice' => [ scale_name => 'major' ];
     is_deeply $obj->notes, [qw(C D E F G A B)], 'notes';
     is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'intervals';
+    $obj = new_ok 'Music::Dice' => [ scale_note => 'A', scale_name => 'minor' ];
+    is_deeply $obj->notes, [qw(A B C D E F G)], 'notes';
+    is_deeply $obj->intervals, [2, 1, 2, 2, 1, 2, 2], 'intervals';
 };
 
 subtest rolls => sub {
