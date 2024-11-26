@@ -96,7 +96,7 @@ has d_chord_voices_nums => (
 sub _build_d_chord_voices_nums {
     my ($self) = @_;
     my $d = sub {
-        choose_weighted($self->chord_voices_num, [ (1) x @{ $self->chord_voices_num } ])
+        choose_weighted($self->chord_voices_nums, [ (1) x @{ $self->chord_voices_nums } ])
     };
     return Games::Dice::Advanced->new($d);
 }
