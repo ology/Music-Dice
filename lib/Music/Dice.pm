@@ -135,6 +135,28 @@ sub _build_d_note_chromatic {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 d_interval_chromatic
+
+  $result = $md->d_interval_chromatic->roll;
+
+Returns one of the chromatic intervals (12 C<1>s), with equal
+probability.
+
+=cut
+
+has d_interval_chromatic => (
+    is => 'lazy',
+);
+
+sub _build_d_interval_chromatic {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [ (1) x 12 ];
+        choose_weighted($choices, $choices);
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
