@@ -116,7 +116,7 @@ has d_remove_chord_num => (
 sub _build_d_remove_chord_num {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [ 1 .. $self->chord_voices_num->[-1] ];
+        my $choices = [ 1 .. $self->chord_voices_nums->[-1] ];
         choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
