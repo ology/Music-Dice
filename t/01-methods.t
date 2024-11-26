@@ -21,6 +21,9 @@ subtest scales => sub {
     $obj = new_ok 'Music::Dice' => [ scale_note => 'C#', scale_name => 'major' ];
     is_deeply $obj->notes, [qw(C# D# E# F# G# A# B#)], 'C# major notes';
     is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'C# major intervals';
+    $obj = new_ok 'Music::Dice' => [ scale_note => 'Db', scale_name => 'major' ];
+    is_deeply $obj->notes, [qw(Db Eb F Gb Ab Bb C)], 'Db major notes';
+    is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'Db major intervals';
     $obj = new_ok 'Music::Dice' => [ scale_note => 'A', scale_name => 'minor' ];
     is_deeply $obj->notes, [qw(A B C D E F G)], 'A minor notes';
     is_deeply $obj->intervals, [2, 1, 2, 2, 1, 2, 2], 'A minor intervals';
