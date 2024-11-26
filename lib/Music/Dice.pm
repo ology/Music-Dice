@@ -67,6 +67,22 @@ has scale_name => (
     default => sub { 'chromatic' },
 );
 
+=head2 flats
+
+  $flats = $md->flats;
+
+Use either flats or sharps in the returned notes.
+
+Default: C<1> (use flats not sharps)
+
+=cut
+
+has flats => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
+    default => sub { 1 },
+);
+
 =head2 notes
 
   $notes = $md->notes;
@@ -153,22 +169,6 @@ sub _build_d_interval {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 flats
-
-  $flats = $md->flats;
-
-Use either flats or sharps in the returned notes.
-
-Default: C<1> (use flats not sharps)
-
-=cut
-
-has flats => (
-    is      => 'ro',
-    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
-    default => sub { 1 },
-);
-
 =head2 d_note_chromatic
 
   $result = $md->d_note_chromatic->roll;
@@ -183,8 +183,11 @@ has d_note_chromatic => (
 
 sub _build_d_note_chromatic {
     my ($self) = @_;
+    no warnings 'qw';
     my $d = sub {
-        my $choices = [qw( C Db D Eb E F Gb G Ab A Bb B )];
+        my $choices = $self->flats
+            ? [qw( C Db D Eb E F Gb G Ab A Bb B )]
+            : [qw( C C# D D# E F F# G G# A A# B )];
         choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
