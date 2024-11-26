@@ -386,8 +386,12 @@ __END__
 
 =head1 SEE ALSO
 
+L<Games::Dice::Advanced>
+
+L<List::Util::WeightedChoice>
+
 L<Moo>
 
-L<http://somewhere.el.se>
+L<Music::Scales>
 
 =cut
