@@ -30,7 +30,7 @@ C<Music::Dice> defines and plays musical dice games.
 
 The available to choose.
 
-Default: C<[qw(C Df D Ef E F Gf G Af A Bf B)]> (the chromatic scale)
+Default: C<[C Df D Ef E F Gf G Af A Bf B]> (the chromatic scale)
 
 Alternately, you could give the constructor sharps (C<s>) instead of
 flats (C<f>) - or just the notes of the desired scale or mode.
