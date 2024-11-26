@@ -28,19 +28,20 @@ C<Music::Dice> defines and plays musical dice games.
   $notes = $md->notes;
   $md->notes(\@notes);
 
-The available to choose.
+The available named pitches from which to choose.
 
-Default: C<[C Df D Ef E F Gf G Af A Bf B]> (the chromatic scale)
+Default: C<[C D E F G A B]>
 
-Alternately, you could give the constructor sharps (C<s>) instead of
-flats (C<f>) - or just the notes of the desired scale or mode.
+Alternately, you could give the constructor any scale, like the
+chromatic (C<[C Df D Ef E F Gf G Af A Bf B]>), with either sharps
+(C<s>, C<#>, etc.) or flats (C<f>, C<b>, etc.).
 
 =cut
 
 has notes => (
     is      => 'lazy',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [qw( C Df D Ef E F Gf G Af A Bf B )] },
+    default => sub { [qw( C D E F G A B )] },
 );
 
 =head2 d_note
@@ -117,6 +118,43 @@ sub _build_d_remove_chord_num {
     my $d = sub {
         my $choices = [ 1 .. $self->chord_voices_num->[-1] ];
         choose_weighted($choices, [ (1) x @$choices ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 intervals
+
+  $intervals = $md->intervals;
+  $md->intervals(\@intervals);
+
+The available intervals to choose.
+
+Default: C<[2 2 1 2 2 2 1]> (the intervals of the major scale)
+
+=cut
+
+has intervals => (
+    is      => 'lazy',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [qw( 2 2 1 2 2 2 1 )] },
+);
+
+=head2 d_interval
+
+  $result = $md->d_interval->roll;
+
+Returns one of the B<intervals> with equal probability.
+
+=cut
+
+has d_interval => (
+    is => 'lazy',
+);
+
+sub _build_d_interval {
+    my ($self) = @_;
+    my $d = sub {
+        choose_weighted($self->intervals, [ (1) x @{ $self->intervals } ])
     };
     return Games::Dice::Advanced->new($d);
 }
