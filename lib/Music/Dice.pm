@@ -200,6 +200,8 @@ sub _build_d_note_chromatic {
 Returns one of the chromatic intervals (12 C<1>s), with equal
 probability.
 
+* This is possibly a dumb function, since it always returns C<1>...
+
 =cut
 
 has d_interval_chromatic => (
