@@ -27,6 +27,9 @@ subtest scales => sub {
     $obj = new_ok 'Music::Dice' => [ scale_note => 'A', scale_name => 'minor' ];
     is_deeply $obj->notes, [qw(A B C D E F G)], 'A minor notes';
     is_deeply $obj->intervals, [2, 1, 2, 2, 1, 2, 2], 'A minor intervals';
+    $obj = new_ok 'Music::Dice' => [ scale_name => 'chromatic', flats => 0 ];
+    is_deeply $obj->notes, [qw(C C# D D# E F F# G G# A A# B)], 'C chromatic notes';
+    is_deeply $obj->intervals, [ (1) x 12 ], 'C chromatic intervals';
 };
 
 subtest rolls => sub {
