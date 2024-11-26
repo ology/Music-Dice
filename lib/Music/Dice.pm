@@ -307,6 +307,47 @@ sub _build_d_interval_minor {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 chord_qualities
+
+  $chord_qualities = $md->chord_qualities;
+
+The user-definable named chord qualities, from which to choose.
+
+Default:
+
+  sus4
+  b5 #5
+  6 69
+  maj7 minmaj7
+  7 min7
+  add9 b9 9 #9
+  b11 11 #11
+  b13 13 #13
+  ø
+
+Where "ø" is the "half-diminished" chord.
+
+=cut
+
+has chord_qualities => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub {
+        no warnings 'qw';
+        [qw(
+            sus4
+            b5 #5
+            6 69
+            maj7 minmaj7
+            7 min7
+            add9 b9 9 #9
+            b11 11 #11
+            b13 13 #13
+            ø
+        )]
+    },
+);
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
@@ -318,7 +359,7 @@ Default: C<[3,4]>
 =cut
 
 has chord_voices_nums => (
-    is      => 'lazy',
+    is      => 'ro',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [ 3, 4 ] },
 );
