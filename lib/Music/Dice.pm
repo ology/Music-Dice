@@ -379,8 +379,6 @@ sub _build_d_remove_chord_num {
 
 Create a new C<Music::Dice> object.
 
-=for Pod::Coverage BUILD
-
 =cut
 
 1;
