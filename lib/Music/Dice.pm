@@ -229,7 +229,8 @@ has d_note_major => (
 sub _build_d_note_major {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [qw( C D E F G A B )];
+        my $keypref = $self->flats ? 'b' : '#';
+        my $choices = [ get_scale_notes($self->scale_note, 'major', 0, $keypref) ];
         return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
@@ -272,7 +273,8 @@ has d_note_minor => (
 sub _build_d_note_minor {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [qw( A B C D E F G )];
+        my $keypref = $self->flats ? 'b' : '#';
+        my $choices = [ get_scale_notes($self->scale_note, 'minor', 0, $keypref) ];
         return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
