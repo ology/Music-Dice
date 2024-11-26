@@ -25,6 +25,7 @@ use namespace::clean;
   $roll = $md->d_interval_major->roll;
   $roll = $md->d_note_minor->roll;
   $roll = $md->d_interval_minor->roll;
+  $roll = $md->d_chord_triad->roll;
   $roll = $md->d_chord_quality->roll;
   # gameplay
   $roll = $md->d_chord_voices_nums->roll;
@@ -307,6 +308,57 @@ sub _build_d_interval_minor {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 chord_triads
+
+  $chord_triads = $md->chord_triads;
+
+The user-definable named chord triads, from which to choose.
+
+Default:
+
+  major
+  minor
+  diminished
+  augmented
+  custom
+  
+=cut
+
+has chord_triads => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub {
+        [qw(
+            major
+            minor
+            diminished
+            augmented
+            custom
+        )]
+    },
+);
+
+=head2 d_chord_triad
+
+  $result = $md->d_chord_triad->roll;
+
+Returns a chord triad. If C<custom> is rolled, then three C<notes>
+must be rolled for, separately.
+
+=cut
+
+has d_chord_triad => (
+    is => 'lazy',
+);
+
+sub _build_d_chord_triad {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_triads, [ (1) x @{ $self->chord_triads } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_qualities
 
   $chord_qualities = $md->chord_qualities;
@@ -347,6 +399,26 @@ has chord_qualities => (
         )]
     },
 );
+
+=head2 d_chord_quality
+
+  $result = $md->d_chord_quality->roll;
+
+Returns a chord quality to modify a chord triad.
+
+=cut
+
+has d_chord_quality => (
+    is => 'lazy',
+);
+
+sub _build_d_chord_quality {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities, [ (1) x @{ $self->chord_qualities } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
 
 =head2 chord_voices_nums
 
@@ -410,11 +482,13 @@ sub _build_d_remove_chord_num {
 =head2 new
 
   $md = Music::Dice->new(
-    scale_note => $note,
-    scale_name => $name,
-    flats      => $bool,
-    notes      => \@notes,
-    intervals  => \@intervals,
+    scale_note        => $note,
+    scale_name        => $name,
+    flats             => $bool,
+    notes             => \@notes,
+    intervals         => \@intervals,
+    chord_triads      => \@triads,
+    chord_qualities   => \@qualities,
     chord_voices_nums => \@voices,
   );
 
