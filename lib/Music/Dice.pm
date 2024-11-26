@@ -200,6 +200,49 @@ sub _build_d_interval_major {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 d_note_minor
+
+  $result = $md->d_note_minor->roll;
+
+Returns one of the natural minor scale notes, with equal probability.
+
+=cut
+
+has d_note_minor => (
+    is => 'lazy',
+);
+
+sub _build_d_note_minor {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [qw( A B C D E F G )];
+        choose_weighted($choices, [ (1) x @$choices ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 d_interval_minor
+
+  $result = $md->d_interval_minor->roll;
+
+Returns one of the minor intervals, with equal
+probability.
+
+=cut
+
+has d_interval_minor => (
+    is => 'lazy',
+);
+
+sub _build_d_interval_minor {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [qw(2 1 2 2 1 2 2)];
+        choose_weighted($choices, [ (1) x @$choices ]);
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
