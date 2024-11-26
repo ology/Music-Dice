@@ -1,6 +1,6 @@
 package Music::Dice;
 
-# ABSTRACT: Define and Play Musical Dice Games
+# ABSTRACT: Define Musical Dice
 
 our $VERSION = '0.0100';
 
@@ -20,7 +20,7 @@ use namespace::clean;
 
 =head1 DESCRIPTION
 
-C<Music::Dice> defines and plays musical dice games.
+C<Music::Dice> defines musical dice.
 
 =head1 ATTRIBUTES
 
