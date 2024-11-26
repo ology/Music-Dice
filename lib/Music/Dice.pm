@@ -17,7 +17,8 @@ use namespace::clean;
   use Music::Dice ();
   my $md = Music::Dice->new;
   # basics
-  my $roll = $md->d_interval->roll;
+  my $roll = $md->d_note->roll;
+  $roll = $md->d_interval->roll;
   $roll = $md->d_note_chromatic->roll;
   $roll = $md->d_interval_chromatic->roll;
   $roll = $md->d_note_major->roll;
