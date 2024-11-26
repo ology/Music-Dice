@@ -24,6 +24,7 @@ use namespace::clean;
   $roll = $md->d_note_major->roll;
   $roll = $md->d_interval_major->roll;
   $roll = $md->d_note_minor->roll;
+  $roll = $md->d_chord_quality->roll;
   $roll = $md->d_interval_minor->roll;
   # gameplay
   $roll = $md->d_chord_voices_nums->roll;
@@ -386,6 +387,8 @@ Create a new C<Music::Dice> object.
 __END__
 
 =head1 SEE ALSO
+
+The F<t/01-methods.t> file
 
 L<Games::Dice::Advanced>
 
