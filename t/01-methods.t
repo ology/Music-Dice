@@ -31,11 +31,7 @@ subtest scales => sub {
 
 subtest rolls => sub {
     my $obj = new_ok 'Music::Dice';
-    my $got = $obj->d_chord_voices_nums->roll;
-    ok defined $got, "d_chord_voices_nums: $got";
-    $got = $obj->d_remove_chord_num->roll;
-    ok defined $got, "d_remove_chord_num: $got";
-    $got = $obj->d_note->roll;
+    my $got = $obj->d_note->roll;
     ok defined $got, "d_note: $got";
     $got = $obj->d_interval->roll;
     ok defined $got, "d_interval $got";
@@ -51,6 +47,10 @@ subtest rolls => sub {
     ok defined $got, "d_note_minor: $got";
     $got = $obj->d_interval_minor->roll;
     ok defined $got, "d_interval_minor $got";
+    $got = $obj->d_chord_voices_nums->roll;
+    ok defined $got, "d_chord_voices_nums: $got";
+    $got = $obj->d_remove_chord_num->roll;
+    ok defined $got, "d_remove_chord_num: $got";
 };
 
 done_testing();
