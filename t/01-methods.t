@@ -13,6 +13,7 @@ subtest defaults => sub {
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
     is_deeply $obj->chord_triads, [qw(major minor diminished augmented custom)], 'chord_triads';
     is_deeply $obj->chord_qualities, [qw(sus4 b5 #5 6 69 maj7 minmaj7 7 min7 add9 b9 9 #9 b11 11 #11 b13 13 #13 ø)], 'chord_qualities';
+    is_deeply $obj->modes, [qw(ionian dorian phrygian lydian mixolydian aeolian locrian)], 'modes';
     is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
 };
 
@@ -51,11 +52,13 @@ subtest rolls => sub {
     $got = $obj->d_note_minor->roll;
     ok defined $got, "d_note_minor: $got";
     $got = $obj->d_interval_minor->roll;
-    ok defined $got, "d_interval_minor $got";
+    ok defined $got, "d_interval_minor: $got";
     $got = $obj->d_chord_triad->roll;
-    ok defined $got, "d_chord_triad $got";
+    ok defined $got, "d_chord_triad: $got";
     $got = $obj->d_chord_quality->roll;
-    ok defined $got, "d_chord_quality $got";
+    ok defined $got, "d_chord_quality: $got";
+    $got = $obj->d_mode->roll;
+    ok defined $got, "d_mode: $got";
     # gameplay
     $got = $obj->d_chord_voices_nums->roll;
     ok defined $got, "d_chord_voices_nums: $got";
