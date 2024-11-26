@@ -129,7 +129,7 @@ sub _build_intervals {
     my ($self) = @_;
     my @nums = get_scale_nums($self->scale_name);
     my @intervals = map { $nums[$_] - $nums[$_ - 1] } 1 .. $#nums;
-    push @intervals, 12 - $nums[-1] - $nums[0];
+    push @intervals, 12 - $nums[-1];
     return \@intervals;
 }
 
