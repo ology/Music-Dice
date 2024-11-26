@@ -74,48 +74,48 @@ Default: C<[3,4]>
 
 =cut
 
-has chord_voices => (
+has chord_voices_num => (
     is      => 'lazy',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [ 3, 4 ] },
 );
 
-=head2 d_chord_voices
+=head2 d_chord_voices_num
 
-  $result = $md->d_chord_voices->roll;
+  $result = $md->d_chord_voices_num->roll;
 
-Returns one of the B<chord_voices> with equal probability.
+Returns one of the B<chord_voices_num> with equal probability.
 
 =cut
 
-has d_chord_voices => (
+has d_chord_voices_num => (
     is => 'lazy',
 );
 
-sub _build_d_chord_voices {
+sub _build_d_chord_voices_num {
     my ($self) = @_;
     my $d = sub {
-        choose_weighted($self->chord_voices, [ (1) x @{ $self->chord_voices } ])
+        choose_weighted($self->chord_voices_num, [ (1) x @{ $self->chord_voices_num } ])
     };
     return Games::Dice::Advanced->new($d);
 }
 
 =head2 d_remove_chord
 
-  $result = $md->d_remove_chord->roll;
+  $result = $md->d_remove_chord_num->roll;
 
-Returns a value between C<1> and the last B<chord_voices> entry (e.g. C<4>).
+Returns a value between C<1> and the last B<chord_voices_num> entry (e.g. C<4>).
 
 =cut
 
-has d_remove_chord => (
+has d_remove_chord_num => (
     is => 'lazy',
 );
 
-sub _build_d_remove_chord {
+sub _build_d_remove_chord_num {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [ 1 .. $self->chord_voices->[-1] ];
+        my $choices = [ 1 .. $self->chord_voices_num->[-1] ];
         choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
