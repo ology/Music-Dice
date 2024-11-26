@@ -52,6 +52,10 @@ subtest rolls => sub {
     ok defined $got, "d_note_minor: $got";
     $got = $obj->d_interval_minor->roll;
     ok defined $got, "d_interval_minor $got";
+    $got = $obj->d_chord_triad->roll;
+    ok defined $got, "d_chord_triad $got";
+    $got = $obj->d_chord_quality->roll;
+    ok defined $got, "d_chord_quality $got";
     # gameplay
     $got = $obj->d_chord_voices_nums->roll;
     ok defined $got, "d_chord_voices_nums: $got";
