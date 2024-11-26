@@ -173,7 +173,7 @@ sub _build_d_interval {
 
   $result = $md->d_note_chromatic->roll;
 
-Returns one of the chromatic scale notes with equal probability.
+Returns one of the chromatic scale notes, with equal probability.
 
 =cut
 
