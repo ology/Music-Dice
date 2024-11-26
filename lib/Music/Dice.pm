@@ -122,7 +122,7 @@ has d_note => (
 sub _build_d_note {
     my ($self) = @_;
     my $d = sub {
-        choose_weighted($self->notes, [ (1) x @{ $self->notes } ])
+        return choose_weighted($self->notes, [ (1) x @{ $self->notes } ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -164,7 +164,7 @@ has d_interval => (
 sub _build_d_interval {
     my ($self) = @_;
     my $d = sub {
-        choose_weighted($self->intervals, [ (1) x @{ $self->intervals } ])
+        return choose_weighted($self->intervals, [ (1) x @{ $self->intervals } ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -185,10 +185,9 @@ sub _build_d_note_chromatic {
     my ($self) = @_;
     no warnings 'qw';
     my $d = sub {
-        my $choices = $self->flats
-            ? [qw( C Db D Eb E F Gb G Ab A Bb B )]
-            : [qw( C C# D D# E F F# G G# A A# B )];
-        choose_weighted($choices, [ (1) x @$choices ])
+        my $keypref = $self->flats ? 'b' : '#';
+        my $choices = [ get_scale_notes($self->scale_note, $self->scale_name, 0, $keypref) ];
+        return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -200,8 +199,6 @@ sub _build_d_note_chromatic {
 Returns one of the chromatic intervals (12 C<1>s), with equal
 probability.
 
-* This is possibly a dumb function, since it always returns C<1>...
-
 =cut
 
 has d_interval_chromatic => (
@@ -212,7 +209,7 @@ sub _build_d_interval_chromatic {
     my ($self) = @_;
     my $d = sub {
         my $choices = [ (1) x 12 ];
-        choose_weighted($choices, $choices);
+        return choose_weighted($choices, $choices);
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -233,7 +230,7 @@ sub _build_d_note_major {
     my ($self) = @_;
     my $d = sub {
         my $choices = [qw( C D E F G A B )];
-        choose_weighted($choices, [ (1) x @$choices ])
+        return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -255,7 +252,7 @@ sub _build_d_interval_major {
     my ($self) = @_;
     my $d = sub {
         my $choices = [qw(2 2 1 2 2 2 1)];
-        choose_weighted($choices, [ (1) x @$choices ]);
+        return choose_weighted($choices, [ (1) x @$choices ]);
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -276,7 +273,7 @@ sub _build_d_note_minor {
     my ($self) = @_;
     my $d = sub {
         my $choices = [qw( A B C D E F G )];
-        choose_weighted($choices, [ (1) x @$choices ])
+        return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -298,7 +295,7 @@ sub _build_d_interval_minor {
     my ($self) = @_;
     my $d = sub {
         my $choices = [qw(2 1 2 2 1 2 2)];
-        choose_weighted($choices, [ (1) x @$choices ]);
+        return choose_weighted($choices, [ (1) x @$choices ]);
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -334,7 +331,7 @@ has d_chord_voices_nums => (
 sub _build_d_chord_voices_nums {
     my ($self) = @_;
     my $d = sub {
-        choose_weighted($self->chord_voices_nums, [ (1) x @{ $self->chord_voices_nums } ])
+        return choose_weighted($self->chord_voices_nums, [ (1) x @{ $self->chord_voices_nums } ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -355,7 +352,7 @@ sub _build_d_remove_chord_num {
     my ($self) = @_;
     my $d = sub {
         my $choices = [ 1 .. $self->chord_voices_nums->[-1] ];
-        choose_weighted($choices, [ (1) x @$choices ])
+        return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
 }
