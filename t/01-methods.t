@@ -9,8 +9,14 @@ subtest defaults => sub {
     my $obj = new_ok 'Music::Dice';
     is $obj->flats, 1, 'flats';
     is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
-    is_deeply $obj->notes, [qw(C Df D Ef E F Gf G Af A Bf B)], 'notes';
+    is_deeply $obj->notes, [qw(C Db D Eb E F Gb G Ab A Bb B)], 'notes';
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
+};
+
+subtest scale => sub {
+    my $obj = new_ok 'Music::Dice' => [ scale_name => 'major' ];
+    is_deeply $obj->notes, [qw(C D E F G A B)], 'notes';
+    is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'intervals';
 };
 
 subtest rolls => sub {
