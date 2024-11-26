@@ -11,6 +11,8 @@ subtest defaults => sub {
     is $obj->flats, 1, 'flats';
     is_deeply $obj->notes, [qw(C Db D Eb E F Gb G Ab A Bb B)], 'notes';
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
+    is_deeply $obj->chord_triads, [qw(major minor diminished augmented custom)], 'chord_triads';
+    is_deeply $obj->chord_qualities, [qw(sus4 b5 #5 6 69 maj7 minmaj7 7 min7 add9 b9 9 #9 b11 11 #11 b13 13 #13 ø)], 'chord_qualities';
     is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
 };
 
