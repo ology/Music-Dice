@@ -131,7 +131,7 @@ sub _build_d_note {
 
   $intervals = $md->intervals;
 
-The available intervals to choose.
+Returns one of the B<intervals> with equal probability.
 
 Default: 12 C<1>s
 
