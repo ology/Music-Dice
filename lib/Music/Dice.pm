@@ -107,26 +107,6 @@ sub _build_notes {
     return \@notes;
 }
 
-=head2 d_note
-
-  $result = $md->d_note->roll;
-
-Returns one of the B<notes>, with equal probability.
-
-=cut
-
-has d_note => (
-    is => 'lazy',
-);
-
-sub _build_d_note {
-    my ($self) = @_;
-    my $d = sub {
-        return choose_weighted($self->notes, [ (1) x @{ $self->notes } ])
-    };
-    return Games::Dice::Advanced->new($d);
-}
-
 =head2 intervals
 
   $intervals = $md->intervals;
@@ -147,6 +127,26 @@ sub _build_intervals {
     my @intervals = map { $nums[$_] - $nums[$_ - 1] } 1 .. $#nums;
     push @intervals, 12 - $nums[-1];
     return \@intervals;
+}
+
+=head2 d_note
+
+  $result = $md->d_note->roll;
+
+Returns one of the B<notes>, with equal probability.
+
+=cut
+
+has d_note => (
+    is => 'lazy',
+);
+
+sub _build_d_note {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->notes, [ (1) x @{ $self->notes } ])
+    };
+    return Games::Dice::Advanced->new($d);
 }
 
 =head2 d_interval
