@@ -157,6 +157,49 @@ sub _build_d_interval_chromatic {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 d_note_major
+
+  $result = $md->d_note_major->roll;
+
+Returns one of the major scale notes with equal probability.
+
+=cut
+
+has d_note_major => (
+    is => 'lazy',
+);
+
+sub _build_d_note_major {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [qw( C D E F G A B )];
+        choose_weighted($choices, [ (1) x @$choices ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 d_interval_major
+
+  $result = $md->d_interval_major->roll;
+
+Returns one of the major intervals, with equal
+probability.
+
+=cut
+
+has d_interval_major => (
+    is => 'lazy',
+);
+
+sub _build_d_interval_major {
+    my ($self) = @_;
+    my $d = sub {
+        my $choices = [qw(2 2 1 2 2 2 1)];
+        choose_weighted($choices, [ (1) x @$choices ]);
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
