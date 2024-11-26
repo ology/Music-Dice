@@ -196,8 +196,8 @@ sub _build_d_note_chromatic {
 
   $result = $md->d_interval_chromatic->roll;
 
-Returns one of the chromatic intervals (12 C<1>s), with equal
-probability.
+Returns one of the chromatic intervals (12 C<1>s), based on the given
+B<scale_note>, with equal probability.
 
 =cut
 
@@ -218,7 +218,8 @@ sub _build_d_interval_chromatic {
 
   $result = $md->d_note_major->roll;
 
-Returns one of the major scale notes with equal probability.
+Returns one of the major scale notes, based on the given
+B<scale_note>, with equal probability.
 
 =cut
 
@@ -262,7 +263,8 @@ sub _build_d_interval_major {
 
   $result = $md->d_note_minor->roll;
 
-Returns one of the natural minor scale notes, with equal probability.
+Returns one of the natural minor scale notes, based on the given
+B<scale_note>, with equal probability.
 
 =cut
 
