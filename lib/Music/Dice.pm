@@ -15,8 +15,18 @@ use namespace::clean;
 =head1 SYNOPSIS
 
   use Music::Dice ();
-
-  my $md = Music::Dice->new(verbose => 1);
+  my $md = Music::Dice->new;
+  my $roll = $md->d_interval->roll;
+  $roll = $md->d_note_chromatic->roll;
+  $roll = $md->d_interval_chromatic->roll;
+  $roll = $md->d_note_major->roll;
+  $roll = $md->d_interval_major->roll;
+  $roll = $md->d_note_minor->roll;
+  $roll = $md->d_interval_minor->roll;
+  # gameplay
+  $roll = $md->d_chord_voices_nums->roll;
+  $roll = $md->d_remove_chord_num->roll;
+};
 
 =head1 DESCRIPTION
 
@@ -348,7 +358,13 @@ sub _build_d_remove_chord_num {
 
 =head2 new
 
-  $md = Music::Dice->new(verbose => 1);
+  $md = Music::Dice->new(
+    scale_note => $note,
+    scale_name => $name,
+    flats      => $bool,
+    notes      => \@notes,
+    intervals  => \@intervals,
+  );
 
 Create a new C<Music::Dice> object.
 
