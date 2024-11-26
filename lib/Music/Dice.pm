@@ -27,6 +27,7 @@ use namespace::clean;
   $roll = $md->d_interval_minor->roll;
   $roll = $md->d_chord_triad->roll;
   $roll = $md->d_chord_quality->roll;
+  $roll = $md->d_mode->roll;
   # gameplay
   $roll = $md->d_chord_voices_nums->roll;
   $roll = $md->d_remove_chord_num->roll;
@@ -416,6 +417,60 @@ sub _build_d_chord_quality {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->chord_qualities, [ (1) x @{ $self->chord_qualities } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 modes
+
+  $modes = $md->modes;
+
+The named modes, from which to choose.
+
+Default:
+
+  ionian
+  dorian
+  phrygian
+  lydian
+  mixolydian
+  aeolian
+  locrian
+
+=cut
+
+has modes => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub {
+        [qw(
+            ionian
+            dorian
+            phrygian
+            lydian
+            mixolydian
+            aeolian
+            locrian
+        )]
+    },
+);
+
+=head2 d_mode
+
+  $result = $md->d_mode->roll;
+
+Returns a mode, from which to choose.
+
+=cut
+
+has d_mode => (
+    is => 'lazy',
+);
+
+sub _build_d_mode {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->modes, [ (1) x @{ $self->modes } ])
     };
     return Games::Dice::Advanced->new($d);
 }
