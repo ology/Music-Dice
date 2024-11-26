@@ -39,7 +39,7 @@ C<Music::Dice> defines musical dice.
 
   $note = $md->scale_note;
 
-The (uppercase) tonic of the scale, used for B<notes>.
+The (uppercase) tonic of the scale.
 
 Default: C<C>
 
@@ -55,7 +55,7 @@ has scale_note => (
 
   $note = $md->scale_name;
 
-The (lowecase) name of the scale, used for B<notes>.
+The (lowecase) name of the scale.
 
 Default: C<chromatic>
 
