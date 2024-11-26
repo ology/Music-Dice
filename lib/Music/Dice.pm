@@ -372,6 +372,7 @@ sub _build_d_remove_chord_num {
     flats      => $bool,
     notes      => \@notes,
     intervals  => \@intervals,
+    chord_voices_nums => \@voices,
   );
 
 Create a new C<Music::Dice> object.
