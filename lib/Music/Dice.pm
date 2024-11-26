@@ -64,10 +64,10 @@ sub _build_d_note {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 chord_voices_num
+=head2 chord_voices_nums
 
-  $chord_voices = $md->chord_voices_num;
-  $md->chord_voices($n);
+  $chord_voices = $md->chord_voices_nums;
+  $md->chord_voices_nums($n);
 
 The number of voices in a chord given as an array reference.
 
@@ -75,25 +75,25 @@ Default: C<[3,4]>
 
 =cut
 
-has chord_voices_num => (
+has chord_voices_nums => (
     is      => 'lazy',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [ 3, 4 ] },
 );
 
-=head2 d_chord_voices_num
+=head2 d_chord_voices_nums
 
-  $result = $md->d_chord_voices_num->roll;
+  $result = $md->d_chord_voices_nums->roll;
 
-Returns one of the B<chord_voices_num> with equal probability.
+Returns one of the B<chord_voices_nums> with equal probability.
 
 =cut
 
-has d_chord_voices_num => (
+has d_chord_voices_nums => (
     is => 'lazy',
 );
 
-sub _build_d_chord_voices_num {
+sub _build_d_chord_voices_nums {
     my ($self) = @_;
     my $d = sub {
         choose_weighted($self->chord_voices_num, [ (1) x @{ $self->chord_voices_num } ])
