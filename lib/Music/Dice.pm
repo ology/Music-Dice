@@ -63,9 +63,9 @@ sub _build_d_note {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 chord_voices
+=head2 chord_voices_num
 
-  $chord_voices = $md->chord_voices;
+  $chord_voices = $md->chord_voices_num;
   $md->chord_voices($n);
 
 The number of voices in a chord given as an array reference.
@@ -100,7 +100,7 @@ sub _build_d_chord_voices_num {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_remove_chord
+=head2 d_remove_chord_num
 
   $result = $md->d_remove_chord_num->roll;
 
