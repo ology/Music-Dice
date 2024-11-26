@@ -16,14 +16,14 @@ subtest defaults => sub {
 
 subtest scales => sub {
     my $obj = new_ok 'Music::Dice' => [ scale_name => 'major' ];
-    is_deeply $obj->notes, [qw(C D E F G A B)], 'notes';
-    is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'intervals';
+    is_deeply $obj->notes, [qw(C D E F G A B)], 'C major notes';
+    is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'C major intervals';
     $obj = new_ok 'Music::Dice' => [ scale_note => 'C#', scale_name => 'major' ];
-    is_deeply $obj->notes, [qw(C# D# E# F# G# A# B#)], 'notes';
-    is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'intervals';
+    is_deeply $obj->notes, [qw(C# D# E# F# G# A# B#)], 'C# major notes';
+    is_deeply $obj->intervals, [2, 2, 1, 2, 2, 2, 1], 'C# major intervals';
     $obj = new_ok 'Music::Dice' => [ scale_note => 'A', scale_name => 'minor' ];
-    is_deeply $obj->notes, [qw(A B C D E F G)], 'notes';
-    is_deeply $obj->intervals, [2, 1, 2, 2, 1, 2, 2], 'intervals';
+    is_deeply $obj->notes, [qw(A B C D E F G)], 'A minor notes';
+    is_deeply $obj->intervals, [2, 1, 2, 2, 1, 2, 2], 'A minor intervals';
 };
 
 subtest rolls => sub {
