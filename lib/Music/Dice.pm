@@ -511,30 +511,6 @@ sub _build_d_mode {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 rhythms
-
-  $rhythms = $md->rhythms;
-
-The named rhythms, from which to choose. These are the abbreviations
-used by MIDI-Perl:
-
-  ddwn ddhn ddqn dden ddsn
-  dwn dhn dqn den dsn
-  wn hn qn en sn
-  twn thn tqn ten tsn
-
-Where for instance, C<ten> is a "triplet eighth note."
-
-Default: The keys of the C<MIDI::Simple::Length> hash.
-
-=cut
-
-has rhythms => (
-    is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [ sort keys %{ midi_dump('length') } ] },
-);
-
 =head2 d_rhythm
 
   $result = $md->d_rhythm->roll;
@@ -550,7 +526,7 @@ has d_rhythm => (
 sub _build_d_rhythm {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->rhythms, [ (1) x @{ $self->rhythms } ])
+        return choose_weighted($self->pool, [ (1) x @{ $self->pool } ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -572,7 +548,7 @@ sub _build_d_rhythmic_phrase {
     my $d = sub {
         my $mdp = Music::Duration::Partition->new(
           size => $self->beats,
-          pool => $self->rhythms,
+          pool => $self->pool,
         );
         return $mdp->motif;
     };
