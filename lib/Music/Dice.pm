@@ -620,6 +620,8 @@ sub _build_d_remove_chord_num {
     scale_note        => $note,
     scale_name        => $name,
     flats             => $bool,
+    beats             => $beats,
+    pool              => \@pool, # or 'all'
     notes             => \@notes,
     intervals         => \@intervals,
     chord_triads      => \@triads,
