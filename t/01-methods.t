@@ -18,7 +18,7 @@ subtest defaults => sub {
     is_deeply $obj->modes, [qw(ionian dorian phrygian lydian mixolydian aeolian locrian)], 'modes';
     is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
     $obj = new_ok 'Music::Dice' => [ pool => 'all' ];
-    is_deeply $obj->pool, [qw(dden ddhn ddqn ddsn ddwn den dhn dqn dsn dwn en hn qn sn ten thn tqn tsn twn wn)], 'all';
+    is_deeply $obj->pool, [qw(dden ddhn ddqn ddsn ddwn den dhn dqn dsn dwn en hn qn sn ten thn tqn tsn twn wn)], 'all pool';
 };
 
 subtest scales => sub {
