@@ -515,7 +515,7 @@ sub _build_d_mode {
 
   $result = $md->d_rhythm->roll;
 
-Returns a rhythm.
+Returns a single rhythmic value.
 
 =cut
 
