@@ -352,7 +352,8 @@ sub _build_d_interval_minor {
 
   $chord_triads = $md->chord_triads;
 
-The user-definable named chord triads, from which to choose.
+The named chord triads, from which to choose. Rolling C<custom> means
+that three individual notes, or two intervals must be chosen.
 
 Default:
 
