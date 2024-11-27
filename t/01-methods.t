@@ -76,4 +76,10 @@ subtest rolls => sub {
     ok defined $got, "remove_chord_num: $got";
 };
 
+subtest utility => sub {
+    my $obj = new_ok 'Music::Dice';
+    my $got = $obj->unique_note(['C']);
+    isnt $got, 'C', 'unique_note';
+};
+
 done_testing();
