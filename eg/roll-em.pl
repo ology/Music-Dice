@@ -58,10 +58,7 @@ for my $i (1 .. @$phrase) {
 my @named;
 for my $i (0 .. $#$phrase) {
     my $named = $notes[$i];
-    if ($chords[$i] ne 'custom' && $qualities[$i] eq 'm7b5') {
-        $named .= " $qualities[$i]";
-    }
-    else {
+    if ($qualities[$i] ne 'm7b5') {
         if ($chords[$i] eq 'custom') {
             my @custom;
             my $n = $d->unique_note([ $notes[$i] ]);
@@ -72,9 +69,8 @@ for my $i (0 .. $#$phrase) {
         else {
             $named .= " $chords[$i]";
         }
-        $named .= " $qualities[$i]";
     }
-    $named .= " | $phrase->[$i]";
+    $named .= " $qualities[$i] | $phrase->[$i]";
     push @named, $named;
 }
 print ddc \@named;
