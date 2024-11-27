@@ -6,6 +6,7 @@ use Test::More;
 use_ok 'Music::Dice';
 
 subtest defaults => sub {
+    no warnings 'qw';
     my $obj = new_ok 'Music::Dice';
     is $obj->flats, 1, 'flats';
     is $obj->beats, 4, 'beats';
@@ -42,37 +43,37 @@ subtest scales => sub {
 
 subtest rolls => sub {
     my $obj = new_ok 'Music::Dice';
-    my $got = $obj->d_note->roll;
-    ok defined $got, "d_note: $got";
-    $got = $obj->d_interval->roll;
-    ok defined $got, "d_interval $got";
-    $got = $obj->d_note_chromatic->roll;
-    ok defined $got, "d_note_chromatic: $got";
-    $got = $obj->d_interval_chromatic->roll;
-    ok defined $got, "d_interval_chromatic $got";
-    $got = $obj->d_note_major->roll;
-    ok defined $got, "d_note_major: $got";
-    $got = $obj->d_interval_major->roll;
-    ok defined $got, "d_interval_major $got";
-    $got = $obj->d_note_minor->roll;
-    ok defined $got, "d_note_minor: $got";
-    $got = $obj->d_interval_minor->roll;
-    ok defined $got, "d_interval_minor: $got";
-    $got = $obj->d_chord_triad->roll;
-    ok defined $got, "d_chord_triad: $got";
-    $got = $obj->d_chord_quality->roll;
-    ok defined $got, "d_chord_quality: $got";
-    $got = $obj->d_mode->roll;
-    ok defined $got, "d_mode: $got";
-    $got = $obj->d_rhythm->roll;
-    ok defined $got, "d_rhythm: $got";
-    $got = $obj->d_rhythmic_phrase->roll;
-    ok defined $got, "d_rhythmic_phrase: @$got";
+    my $got = $obj->note->roll;
+    ok defined $got, "note: $got";
+    $got = $obj->interval->roll;
+    ok defined $got, "interval $got";
+    $got = $obj->note_chromatic->roll;
+    ok defined $got, "note_chromatic: $got";
+    $got = $obj->interval_chromatic->roll;
+    ok defined $got, "interval_chromatic $got";
+    $got = $obj->note_major->roll;
+    ok defined $got, "note_major: $got";
+    $got = $obj->interval_major->roll;
+    ok defined $got, "interval_major $got";
+    $got = $obj->note_minor->roll;
+    ok defined $got, "note_minor: $got";
+    $got = $obj->interval_minor->roll;
+    ok defined $got, "interval_minor: $got";
+    $got = $obj->chord_triad->roll;
+    ok defined $got, "chord_triad: $got";
+    $got = $obj->chord_quality->roll;
+    ok defined $got, "chord_quality: $got";
+    $got = $obj->mode->roll;
+    ok defined $got, "mode: $got";
+    $got = $obj->rhythm->roll;
+    ok defined $got, "rhythm: $got";
+    $got = $obj->rhythmic_phrase->roll;
+    ok defined $got, "rhythmic_phrase: @$got";
     # gameplay
-    $got = $obj->d_chord_voices_nums->roll;
-    ok defined $got, "d_chord_voices_nums: $got";
-    $got = $obj->d_remove_chord_num->roll;
-    ok defined $got, "d_remove_chord_num: $got";
+    $got = $obj->chord_voices_num->roll;
+    ok defined $got, "chord_voices_num: $got";
+    $got = $obj->remove_chord_num->roll;
+    ok defined $got, "remove_chord_num: $got";
 };
 
 done_testing();
