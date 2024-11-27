@@ -9,6 +9,7 @@ use strictures 2;
 use Carp qw(croak);
 use Games::Dice::Advanced ();
 use List::Util::WeightedChoice qw(choose_weighted); # because we may weight in the future
+use MIDI::Util qw(midi_dump);
 use Music::Scales qw(get_scale_notes get_scale_nums);
 use namespace::clean;
 
@@ -474,6 +475,22 @@ sub _build_d_mode {
     };
     return Games::Dice::Advanced->new($d);
 }
+
+=head2 rhythms
+
+  $rhythms = $md->rhythms;
+
+The named rhythms, from which to choose.
+
+Default:
+
+=cut
+
+has rhythms => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [ sort keys %{ midi_dump('length') } ] },
+);
 
 =head2 chord_voices_nums
 
