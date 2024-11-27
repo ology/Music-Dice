@@ -499,7 +499,14 @@ sub _build_d_mode {
   $rhythms = $md->rhythms;
 
 The named rhythms, from which to choose. These are the abbreviations
-used by MIDI-Perl (e.g. C<tqn> is a "triplet quarter note").
+used by MIDI-Perl:
+
+  ddwn ddhn ddqn dden ddsn
+  dwn dhn dqn den dsn
+  wn hn qn en sn
+  twn thn tqn ten tsn
+
+Where for instance, C<ten> is a "triplet eighth note."
 
 Default: The keys of the C<MIDI::Simple::Length> hash.
 
