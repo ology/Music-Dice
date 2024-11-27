@@ -10,6 +10,7 @@ use Carp qw(croak);
 use Games::Dice::Advanced ();
 use List::Util::WeightedChoice qw(choose_weighted); # because we may weight in the future
 use MIDI::Util qw(midi_dump);
+use Music::Duration::Partition ();
 use Music::Scales qw(get_scale_notes get_scale_nums);
 use namespace::clean;
 
@@ -87,6 +88,22 @@ has flats => (
     is      => 'ro',
     isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
     default => sub { 1 },
+);
+
+=head2 beats
+
+  $beats = $md->beats;
+
+The number of quarter-note beats in a rhythmic phrase.
+
+Default: C<4> (standard measure)
+
+=cut
+
+has beats => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a positive number" unless $_[0] =~ /^[1-9]\d*$/ },
+    default => sub { 4 },
 );
 
 =head2 notes
@@ -514,6 +531,30 @@ sub _build_d_rhythm {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 d_rhythmic_phrase
+
+  $result = $md->d_rhythmic_phrase->roll;
+
+Returns a rhythmic phrase, given the number of B<beats>.
+
+=cut
+
+has d_rhythmic_phrase => (
+    is => 'lazy',
+);
+
+sub _build_d_rhythmic_phrase {
+    my ($self) = @_;
+    my $d = sub {
+        my $mdp = Music::Duration::Partition->new(
+          size => $self->beats,
+          pool => $self->rhythms,
+        );
+        return $mdp->motif;
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
@@ -602,7 +643,11 @@ L<Games::Dice::Advanced>
 
 L<List::Util::WeightedChoice>
 
+L<MIDI::Util>
+
 L<Moo>
+
+L<Music::Duration::Partition>
 
 L<Music::Scales>
 
