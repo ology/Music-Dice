@@ -481,9 +481,10 @@ sub _build_d_mode {
 
   $rhythms = $md->rhythms;
 
-The named rhythms, from which to choose.
+The named rhythms, from which to choose. These are the abbreviations
+used by MIDI-Perl (e.g. C<tqn> is a "triplet quarter note").
 
-Default:
+Default: The keys of the C<MIDI::Simple::Length> hash.
 
 =cut
 
@@ -582,6 +583,7 @@ sub _build_d_remove_chord_num {
     intervals         => \@intervals,
     chord_triads      => \@triads,
     chord_qualities   => \@qualities,
+    rhythms           => \@rhythms,
     chord_voices_nums => \@voices,
   );
 
