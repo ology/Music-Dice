@@ -574,7 +574,8 @@ sub chord_voices_num {
 
   $result = $md->remove_chord_num->roll;
 
-Returns a value between C<1> and the last B<chord_voices_num> entry (e.g. C<4>).
+Returns a value between C<1> and the last B<chord_voices_num> entry
+(e.g. C<4>).
 
 =cut
 
@@ -585,6 +586,24 @@ sub remove_chord_num {
         return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
+}
+
+=head2 unique_note
+
+  $unique_note = unique_note(\@excludes, \@notes);
+
+Return a note from the B<notes> list, that is not in the B<excludes>
+list.
+
+=cut
+
+sub unique_note {
+    my ($excludes, $notes) = @_;
+    my $note = '';
+    while (!$note || grep { $_ eq $note } @$excludes) {
+        $note = $notes->[ int rand @$notes ];
+    }
+    return $note;
 }
 
 1;
