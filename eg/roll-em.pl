@@ -55,11 +55,11 @@ for my $i (1 .. @$phrase) {
     push @notes, $d->note->roll;
 }
 # print ddc \@notes;
-my @x;
+my @named;
 for my $i (0 .. $#$phrase) {
-    my $x = $notes[$i];
+    my $named = $notes[$i];
     if ($chords[$i] ne 'custom' && $qualities[$i] eq 'm7b5') {
-        $x .= " $qualities[$i]";
+        $named .= " $qualities[$i]";
     }
     else {
         if ($chords[$i] eq 'custom') {
@@ -67,13 +67,13 @@ for my $i (0 .. $#$phrase) {
             my $n = $d->unique_note([ $notes[$i] ]);
             push @custom, $n;
             push @custom, $d->unique_note([ $notes[$i], $n ]);
-            $x .= " @custom $qualities[$i]";
+            $named .= " @custom $qualities[$i]";
         }
         else {
-            $x .= " $chords[$i] $qualities[$i]";
+            $named .= " $chords[$i] $qualities[$i]";
         }
     }
-    $x .= " | $phrase->[$i]";
-    push @x, $x;
+    $named .= " | $phrase->[$i]";
+    push @named, $named;
 }
-print ddc \@x;
+print ddc \@named;
