@@ -626,7 +626,6 @@ sub _build_d_remove_chord_num {
     intervals         => \@intervals,
     chord_triads      => \@triads,
     chord_qualities   => \@qualities,
-    rhythms           => \@rhythms,
     chord_voices_nums => \@voices,
   );
 
