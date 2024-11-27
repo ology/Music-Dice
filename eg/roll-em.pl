@@ -38,5 +38,13 @@ my $d = Music::Dice->new(
     chord_triads => [ split ' ', $opt{triads} ],
 );
 
-my $roll = $d->rhythmic_phrase->roll;
-print ddc $roll;
+my $phrase = $d->rhythmic_phrase->roll;
+print ddc $phrase;
+my $voices = $d->chord_voices_num->roll;
+print $voices, "\n";
+my @chords;
+for my $voice (1 .. $voices) {
+    push @chords, $d->chord_triad->roll;
+}
+print ddc \@chords;
+
