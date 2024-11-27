@@ -2,8 +2,6 @@
 use strict;
 use warnings;
 
-use lib map { "$ENV{HOME}/sandbox/$_/lib" } qw(Foo);
-
 use Data::Dumper::Compact qw(ddc);
 use Getopt::Long qw(GetOptions);
 use Music::Dice ();
