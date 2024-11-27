@@ -65,8 +65,8 @@ subtest rolls => sub {
     ok defined $got, "chord_quality: $got";
     $got = $obj->mode->roll;
     ok defined $got, "mode: $got";
-    $got = $obj->rhythm->roll;
-    ok defined $got, "rhythm: $got";
+    $got = $obj->rhythmic_value->roll;
+    ok defined $got, "rhythmic_value: $got";
     $got = $obj->rhythmic_phrase->roll;
     ok defined $got, "rhythmic_phrase: @$got";
     # gameplay
