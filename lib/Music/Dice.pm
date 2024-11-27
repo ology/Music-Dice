@@ -549,8 +549,8 @@ sub _build_d_rhythmic_phrase {
     my ($self) = @_;
     my $d = sub {
         my $mdp = Music::Duration::Partition->new(
-          size => $self->beats,
-          pool => $self->pool,
+            size => $self->beats,
+            pool => $self->pool,
         );
         return $mdp->motif;
     };
