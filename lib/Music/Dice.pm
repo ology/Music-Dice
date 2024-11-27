@@ -513,19 +513,19 @@ sub _build_mode {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 rhythm
+=head2 rhythmic_value
 
-  $result = $md->rhythm->roll;
+  $result = $md->rhythmic_value->roll;
 
 Returns a single rhythmic value.
 
 =cut
 
-has rhythm => (
+has rhythmic_value => (
     is => 'lazy',
 );
 
-sub _build_rhythm {
+sub _build_rhythmic_value {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->pool, [ (1) x @{ $self->pool } ])
