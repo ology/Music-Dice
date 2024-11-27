@@ -285,8 +285,7 @@ sub _build_d_note_major {
 
   $result = $md->d_interval_major->roll;
 
-Returns one of the major intervals, with equal
-probability.
+Returns one of the major intervals, with equal probability.
 
 =cut
 
@@ -330,8 +329,7 @@ sub _build_d_note_minor {
 
   $result = $md->d_interval_minor->roll;
 
-Returns one of the minor intervals, with equal
-probability.
+Returns one of the minor intervals, with equal probability.
 
 =cut
 
