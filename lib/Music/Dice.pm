@@ -590,7 +590,7 @@ sub remove_chord_num {
 
 =head2 unique_note
 
-  $unique_note = unique_note(\@excludes, \@notes);
+  $unique_note = $mb->unique_note(\@excludes, \@notes);
 
 Return a note from the B<notes> list, that is not in the B<excludes>
 list.
@@ -598,7 +598,8 @@ list.
 =cut
 
 sub unique_note {
-    my ($excludes, $notes) = @_;
+    my ($self, $excludes, $notes) = @_;
+    $notes ||= $self->notes;
     my $note = '';
     while (!$note || grep { $_ eq $note } @$excludes) {
         $note = $notes->[ int rand @$notes ];
