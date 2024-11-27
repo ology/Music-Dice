@@ -29,6 +29,7 @@ use namespace::clean;
   $roll = $md->d_chord_triad->roll;
   $roll = $md->d_chord_quality->roll;
   $roll = $md->d_mode->roll;
+  $roll = $md->d_rhythm->roll;
   # gameplay
   $roll = $md->d_chord_voices_nums->roll;
   $roll = $md->d_remove_chord_num->roll;
