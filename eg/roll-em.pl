@@ -57,7 +57,12 @@ for my $i (1 .. @$phrase) {
 # print ddc \@notes;
 my @x;
 for my $i (0 .. $#$phrase) {
-    push @x, "$notes[$i] $chords[$i] $qualities[$i]";
+    if ($qualities[$i] eq 'm7b5') {
+        push @x, "$notes[$i] $qualities[$i]";
+    }
+    else {
+        push @x, "$notes[$i] $chords[$i] $qualities[$i]";
+    }
 }
 print ddc \@x;
 
