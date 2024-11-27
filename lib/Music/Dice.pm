@@ -106,6 +106,23 @@ has beats => (
     default => sub { 4 },
 );
 
+=head2 pool
+
+  $pool = $md->pool;
+
+The pool of durations in a rhythmic phrase.
+
+Default: C<[wn dhn hn dqn qn den en]>
+
+The keyword C<all> may also be given, which will use the keys of the
+C<MIDI::Simple::Length> hash (all the known MIDI-Perl durations).
+
+=cut
+
+has pool => (
+    is => 'rw',
+);
+
 =head2 notes
 
   $notes = $md->notes;
@@ -637,7 +654,19 @@ sub _build_d_remove_chord_num {
 
 Create a new C<Music::Dice> object.
 
+=for Pod::Coverage BUILD
+
 =cut
+
+sub BUILD {
+    my ($self, $args) = @_;
+    if (exists $args->{pool} && !ref $args->{pool} && $args->{pool} eq 'all') {
+        $self->pool([ sort keys %{ midi_dump('length') } ]);
+    }
+    else {
+        $self->pool([qw(wn dhn hn dqn qn den en)]);
+    }
+}
 
 1;
 __END__
