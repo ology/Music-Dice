@@ -67,11 +67,12 @@ for my $i (0 .. $#$phrase) {
             my $n = $d->unique_note([ $notes[$i] ]);
             push @custom, $n;
             push @custom, $d->unique_note([ $notes[$i], $n ]);
-            $named .= " @custom $qualities[$i]";
+            $named .= " @custom";
         }
         else {
-            $named .= " $chords[$i] $qualities[$i]";
+            $named .= " $chords[$i]";
         }
+        $named .= " $qualities[$i]";
     }
     $named .= " | $phrase->[$i]";
     push @named, $named;
