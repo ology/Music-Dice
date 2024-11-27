@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 
-use Data::Dumper::Compact qw(ddc);
 use Getopt::Long qw(GetOptions);
 use Music::Dice ();
 
