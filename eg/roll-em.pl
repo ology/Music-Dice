@@ -39,10 +39,26 @@ my $d = Music::Dice->new(
 );
 
 my $phrase = $d->rhythmic_phrase->roll;
-print ddc $phrase;
+# print ddc $phrase;
 my @chords;
 for my $i (1 .. @$phrase) {
     push @chords, $d->chord_triad->roll;
 }
-print ddc \@chords;
+# print ddc \@chords;
+my @qualities;
+for my $i (1 .. @$phrase) {
+    push @qualities, $d->chord_quality->roll;
+}
+# print ddc \@qualities;
+my @notes;
+for my $i (1 .. @$phrase) {
+    push @notes, $d->note->roll;
+}
+# print ddc \@notes;
+my @x;
+for my $i (0 .. $#$phrase) {
+    push @x, "$notes[$i] $chords[$i] $qualities[$i]";
+}
+print ddc \@x;
+
 
