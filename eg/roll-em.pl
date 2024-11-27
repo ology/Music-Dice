@@ -64,16 +64,9 @@ for my $i (0 .. $#$phrase) {
     else {
         if ($chords[$i] eq 'custom') {
             my @custom;
-            my $note = '';
-            while (!$note || $note eq $notes[$i]) {
-                $note = $notes[ int rand @notes ];
-            }
-            push @custom, $note;
-            $note = '';
-            while (!$note || $note eq $notes[$i]) {
-                $note = $notes[ int rand @notes ];
-            }
-            push @custom, $note;
+            my $n = unique_note([ $notes[$i] ], \@notes);
+            push @custom, $n;
+            push @custom, unique_note([ $notes[$i], $n ], \@notes);
             $x .= " @custom $qualities[$i]";
         }
         else {
@@ -85,3 +78,12 @@ for my $i (0 .. $#$phrase) {
 }
 print ddc \@x;
 
+
+sub unique_note {
+    my ($excludes, $notes) = @_;
+    my $note = '';
+    while (!$note || grep { $_ eq $note } @$excludes) {
+        $note = $notes->[ int rand @$notes ];
+    }
+    return $note;
+}
