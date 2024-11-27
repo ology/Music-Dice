@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 
+use Data::Dumper::Compact qw(ddc);
 use Getopt::Long qw(GetOptions);
 use Music::Dice ();
 
@@ -36,3 +37,5 @@ my $d = Music::Dice->new(
     chord_triads => $opt{triads},
 );
 
+my $roll = $d->rhythmic_phrase->roll;
+print ddc $roll;
