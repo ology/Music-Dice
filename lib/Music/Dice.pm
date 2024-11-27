@@ -14,6 +14,8 @@ use Music::Duration::Partition ();
 use Music::Scales qw(get_scale_notes get_scale_nums);
 use namespace::clean;
 
+=encoding utf8
+
 =head1 SYNOPSIS
 
   use Music::Dice ();
@@ -358,7 +360,7 @@ Default:
   diminished
   augmented
   custom
-  
+
 =cut
 
 has chord_triads => (
