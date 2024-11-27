@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-no warnings 'qw';
 
 use Test::More;
 
@@ -22,6 +21,7 @@ subtest defaults => sub {
 };
 
 subtest scales => sub {
+    no warnings 'qw';
     my $maj = [qw(2 2 1 2 2 2 1)];
     my $obj = new_ok 'Music::Dice' => [ scale_name => 'major' ];
     is_deeply $obj->notes, [qw(C D E F G A B)], 'C major notes';
