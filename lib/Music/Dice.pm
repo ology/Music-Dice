@@ -21,22 +21,22 @@ use namespace::clean;
   use Music::Dice ();
   my $md = Music::Dice->new;
   # basics
-  my $roll = $md->d_note->roll;
-  $roll = $md->d_interval->roll;
-  $roll = $md->d_note_chromatic->roll;
-  $roll = $md->d_interval_chromatic->roll;
-  $roll = $md->d_note_major->roll;
-  $roll = $md->d_interval_major->roll;
-  $roll = $md->d_note_minor->roll;
-  $roll = $md->d_interval_minor->roll;
-  $roll = $md->d_chord_triad->roll;
-  $roll = $md->d_chord_quality->roll;
-  $roll = $md->d_mode->roll;
-  $roll = $md->d_rhythm->roll;
-  $roll = $md->d_rhythmic_phrase->roll;
+  my $roll = $md->note->roll;
+  $roll = $md->interval->roll;
+  $roll = $md->note_chromatic->roll;
+  $roll = $md->interval_chromatic->roll;
+  $roll = $md->note_major->roll;
+  $roll = $md->interval_major->roll;
+  $roll = $md->note_minor->roll;
+  $roll = $md->interval_minor->roll;
+  $roll = $md->chord_triad->roll;
+  $roll = $md->chord_quality->roll;
+  $roll = $md->mode->roll;
+  $roll = $md->rhythm->roll;
+  $roll = $md->rhythmic_phrase->roll;
   # gameplay
-  $roll = $md->d_chord_voices_nums->roll;
-  $roll = $md->d_remove_chord_num->roll;
+  $roll = $md->chord_voices_nums->roll;
+  $roll = $md->remove_chord_num->roll;
 };
 
 =head1 DESCRIPTION
@@ -150,19 +150,19 @@ sub _build_notes {
     return \@notes;
 }
 
-=head2 d_note
+=head2 note
 
-  $result = $md->d_note->roll;
+  $result = $md->note->roll;
 
 Returns one of the B<notes>, with equal probability.
 
 =cut
 
-has d_note => (
+has note => (
     is => 'lazy',
 );
 
-sub _build_d_note {
+sub _build_note {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->notes, [ (1) x @{ $self->notes } ])
@@ -192,19 +192,19 @@ sub _build_intervals {
     return \@intervals;
 }
 
-=head2 d_interval
+=head2 interval
 
-  $result = $md->d_interval->roll;
+  $result = $md->interval->roll;
 
 Returns one of the note B<intervals>, with equal probability.
 
 =cut
 
-has d_interval => (
+has interval => (
     is => 'lazy',
 );
 
-sub _build_d_interval {
+sub _build_interval {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->intervals, [ (1) x @{ $self->intervals } ])
@@ -212,20 +212,20 @@ sub _build_d_interval {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_note_chromatic
+=head2 note_chromatic
 
-  $result = $md->d_note_chromatic->roll;
+  $result = $md->note_chromatic->roll;
 
 Returns one of the chromatic scale notes, based on the given
 B<scale_note>, with equal probability.
 
 =cut
 
-has d_note_chromatic => (
+has note_chromatic => (
     is => 'lazy',
 );
 
-sub _build_d_note_chromatic {
+sub _build_note_chromatic {
     my ($self) = @_;
     no warnings 'qw';
     my $d = sub {
@@ -236,20 +236,20 @@ sub _build_d_note_chromatic {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_interval_chromatic
+=head2 interval_chromatic
 
-  $result = $md->d_interval_chromatic->roll;
+  $result = $md->interval_chromatic->roll;
 
 Returns one of the chromatic intervals (12 C<1>s), with equal
 probability.
 
 =cut
 
-has d_interval_chromatic => (
+has interval_chromatic => (
     is => 'lazy',
 );
 
-sub _build_d_interval_chromatic {
+sub _build_interval_chromatic {
     my ($self) = @_;
     my $d = sub {
         my $choices = [ (1) x 12 ];
@@ -258,20 +258,20 @@ sub _build_d_interval_chromatic {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_note_major
+=head2 note_major
 
-  $result = $md->d_note_major->roll;
+  $result = $md->note_major->roll;
 
 Returns one of the major scale notes, based on the given
 B<scale_note>, with equal probability.
 
 =cut
 
-has d_note_major => (
+has note_major => (
     is => 'lazy',
 );
 
-sub _build_d_note_major {
+sub _build_note_major {
     my ($self) = @_;
     my $d = sub {
         my $keypref = $self->flats ? 'b' : '#';
@@ -281,19 +281,19 @@ sub _build_d_note_major {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_interval_major
+=head2 interval_major
 
-  $result = $md->d_interval_major->roll;
+  $result = $md->interval_major->roll;
 
 Returns one of the major intervals, with equal probability.
 
 =cut
 
-has d_interval_major => (
+has interval_major => (
     is => 'lazy',
 );
 
-sub _build_d_interval_major {
+sub _build_interval_major {
     my ($self) = @_;
     my $d = sub {
         my $choices = [qw(2 2 1 2 2 2 1)];
@@ -302,20 +302,20 @@ sub _build_d_interval_major {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_note_minor
+=head2 note_minor
 
-  $result = $md->d_note_minor->roll;
+  $result = $md->note_minor->roll;
 
 Returns one of the natural minor scale notes, based on the given
 B<scale_note>, with equal probability.
 
 =cut
 
-has d_note_minor => (
+has note_minor => (
     is => 'lazy',
 );
 
-sub _build_d_note_minor {
+sub _build_note_minor {
     my ($self) = @_;
     my $d = sub {
         my $keypref = $self->flats ? 'b' : '#';
@@ -325,19 +325,19 @@ sub _build_d_note_minor {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_interval_minor
+=head2 interval_minor
 
-  $result = $md->d_interval_minor->roll;
+  $result = $md->interval_minor->roll;
 
 Returns one of the minor intervals, with equal probability.
 
 =cut
 
-has d_interval_minor => (
+has interval_minor => (
     is => 'lazy',
 );
 
-sub _build_d_interval_minor {
+sub _build_interval_minor {
     my ($self) = @_;
     my $d = sub {
         my $choices = [qw(2 1 2 2 1 2 2)];
@@ -377,20 +377,20 @@ has chord_triads => (
     },
 );
 
-=head2 d_chord_triad
+=head2 chord_triad
 
-  $result = $md->d_chord_triad->roll;
+  $result = $md->chord_triad->roll;
 
 Returns a chord triad. If C<custom> is rolled, then three C<notes>
 must be rolled for, separately.
 
 =cut
 
-has d_chord_triad => (
+has chord_triad => (
     is => 'lazy',
 );
 
-sub _build_d_chord_triad {
+sub _build_chord_triad {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->chord_triads, [ (1) x @{ $self->chord_triads } ])
@@ -439,19 +439,19 @@ has chord_qualities => (
     },
 );
 
-=head2 d_chord_quality
+=head2 chord_quality
 
-  $result = $md->d_chord_quality->roll;
+  $result = $md->chord_quality->roll;
 
 Returns a chord quality to modify a chord triad.
 
 =cut
 
-has d_chord_quality => (
+has chord_quality => (
     is => 'lazy',
 );
 
-sub _build_d_chord_quality {
+sub _build_chord_quality {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->chord_qualities, [ (1) x @{ $self->chord_qualities } ])
@@ -493,19 +493,19 @@ has modes => (
     },
 );
 
-=head2 d_mode
+=head2 mode
 
-  $result = $md->d_mode->roll;
+  $result = $md->mode->roll;
 
 Returns a mode.
 
 =cut
 
-has d_mode => (
+has mode => (
     is => 'lazy',
 );
 
-sub _build_d_mode {
+sub _build_mode {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->modes, [ (1) x @{ $self->modes } ])
@@ -513,19 +513,19 @@ sub _build_d_mode {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_rhythm
+=head2 rhythm
 
-  $result = $md->d_rhythm->roll;
+  $result = $md->rhythm->roll;
 
 Returns a single rhythmic value.
 
 =cut
 
-has d_rhythm => (
+has rhythm => (
     is => 'lazy',
 );
 
-sub _build_d_rhythm {
+sub _build_rhythm {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->pool, [ (1) x @{ $self->pool } ])
@@ -533,19 +533,19 @@ sub _build_d_rhythm {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_rhythmic_phrase
+=head2 rhythmic_phrase
 
-  $result = $md->d_rhythmic_phrase->roll;
+  $result = $md->rhythmic_phrase->roll;
 
 Returns a rhythmic phrase, given the number of B<beats>.
 
 =cut
 
-has d_rhythmic_phrase => (
+has rhythmic_phrase => (
     is => 'lazy',
 );
 
-sub _build_d_rhythmic_phrase {
+sub _build_rhythmic_phrase {
     my ($self) = @_;
     my $d = sub {
         my $mdp = Music::Duration::Partition->new(
@@ -573,19 +573,19 @@ has chord_voices_nums => (
     default => sub { [ 3, 4 ] },
 );
 
-=head2 d_chord_voices_nums
+=head2 chord_voices_nums
 
-  $result = $md->d_chord_voices_nums->roll;
+  $result = $md->chord_voices_nums->roll;
 
 Returns one of the B<chord_voices_nums> with equal probability.
 
 =cut
 
-has d_chord_voices_nums => (
+has chord_voices_num => (
     is => 'lazy',
 );
 
-sub _build_d_chord_voices_nums {
+sub _build_chord_voices_num {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->chord_voices_nums, [ (1) x @{ $self->chord_voices_nums } ])
@@ -593,19 +593,19 @@ sub _build_d_chord_voices_nums {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 d_remove_chord_num
+=head2 remove_chord_num
 
-  $result = $md->d_remove_chord_num->roll;
+  $result = $md->remove_chord_num->roll;
 
 Returns a value between C<1> and the last B<chord_voices_num> entry (e.g. C<4>).
 
 =cut
 
-has d_remove_chord_num => (
+has remove_chord_num => (
     is => 'lazy',
 );
 
-sub _build_d_remove_chord_num {
+sub _build_remove_chord_num {
     my ($self) = @_;
     my $d = sub {
         my $choices = [ 1 .. $self->chord_voices_nums->[-1] ];
