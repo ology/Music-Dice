@@ -460,7 +460,7 @@ has modes => (
 
   $result = $md->d_mode->roll;
 
-Returns a mode, from which to choose.
+Returns a mode.
 
 =cut
 
@@ -491,6 +491,26 @@ has rhythms => (
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [ sort keys %{ midi_dump('length') } ] },
 );
+
+=head2 d_rhythm
+
+  $result = $md->d_rhythm->roll;
+
+Returns a rhythm.
+
+=cut
+
+has d_rhythm => (
+    is => 'lazy',
+);
+
+sub _build_d_rhythm {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->rhythms, [ (1) x @{ $self->rhythms } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
 
 =head2 chord_voices_nums
 
