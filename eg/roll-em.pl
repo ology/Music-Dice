@@ -31,10 +31,11 @@ GetOptions(\%opt,
     # 'voices=s',
 );
 
+
 my $d = Music::Dice->new(
     scale_note   => $opt{tonic},
     scale_name   => $opt{scale},
-    chord_triads => $opt{triads},
+    chord_triads => [ split ' ', $opt{triads} ],
 );
 
 my $roll = $d->rhythmic_phrase->roll;
