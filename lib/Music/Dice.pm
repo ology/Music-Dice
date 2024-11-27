@@ -221,7 +221,7 @@ Default:
   b13 13 #13
   m7b5
 
-Where "ø" is the "half-diminished" chord.
+Where C<m7b5> is the "half-diminished" chord ("ø").
 
 =cut
 
