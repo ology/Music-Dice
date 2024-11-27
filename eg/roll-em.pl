@@ -58,11 +58,27 @@ for my $i (1 .. @$phrase) {
 my @x;
 for my $i (0 .. $#$phrase) {
     my $x = $notes[$i];
-    if ($qualities[$i] eq 'm7b5') {
+    if ($chords[$i] ne 'custom' && $qualities[$i] eq 'm7b5') {
         $x .= " $qualities[$i]";
     }
     else {
-        $x .= " $chords[$i] $qualities[$i]";
+        if ($chords[$i] eq 'custom') {
+            my @custom;
+            my $note = '';
+            while (!$note || $note eq $notes[$i]) {
+                $note = $notes[ int rand @notes ];
+            }
+            push @custom, $note;
+            $note = '';
+            while (!$note || $note eq $notes[$i]) {
+                $note = $notes[ int rand @notes ];
+            }
+            push @custom, $note;
+            $x .= " @custom $qualities[$i]";
+        }
+        else {
+            $x .= " $chords[$i] $qualities[$i]";
+        }
     }
     $x .= " | $phrase->[$i]";
     push @x, $x;
