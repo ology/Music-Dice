@@ -235,11 +235,11 @@ has chord_qualities => (
             b5 #5
             6 69
             maj7 minmaj7
-            7 min7
+            7 m7
             add9 b9 9 #9
             b11 11 #11
             b13 13 #13
-            ø
+            m7b5
         )]
     },
 );
