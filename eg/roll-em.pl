@@ -14,7 +14,7 @@ my %opt = (
     # pool      => 'wn dhn hn dqn qn den en',
     # notes     => 'C D E F G A B',
     # intervals => '2 2 1 2 2 2 1',
-    triads    => 'major minor diminished',
+    # triads    => 'major minor diminished',
     # qualities => 'sus4 b5 #5 6 69 maj7 minmaj7 7 min7 add9 b9 9 #9 b11 11 #11 b13 13 #13 ø',
     # voices    => '3 4',
 );
@@ -26,7 +26,7 @@ GetOptions(\%opt,
     # 'pool=s',
     # 'notes=s',
     # 'intervals=s',
-    'triads=s',
+    # 'triads=s',
     # 'qualities=s',
     # 'voices=s',
 );
@@ -35,15 +35,13 @@ GetOptions(\%opt,
 my $d = Music::Dice->new(
     scale_note   => $opt{tonic},
     scale_name   => $opt{scale},
-    chord_triads => [ split ' ', $opt{triads} ],
+    # chord_triads => [ split ' ', $opt{triads} ],
 );
 
 my $phrase = $d->rhythmic_phrase->roll;
 print ddc $phrase;
-my $voices = $d->chord_voices_num->roll;
-print $voices, "\n";
 my @chords;
-for my $voice (1 .. $voices) {
+for my $i (1 .. @$phrase) {
     push @chords, $d->chord_triad->roll;
 }
 print ddc \@chords;
