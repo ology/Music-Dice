@@ -776,8 +776,8 @@ sub chord_voices_num {
 
   $result = $md->remove_chord_num->roll;
 
-Return a value between C<1> and the last B<chord_voices_num> entry
-(e.g. C<4>).
+Return a value between C<1> and one less than the first
+B<chord_voices_num> entry.
 
 =cut
 
