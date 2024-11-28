@@ -802,8 +802,8 @@ sub remove_chord_num {
   $unique_note = $mb->unique_note(\@excludes, \@notes);
 
 Return a note from the B<notes> list, that is not in the B<excludes>
-list. If notes are not given in the arguments, the object B<notes> are
-used.
+list. If anote list is not given in the arguments, the object B<notes>
+are used.
 
 =cut
 
