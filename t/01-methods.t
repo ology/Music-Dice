@@ -11,6 +11,7 @@ subtest defaults => sub {
     is $obj->flats, 1, 'flats';
     is $obj->beats, 4, 'beats';
     is_deeply $obj->pool, [qw(wn dhn hn dqn qn den en)], 'pool';
+    is_deeply $obj->octaves, [2 .. 6], 'octaves';
     is_deeply $obj->notes, [qw(C Db D Eb E F Gb G Ab A Bb B)], 'notes';
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
     is_deeply $obj->chord_triads, [qw(major minor diminished augmented custom)], 'chord_triads';
@@ -51,7 +52,9 @@ subtest scales => sub {
 
 subtest rolls => sub {
     my $obj = new_ok 'Music::Dice' => [ rhythmic_phrase_constraints => [4] ];
-    my $got = $obj->note->roll;
+    my $got = $obj->octave->roll;
+    ok defined $got, "octave: @$got";
+    $got = $obj->note->roll;
     ok defined $got, "note: $got";
     $got = $obj->interval->roll;
     ok defined $got, "interval $got";
