@@ -305,7 +305,8 @@ has chord_voices_nums => (
 
 =head2 new
 
-  $md = Music::Dice->new(
+  $md = Music::Dice->new;
+  $md = Music::Dice->new( # override defaults
     scale_note        => $note,
     scale_name        => $name,
     flats             => $bool,
