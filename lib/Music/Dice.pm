@@ -128,6 +128,22 @@ has pool => (
     is => 'rw',
 );
 
+=head2 octaves
+
+  $octaves = $md->octaves;
+
+The octaves to choose from.
+
+Default: C<[2 3 4 5 6]>
+
+=cut
+
+has octave => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a valid octave" unless $_[0] =~ /^\d$/ },
+    default => sub { [ 2 .. 6 ] },
+);
+
 =head2 notes
 
   $notes = $md->notes;
@@ -446,6 +462,22 @@ sub BUILD {
     else {
         $self->pool([qw(wn dhn hn dqn qn den en)]);
     }
+}
+
+=head2 octave
+
+  $result = $md->octave->roll;
+
+Returns an octave number.
+
+=cut
+
+sub octave {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->octaves, [ (1) x @{ $self->octaves } ])
+    };
+    return Games::Dice::Advanced->new($d);
 }
 
 =head2 note
