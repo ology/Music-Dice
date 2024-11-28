@@ -794,7 +794,7 @@ sub remove_chord_num {
     return Games::Dice::Advanced->new($d);
 }
 
-## UTIITY ##
+## UTILITY ##
 
 =head2 unique_note
 
