@@ -12,6 +12,7 @@ use List::Util::WeightedChoice qw(choose_weighted); # because we may weight in t
 use MIDI::Util qw(midi_dump);
 use Music::Duration::Partition ();
 use Music::Scales qw(get_scale_notes get_scale_nums);
+use Types::Standard qw(ArrayRef Int Str);
 use namespace::clean;
 
 =encoding utf8
@@ -140,7 +141,7 @@ Default: C<[2 3 4 5 6]>
 
 has octaves => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Int],
     default => sub { [ 2 .. 6 ] },
 );
 
@@ -217,7 +218,7 @@ Default:
 
 has chord_triads => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Str],
     default => sub {
         [qw(
             major
@@ -241,7 +242,7 @@ Default: C<[2 2 1 1 1]> (major and minor are twice as likely)
 
 has chord_triad_weights => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Int],
     default => sub { [qw(2 2 1 1 1)] },
 );
 
@@ -270,7 +271,7 @@ rolled, it should replace the triad it "modifies."
 
 has chord_qualities => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Str],
     default => sub {
         no warnings 'qw';
         [qw(
@@ -307,7 +308,7 @@ Default:
 
 has modes => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Str],
     default => sub {
         [qw(
             ionian
@@ -340,7 +341,7 @@ Default:
 
 has tonnetzen3 => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Str],
     default => sub { [qw(P R L N S H)],
     },
 );
@@ -367,7 +368,7 @@ Default:
 
 has tonnetzen4 => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Str],
     default => sub { [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)],
     },
 );
@@ -384,7 +385,7 @@ Default: C<[3,4,5]>
 
 has rhythmic_phrase_constraints => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Int],
     default => sub { [ 3, 4, 5 ] },
 );
 
@@ -400,7 +401,7 @@ Default: C<[3,4]>
 
 has chord_voices_nums => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => ArrayRef[Int],
     default => sub { [ 3, 4 ] },
 );
 
