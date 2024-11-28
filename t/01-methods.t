@@ -53,7 +53,7 @@ subtest scales => sub {
 subtest rolls => sub {
     my $obj = new_ok 'Music::Dice' => [ rhythmic_phrase_constraints => [4] ];
     my $got = $obj->octave->roll;
-    ok defined $got, "octave: @$got";
+    ok defined $got, "octave: $got";
     $got = $obj->note->roll;
     ok defined $got, "note: $got";
     $got = $obj->interval->roll;
