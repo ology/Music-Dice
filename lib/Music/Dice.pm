@@ -8,7 +8,7 @@ use Moo;
 use strictures 2;
 use Carp qw(croak);
 use Games::Dice::Advanced ();
-use List::Util::WeightedChoice qw(choose_weighted); # because we may weight in the future
+use List::Util::WeightedChoice qw(choose_weighted);
 use MIDI::Util qw(midi_dump);
 use Music::Duration::Partition ();
 use Music::Scales qw(get_scale_notes get_scale_nums);
