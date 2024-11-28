@@ -287,11 +287,11 @@ has modes => (
     },
 );
 
-=head2 tonnetzen
+=head2 tonnetzen3
 
-  $tonnetzen = $md->tonnetzen;
+  $tonnetzen3 = $md->tonnetzen3;
 
-The named tonnetz, from which to choose.
+The named tonnetz values for triad transformations.
 
 Default:
 
@@ -304,7 +304,7 @@ Default:
 
 =cut
 
-has tonnetzen => (
+has tonnetzen3 => (
     is      => 'ro',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [qw(P R L N S H)]
@@ -552,18 +552,18 @@ sub mode {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 tonnetz
+=head2 tonnetz3
 
-  $result = $md->tonnetz->roll;
+  $result = $md->tonnetz3->roll;
 
-Returns one of the B<tonnetzen>, with equal probability.
+Returns one of the B<tonnetzen3>, with equal probability.
 
 =cut
 
-sub tonnetz {
+sub tonnetz3 {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->tonnetzen, [ (1) x @{ $self->tonnetzen } ])
+        return choose_weighted($self->tonnetzen3, [ (1) x @{ $self->tonnetzen3 } ])
     };
     return Games::Dice::Advanced->new($d);
 }
