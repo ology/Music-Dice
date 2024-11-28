@@ -378,14 +378,14 @@ has tonnetzen4 => (
 
 The number of rhythmic values in a phrase, given as an array reference.
 
-Default: C<[3,4]>
+Default: C<[3,4,5]>
 
 =cut
 
 has rhythmic_phrase_constraints => (
     is      => 'ro',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [ 3, 4 ] },
+    default => sub { [ 3, 4, 5 ] },
 );
 
 =head2 chord_voices_nums
