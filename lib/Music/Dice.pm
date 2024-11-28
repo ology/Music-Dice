@@ -391,6 +391,7 @@ has chord_voices_nums => (
     tonnetzen4        => \@tonnetzen4,
     chord_qualities   => \@qualities,
     chord_voices_nums => \@voices,
+    rhythmic_phrase_constraints => \@constraints,
   );
 
 Create a new C<Music::Dice> object.
