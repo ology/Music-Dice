@@ -372,6 +372,27 @@ has chord_voices_nums => (
     default => sub { [ 3, 4 ] },
 );
 
+=head2 mdp
+
+  $mdp = $md->mdp;
+
+The L<Music::Duration::Partition> object.
+
+=cut
+
+has mdp => (
+    is => 'lazy',
+);
+
+sub _build_mdp {
+    my ($self) = @_;
+    my $mdp = Music::Duration::Partition->new(
+        size => $self->beats,
+        pool => $self->pool,
+    );
+    return $mdp;
+}
+
 =head1 METHODS
 
 =head2 new
