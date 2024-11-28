@@ -828,4 +828,6 @@ L<Music::Duration::Partition>
 
 L<Music::Scales>
 
+L<Types::Standard>
+
 =cut
