@@ -228,7 +228,7 @@ Default:
   m7b5
 
 Where C<m7b5> is the half-diminished chord ("ø"). If this quality is
-rolled, it replaces the triad it "modifies."
+rolled, it should replace the triad it "modifies."
 
 =cut
 
