@@ -64,7 +64,7 @@ use namespace::clean;
       $named .= " $qualities[$i] | $phrase->[$i]";
       push @named, $named;
   }
-  print join(', ', @named), "\n";
+  print join("\n", @named), "\n";
 
 =head1 DESCRIPTION
 
