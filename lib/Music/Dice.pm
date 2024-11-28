@@ -340,11 +340,27 @@ has tonnetzen4 => (
     },
 );
 
+=head2 rhythmic_phrase_constraints
+
+  $rhythmic_phrase_constraints = $md->rhythmic_phrase_constraints;
+
+The number of rhythmic values in a phrase, given as an array reference.
+
+Default: C<[3,4]>
+
+=cut
+
+has rhythmic_phrase_constraints => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [ 3, 4 ] },
+);
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
 
-The number of voices in a chord given as an array reference.
+The number of voices in a chord, given as an array reference.
 
 Default: C<[3,4]>
 
@@ -647,6 +663,31 @@ sub rhythmic_phrase {
             pool => $self->pool,
         );
         return $mdp->motif;
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 rhythmic_phrase_constrained
+
+  $result = $md->rhythmic_phrase_constrained->roll;
+
+Returns a constrained rhythmic phrase, given the number of
+B<rhythmic_phrase_constraints>.
+
+=cut
+
+sub rhythmic_phrase_constrained {
+    my ($self) = @_;
+    my $d = sub {
+        my $mdp = Music::Duration::Partition->new(
+            size => $self->beats,
+            pool => $self->pool,
+        );
+        my $motif;
+        while (!$motif || !grep { $_ == @$motif } @{ $self->rhythmic_phrase_constraints }) {
+            $motif = $mdp->motif;
+        }
+        return $motif;
     };
     return Games::Dice::Advanced->new($d);
 }
