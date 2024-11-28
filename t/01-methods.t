@@ -19,6 +19,7 @@ subtest defaults => sub {
     is_deeply $obj->tonnetzen3, [qw(P R L N S H)], 'tonnetzen3';
     is_deeply $obj->tonnetzen4, [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)], 'tonnetzen4';
     is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
+    is_deeply $obj->rhythmic_phrase_constraints, [3,4], 'rhythmic_phrase_constraints';
     $obj = new_ok 'Music::Dice' => [ pool => 'all' ];
     is_deeply $obj->pool, [qw(dden ddhn ddqn ddsn ddwn den dhn dqn dsn dwn en hn qn sn ten thn tqn tsn twn wn)], 'all pool';
 };
@@ -49,7 +50,7 @@ subtest scales => sub {
 };
 
 subtest rolls => sub {
-    my $obj = new_ok 'Music::Dice';
+    my $obj = new_ok 'Music::Dice' => [ rhythmic_phrase_constraints => [4] ];
     my $got = $obj->note->roll;
     ok defined $got, "note: $got";
     $got = $obj->interval->roll;
@@ -80,6 +81,9 @@ subtest rolls => sub {
     ok defined $got, "rhythmic_value: $got";
     $got = $obj->rhythmic_phrase->roll;
     ok defined $got, "rhythmic_phrase: @$got";
+    $got = $obj->rhythmic_phrase_constrained->roll;
+    ok defined $got, "rhythmic_phrase_constrained: @$got";
+    is @$got, 4, 'rhythmic_phrase_constrained: 4';
     # gameplay
     $got = $obj->chord_voices_num->roll;
     ok defined $got, "chord_voices_num: $got";
