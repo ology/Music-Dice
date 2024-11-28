@@ -43,6 +43,8 @@ subtest scales => sub {
     $obj = new_ok 'Music::Dice' => [ notes => [qw(C F)], intervals => [5] ];
     is_deeply $obj->notes, [qw(C F)], 'C-F only notes';
     is_deeply $obj->intervals, [5], 'C-F only interval';
+    $obj = new_ok 'Music::Dice' => [ notes => [qw(60 62 64 65 67 69 71)] ];
+    is_deeply $obj->notes, [qw(60 62 64 65 67 69 71)], 'midinum notes';
 };
 
 subtest rolls => sub {
