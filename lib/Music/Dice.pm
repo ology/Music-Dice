@@ -550,6 +550,22 @@ sub mode {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 tonnetz
+
+  $result = $md->tonnetz->roll;
+
+Returns one of the B<tonnetzen>, with equal probability.
+
+=cut
+
+sub tonnetz {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->tonnetzen, [ (1) x @{ $self->tonnetzen } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
 =head2 rhythmic_value
 
   $result = $md->rhythmic_value->roll;
