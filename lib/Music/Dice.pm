@@ -798,6 +798,7 @@ sub remove_chord_num {
 
 =head2 unique_note
 
+  $unique_note = $mb->unique_note(\@excludes);
   $unique_note = $mb->unique_note(\@excludes, \@notes);
 
 Return a note from the B<notes> list, that is not in the B<excludes>
