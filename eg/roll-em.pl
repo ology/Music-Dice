@@ -16,8 +16,8 @@ GetOptions(\%opt,
 );
 
 my $d = Music::Dice->new(
-    scale_note   => $opt{tonic},
-    scale_name   => $opt{scale},
+    scale_note => $opt{tonic},
+    scale_name => $opt{scale},
 );
 
 my $phrase = $d->rhythmic_phrase->roll;
