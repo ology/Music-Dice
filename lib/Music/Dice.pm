@@ -784,7 +784,7 @@ Return a value between C<1> and the last B<chord_voices_num> entry
 sub remove_chord_num {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [ 1 .. $self->chord_voices_nums->[-1] ];
+        my $choices = [ 1 .. $self->chord_voices_nums->[0] - 1 ];
         return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
