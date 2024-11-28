@@ -140,7 +140,7 @@ Default: C<[2 3 4 5 6]>
 
 has octaves => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not a valid octave" unless $_[0] =~ /^\d$/ },
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [ 2 .. 6 ] },
 );
 
