@@ -213,6 +213,22 @@ has chord_triads => (
     },
 );
 
+=head2 chord_triad_weights
+
+  $chord_triad_weights = $md->chord_triad_weights;
+
+The chord triad weights.
+
+Default: C<[2 2 1 1 1]> (major and minor are twice as likely)
+
+=cut
+
+has chord_triad_weights => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [qw(2 2 1 1 1)] },
+);
+
 =head2 chord_qualities
 
   $chord_qualities = $md->chord_qualities;
@@ -399,19 +415,20 @@ sub _build_mdp {
 
   $md = Music::Dice->new;
   $md = Music::Dice->new( # override defaults
-    scale_note        => $note,
-    scale_name        => $name,
-    flats             => $bool,
-    beats             => $beats,
-    pool              => \@pool, # or 'all'
-    notes             => \@notes,
-    intervals         => \@intervals,
-    chord_triads      => \@triads,
-    modes             => \@modes,
-    tonnetzen3        => \@tonnetzen3,
-    tonnetzen4        => \@tonnetzen4,
-    chord_qualities   => \@qualities,
-    chord_voices_nums => \@voices,
+    scale_note          => $note,
+    scale_name          => $name,
+    flats               => $bool,
+    beats               => $beats,
+    pool                => \@pool, # or 'all'
+    notes               => \@notes,
+    intervals           => \@intervals,
+    chord_triads        => \@triads,
+    chord_triad_weights => \@triad_weights,
+    modes               => \@modes,
+    tonnetzen3          => \@tonnetzen3,
+    tonnetzen4          => \@tonnetzen4,
+    chord_qualities     => \@qualities,
+    chord_voices_nums   => \@voices,
     rhythmic_phrase_constraints => \@constraints,
   );
 
@@ -584,7 +601,7 @@ must be rolled for, separately.
 sub chord_triad {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->chord_triads, [ (1) x @{ $self->chord_triads } ])
+        return choose_weighted($self->chord_triads, $self->chord_triad_weights)
     };
     return Games::Dice::Advanced->new($d);
 }
