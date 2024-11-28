@@ -40,7 +40,31 @@ use namespace::clean;
   # gameplay
   $roll = $md->chord_voices_nums->roll;
   $roll = $md->remove_chord_num->roll;
-};
+
+  # for example:
+  my $phrase    = $d->rhythmic_phrase->roll;
+  my @notes     = map { $d->note->roll }          1 .. @$phrase;
+  my @triads    = map { $d->chord_triad->roll }   1 .. @$phrase;
+  my @qualities = map { $d->chord_quality->roll } 1 .. @$phrase; 
+  my @named;
+  for my $i (0 .. $#$phrase) {
+      my $named = $notes[$i];
+      if ($qualities[$i] ne 'm7b5') {
+          if ($triads[$i] eq 'custom') {
+              my @custom;
+              my $n = $d->unique_note([ $notes[$i] ]);
+              push @custom, $n;
+              push @custom, $d->unique_note([ $notes[$i], $n ]);
+              $named .= " @custom";
+          }
+          else {
+              $named .= " $triads[$i]";
+          }
+      }
+      $named .= " $qualities[$i] | $phrase->[$i]";
+      push @named, $named;
+  }
+  print join(', ', @named), "\n";
 
 =head1 DESCRIPTION
 
