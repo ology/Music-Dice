@@ -285,6 +285,31 @@ has modes => (
     },
 );
 
+=head2 tonnetz
+
+  $tonnetz = $md->tonnetz;
+
+The named tonnetz, from which to choose.
+
+Default:
+
+  P  # Parallel
+  R  # Relative
+  L  # Leittonwechsel
+  N  # Nebenverwandt (RLP)
+  S  # Slide (LPR)
+  H  # "hexatonic pole exchange" (LPL)
+
+=cut
+
+has tonnetz => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [qw(P R L N S H)]
+    },
+);
+
+
 =head2 chord_voices_nums
 
   $chord_voices = $md->chord_voices_nums;
