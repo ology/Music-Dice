@@ -159,7 +159,10 @@ sub _build_notes {
 
 Returns the note B<intervals>.
 
-Default: 12 C<1>s
+This list is computed, if the B<scale_name> is given, and the
+B<intervals> are I<not> given in the object constructor.
+
+Default: 12 C<1>s (for the chromatic scale)
 
 =cut
 
