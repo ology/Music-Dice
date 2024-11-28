@@ -17,6 +17,7 @@ subtest defaults => sub {
     is_deeply $obj->chord_qualities, [qw(sus4 b5 #5 6 69 maj7 minmaj7 7 m7 add9 b9 9 #9 b11 11 #11 b13 13 #13 m7b5)], 'chord_qualities';
     is_deeply $obj->modes, [qw(ionian dorian phrygian lydian mixolydian aeolian locrian)], 'modes';
     is_deeply $obj->tonnetzen3, [qw(P R L N S H)], 'tonnetzen3';
+    is_deeply $obj->tonnetzen4, [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)], 'tonnetzen4';
     is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
     $obj = new_ok 'Music::Dice' => [ pool => 'all' ];
     is_deeply $obj->pool, [qw(dden ddhn ddqn ddsn ddwn den dhn dqn dsn dwn en hn qn sn ten thn tqn tsn twn wn)], 'all pool';
@@ -73,6 +74,8 @@ subtest rolls => sub {
     ok defined $got, "mode: $got";
     $got = $obj->tonnetz3->roll;
     ok defined $got, "tonnetz3: $got";
+    $got = $obj->tonnetz4->roll;
+    ok defined $got, "tonnetz4: $got";
     $got = $obj->rhythmic_value->roll;
     ok defined $got, "rhythmic_value: $got";
     $got = $obj->rhythmic_phrase->roll;
