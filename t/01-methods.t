@@ -69,6 +69,8 @@ subtest rolls => sub {
     ok defined $got, "chord_quality: $got";
     $got = $obj->mode->roll;
     ok defined $got, "mode: $got";
+    $got = $obj->tonnetz->roll;
+    ok defined $got, "tonnetz: $got";
     $got = $obj->rhythmic_value->roll;
     ok defined $got, "rhythmic_value: $got";
     $got = $obj->rhythmic_phrase->roll;
