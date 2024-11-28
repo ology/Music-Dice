@@ -22,20 +22,11 @@ my $d = Music::Dice->new(
 
 my $phrase = $d->rhythmic_phrase->roll;
 # print ddc $phrase;
-my @notes;
-for my $i (1 .. @$phrase) {
-    push @notes, $d->note->roll;
-}
+my @notes = map { $d->note->roll } 1 .. @$phrase;
 # print ddc \@notes;
-my @triads;
-for my $i (1 .. @$phrase) {
-    push @triads, $d->chord_triad->roll;
-}
+my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
 # print ddc \@triads;
-my @qualities;
-for my $i (1 .. @$phrase) {
-    push @qualities, $d->chord_quality->roll;
-}
+my @qualities = map { $d->chord_quality->roll } 1 .. @$phrase; 
 # print ddc \@qualities;
 my @named;
 for my $i (0 .. $#$phrase) {
