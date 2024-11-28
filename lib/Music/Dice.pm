@@ -680,11 +680,7 @@ Returns a rhythmic phrase, given the number of B<beats>.
 sub rhythmic_phrase {
     my ($self) = @_;
     my $d = sub {
-        my $mdp = Music::Duration::Partition->new(
-            size => $self->beats,
-            pool => $self->pool,
-        );
-        return $mdp->motif;
+        return $self->mdp->motif;
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -701,13 +697,9 @@ B<rhythmic_phrase_constraints> (number of rhythmic values).
 sub rhythmic_phrase_constrained {
     my ($self) = @_;
     my $d = sub {
-        my $mdp = Music::Duration::Partition->new(
-            size => $self->beats,
-            pool => $self->pool,
-        );
         my $motif;
         while (!$motif || !grep { $_ == @$motif } @{ $self->rhythmic_phrase_constraints }) {
-            $motif = $mdp->motif;
+            $motif = $self->mdp->motif;
         }
         return $motif;
     };
