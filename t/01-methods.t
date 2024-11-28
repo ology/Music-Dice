@@ -81,6 +81,7 @@ subtest rolls => sub {
     ok defined $got, "rhythmic_value: $got";
     $got = $obj->rhythmic_phrase->roll;
     ok defined $got, "rhythmic_phrase: @$got";
+    ok @$got > 0, 'rhythmic_phrase: > 0';
     $got = $obj->rhythmic_phrase_constrained->roll;
     ok defined $got, "rhythmic_phrase_constrained: @$got";
     is @$got, 4, 'rhythmic_phrase_constrained: 4';
