@@ -45,11 +45,11 @@ for my $i (1 .. @$phrase) {
     push @notes, $d->note->roll;
 }
 # print ddc \@notes;
-my @chords;
+my @triads;
 for my $i (1 .. @$phrase) {
-    push @chords, $d->chord_triad->roll;
+    push @triads, $d->chord_triad->roll;
 }
-# print ddc \@chords;
+# print ddc \@triads;
 my @qualities;
 for my $i (1 .. @$phrase) {
     push @qualities, $d->chord_quality->roll;
@@ -59,7 +59,7 @@ my @named;
 for my $i (0 .. $#$phrase) {
     my $named = $notes[$i];
     if ($qualities[$i] ne 'm7b5') {
-        if ($chords[$i] eq 'custom') {
+        if ($triads[$i] eq 'custom') {
             my @custom;
             my $n = $d->unique_note([ $notes[$i] ]);
             push @custom, $n;
@@ -67,7 +67,7 @@ for my $i (0 .. $#$phrase) {
             $named .= " @custom";
         }
         else {
-            $named .= " $chords[$i]";
+            $named .= " $triads[$i]";
         }
     }
     $named .= " $qualities[$i] | $phrase->[$i]";
