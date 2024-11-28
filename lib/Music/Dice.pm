@@ -178,7 +178,7 @@ sub _build_notes {
 
   $intervals = $md->intervals;
 
-Returns the note B<intervals>.
+Return the note B<intervals>.
 
 This list is computed, if the B<scale_name> is given, and the
 B<intervals> are I<not> given in the object constructor.
@@ -469,7 +469,7 @@ sub BUILD {
 
   $result = $md->octave->roll;
 
-Returns an octave number.
+Return an octave number.
 
 =cut
 
@@ -485,7 +485,7 @@ sub octave {
 
   $result = $md->note->roll;
 
-Returns one of the B<notes>, with equal probability.
+Return one of the B<notes>, with equal probability.
 
 =cut
 
@@ -501,7 +501,7 @@ sub note {
 
   $result = $md->interval->roll;
 
-Returns one of the note B<intervals>, with equal probability.
+Return one of the note B<intervals>, with equal probability.
 
 =cut
 
@@ -517,7 +517,7 @@ sub interval {
 
   $result = $md->note_chromatic->roll;
 
-Returns one of the chromatic scale notes, based on the given
+Return one of the chromatic scale notes, based on the given
 B<scale_note>, with equal probability.
 
 =cut
@@ -536,7 +536,7 @@ sub note_chromatic {
 
   $result = $md->interval_chromatic->roll;
 
-Returns one of the chromatic intervals (12 C<1>s), with equal
+Return one of the chromatic intervals (12 C<1>s), with equal
 probability.
 
 =cut
@@ -554,7 +554,7 @@ sub interval_chromatic {
 
   $result = $md->note_major->roll;
 
-Returns one of the major scale notes, based on the given
+Return one of the major scale notes, based on the given
 B<scale_note>, with equal probability.
 
 =cut
@@ -573,7 +573,7 @@ sub note_major {
 
   $result = $md->interval_major->roll;
 
-Returns one of the major intervals, with equal probability.
+Return one of the major intervals, with equal probability.
 
 =cut
 
@@ -590,7 +590,7 @@ sub interval_major {
 
   $result = $md->note_minor->roll;
 
-Returns one of the natural minor scale notes, based on the given
+Return one of the natural minor scale notes, based on the given
 B<scale_note>, with equal probability.
 
 =cut
@@ -609,7 +609,7 @@ sub note_minor {
 
   $result = $md->interval_minor->roll;
 
-Returns one of the minor intervals, with equal probability.
+Return one of the minor intervals, with equal probability.
 
 =cut
 
@@ -626,7 +626,7 @@ sub interval_minor {
 
   $result = $md->chord_triad->roll;
 
-Returns a chord triad. If C<custom> is rolled, then three C<notes>
+Return a chord triad. If C<custom> is rolled, then three C<notes>
 must be rolled for, separately.
 
 =cut
@@ -643,7 +643,7 @@ sub chord_triad {
 
   $result = $md->chord_quality->roll;
 
-Returns a chord quality to modify a chord triad.
+Return a chord quality to modify a chord triad.
 
 =cut
 
@@ -659,7 +659,7 @@ sub chord_quality {
 
   $result = $md->mode->roll;
 
-Returns a mode.
+Return a mode.
 
 =cut
 
@@ -675,7 +675,7 @@ sub mode {
 
   $result = $md->tonnetz3->roll;
 
-Returns one of the B<tonnetzen3>, with equal probability.
+Return one of the B<tonnetzen3>, with equal probability.
 
 =cut
 
@@ -691,7 +691,7 @@ sub tonnetz3 {
 
   $result = $md->tonnetz4->roll;
 
-Returns one of the B<tonnetzen4>, with equal probability.
+Return one of the B<tonnetzen4>, with equal probability.
 
 =cut
 
@@ -707,7 +707,7 @@ sub tonnetz4 {
 
   $result = $md->rhythmic_value->roll;
 
-Returns a single rhythmic value.
+Return a single rhythmic value.
 
 =cut
 
@@ -723,7 +723,7 @@ sub rhythmic_value {
 
   $result = $md->rhythmic_phrase->roll;
 
-Returns a rhythmic phrase, given the number of B<beats>.
+Return a rhythmic phrase, given the number of B<beats>.
 
 =cut
 
@@ -739,7 +739,7 @@ sub rhythmic_phrase {
 
   $result = $md->rhythmic_phrase_constrained->roll;
 
-Returns a constrained rhythmic phrase, given the
+Return a constrained rhythmic phrase, given the
 B<rhythmic_phrase_constraints> (number of rhythmic values).
 
 =cut
@@ -760,7 +760,7 @@ sub rhythmic_phrase_constrained {
 
   $result = $md->chord_voices_nums->roll;
 
-Returns one of the B<chord_voices_nums> with equal probability.
+Return one of the B<chord_voices_nums> with equal probability.
 
 =cut
 
@@ -776,7 +776,7 @@ sub chord_voices_num {
 
   $result = $md->remove_chord_num->roll;
 
-Returns a value between C<1> and the last B<chord_voices_num> entry
+Return a value between C<1> and the last B<chord_voices_num> entry
 (e.g. C<4>).
 
 =cut
