@@ -672,7 +672,7 @@ sub rhythmic_phrase {
   $result = $md->rhythmic_phrase_constrained->roll;
 
 Returns a constrained rhythmic phrase, given the number of
-B<rhythmic_phrase_constraints>.
+B<rhythmic_phrase_constraints> (number of rhythmic values).
 
 =cut
 
