@@ -1,2 +1,2 @@
 # Music-Dice
-Musical Dice Games
+Define and roll musical dice
