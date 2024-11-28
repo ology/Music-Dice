@@ -285,9 +285,9 @@ has modes => (
     },
 );
 
-=head2 tonnetz
+=head2 tonnetzen
 
-  $tonnetz = $md->tonnetz;
+  $tonnetzen = $md->tonnetzen;
 
 The named tonnetz, from which to choose.
 
@@ -302,7 +302,7 @@ Default:
 
 =cut
 
-has tonnetz => (
+has tonnetzen => (
     is      => 'ro',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
     default => sub { [qw(P R L N S H)]
