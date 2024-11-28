@@ -32,6 +32,8 @@ use namespace::clean;
   $roll = $md->chord_triad->roll;
   $roll = $md->chord_quality->roll;
   $roll = $md->mode->roll;
+  $roll = $md->tonnetz3->roll;
+  $roll = $md->tonnetz4->roll;
   $roll = $md->rhythm->roll;
   $roll = $md->rhythmic_phrase->roll;
   # gameplay
@@ -368,6 +370,9 @@ has chord_voices_nums => (
     notes             => \@notes,
     intervals         => \@intervals,
     chord_triads      => \@triads,
+    modes             => \@modes,
+    tonnetzen3        => \@tonnetzen3,
+    tonnetzen4        => \@tonnetzen4,
     chord_qualities   => \@qualities,
     chord_voices_nums => \@voices,
   );
