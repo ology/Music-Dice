@@ -40,6 +40,11 @@ my $d = Music::Dice->new(
 
 my $phrase = $d->rhythmic_phrase->roll;
 # print ddc $phrase;
+my @notes;
+for my $i (1 .. @$phrase) {
+    push @notes, $d->note->roll;
+}
+# print ddc \@notes;
 my @chords;
 for my $i (1 .. @$phrase) {
     push @chords, $d->chord_triad->roll;
@@ -50,11 +55,6 @@ for my $i (1 .. @$phrase) {
     push @qualities, $d->chord_quality->roll;
 }
 # print ddc \@qualities;
-my @notes;
-for my $i (1 .. @$phrase) {
-    push @notes, $d->note->roll;
-}
-# print ddc \@notes;
 my @named;
 for my $i (0 .. $#$phrase) {
     my $named = $notes[$i];
