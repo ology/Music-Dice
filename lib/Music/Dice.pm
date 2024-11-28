@@ -140,6 +140,8 @@ Default: C<[C Db D Eb E F Gb G Ab A Bb B]> (the chromatic scale)
 Any scale may be given in the constructor. For accidentals, either
 sharps (C<#>) or flats (C<b>) may be provided.
 
+Additionally, midi pitch numbers may be used.
+
 =cut
 
 has notes => (
