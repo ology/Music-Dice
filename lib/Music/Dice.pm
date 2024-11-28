@@ -40,6 +40,7 @@ use namespace::clean;
   # gameplay
   $roll = $md->chord_voices_nums->roll;
   $roll = $md->remove_chord_num->roll;
+  $roll = $md->rhythmic_phrase_constrained->roll;
 
   # for example:
   my $phrase    = $d->rhythmic_phrase->roll;
