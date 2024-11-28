@@ -132,6 +132,9 @@ has pool => (
 
 The user-definable named pitches from which to choose.
 
+This list is computed, if the B<scale_note> and B<scale_name> are
+given, and the B<notes> are I<not> given in the object constructor.
+
 Default: C<[C Db D Eb E F Gb G Ab A Bb B]> (the chromatic scale)
 
 Any scale may be given in the constructor. For accidentals, either
