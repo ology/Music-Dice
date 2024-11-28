@@ -1,6 +1,6 @@
 package Music::Dice;
 
-# ABSTRACT: Define Musical Dice
+# ABSTRACT: Define and roll musical dice
 
 our $VERSION = '0.0100';
 
@@ -41,7 +41,7 @@ use namespace::clean;
 
 =head1 DESCRIPTION
 
-C<Music::Dice> defines musical dice.
+C<Music::Dice> defines and rolls musical dice.
 
 =head1 ATTRIBUTES
 
