@@ -138,7 +138,7 @@ Default: C<[2 3 4 5 6]>
 
 =cut
 
-has octave => (
+has octaves => (
     is      => 'ro',
     isa     => sub { croak "$_[0] is not a valid octave" unless $_[0] =~ /^\d$/ },
     default => sub { [ 2 .. 6 ] },
