@@ -703,6 +703,8 @@ sub tonnetz4 {
     return Games::Dice::Advanced->new($d);
 }
 
+## RHYTHMS ##
+
 =head2 rhythmic_value
 
   $result = $md->rhythmic_value->roll;
@@ -756,6 +758,8 @@ sub rhythmic_phrase_constrained {
     return Games::Dice::Advanced->new($d);
 }
 
+## GAMEPLAY ##
+
 =head2 chord_voices_nums
 
   $result = $md->chord_voices_nums->roll;
@@ -789,6 +793,8 @@ sub remove_chord_num {
     };
     return Games::Dice::Advanced->new($d);
 }
+
+## UTIITY ##
 
 =head2 unique_note
 
