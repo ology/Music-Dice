@@ -30,7 +30,7 @@ my @qualities = map { $d->chord_quality->roll } 1 .. @$phrase;
 # print ddc \@qualities;
 my @named;
 for my $i (0 .. $#$phrase) {
-    my $named = $notes[$i];
+    my $named = "$i. $notes[$i]";
     if ($qualities[$i] ne 'm7b5') {
         if ($triads[$i] eq 'custom') {
             my @custom;
@@ -46,4 +46,5 @@ for my $i (0 .. $#$phrase) {
     $named .= " $qualities[$i] | $phrase->[$i]";
     push @named, $named;
 }
-print ddc \@named;
+# print ddc \@named;
+print join("\n", @named), "\n";
