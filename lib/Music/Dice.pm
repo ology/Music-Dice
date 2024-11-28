@@ -140,7 +140,7 @@ Default: C<[2 3 4 5 6]>
 
 has octaves => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub { [ 2 .. 6 ] },
 );
 
@@ -217,7 +217,7 @@ Default:
 
 has chord_triads => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub {
         [qw(
             major
@@ -241,7 +241,7 @@ Default: C<[2 2 1 1 1]> (major and minor are twice as likely)
 
 has chord_triad_weights => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub { [qw(2 2 1 1 1)] },
 );
 
@@ -270,7 +270,7 @@ rolled, it should replace the triad it "modifies."
 
 has chord_qualities => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub {
         no warnings 'qw';
         [qw(
@@ -307,7 +307,7 @@ Default:
 
 has modes => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub {
         [qw(
             ionian
@@ -340,7 +340,7 @@ Default:
 
 has tonnetzen3 => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub { [qw(P R L N S H)],
     },
 );
@@ -367,7 +367,7 @@ Default:
 
 has tonnetzen4 => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub { [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)],
     },
 );
@@ -384,7 +384,7 @@ Default: C<[3,4,5]>
 
 has rhythmic_phrase_constraints => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub { [ 3, 4, 5 ] },
 );
 
@@ -400,7 +400,7 @@ Default: C<[3,4]>
 
 has chord_voices_nums => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    isa     => _is_array(@_),
     default => sub { [ 3, 4 ] },
 );
 
@@ -806,6 +806,10 @@ sub unique_note {
         $note = $notes->[ int rand @$notes ];
     }
     return $note;
+}
+
+sub _is_array {
+    croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY';
 }
 
 1;
