@@ -207,7 +207,7 @@ has chord_triads => (
             diminished
             augmented
             custom
-        )]
+        )],
     },
 );
 
@@ -249,7 +249,7 @@ has chord_qualities => (
             b11 11 #11
             b13 13 #13
             m7b5
-        )]
+        )],
     },
 );
 
@@ -283,7 +283,7 @@ has modes => (
             mixolydian
             aeolian
             locrian
-        )]
+        )],
     },
 );
 
@@ -307,10 +307,36 @@ Default:
 has tonnetzen3 => (
     is      => 'ro',
     isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [qw(P R L N S H)]
+    default => sub { [qw(P R L N S H)],
     },
 );
 
+=head2 tonnetzen4
+
+  $tonnetzen4 = $md->tonnetzen4;
+
+The named tonnetz values for 7th chord transformations.
+
+Default:
+
+  S23
+  S32
+  S34
+  S43
+  S56
+  S65
+  C32
+  C34
+  C65
+
+=cut
+
+has tonnetzen4 => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an array" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)],
+    },
+);
 
 =head2 chord_voices_nums
 
@@ -564,6 +590,22 @@ sub tonnetz3 {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->tonnetzen3, [ (1) x @{ $self->tonnetzen3 } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 tonnetz4
+
+  $result = $md->tonnetz4->roll;
+
+Returns one of the B<tonnetzen4>, with equal probability.
+
+=cut
+
+sub tonnetz4 {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->tonnetzen4, [ (1) x @{ $self->tonnetzen4 } ])
     };
     return Games::Dice::Advanced->new($d);
 }
