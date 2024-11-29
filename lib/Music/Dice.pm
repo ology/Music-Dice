@@ -973,6 +973,7 @@ sub chord_quality_roll {
         my $item = $self->unique_item([ $note ]);
         push @custom, $item;
         push @custom, $self->unique_item([ $note, $item ]);
+        $quality = "@custom";
     }
     return $quality;
 }
