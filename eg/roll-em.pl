@@ -63,7 +63,7 @@ for my $i (0 .. $#$phrase) {
 print join("\n", @named), "\n";
 # print ddc \@to_play;
 
-for (1 .. 2) {
+for (1 .. 4) {
     for my $spec (@to_play) {
         my @tones = $cn->chord_with_octave($spec->[1], 4);
         $score->n($spec->[0], midi_format(@tones))
