@@ -34,9 +34,9 @@ for my $i (0 .. $#$phrase) {
     if ($qualities[$i] ne 'm7b5') {
         if ($triads[$i] eq 'custom') {
             my @custom;
-            my $n = $d->unique_note([ $notes[$i] ]);
-            push @custom, $n;
-            push @custom, $d->unique_note([ $notes[$i], $n ]);
+            my $item = $d->unique_item([ $notes[$i] ]);
+            push @custom, $item;
+            push @custom, $d->unique_item([ $notes[$i], $item ]);
             $named .= " @custom";
         }
         else {
