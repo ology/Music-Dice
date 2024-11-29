@@ -384,9 +384,6 @@ Default:
   m11
   m13
 
-Where C<m7b5> is the half-diminished chord ("ø"). If this quality is
-rolled, it should replace the triad it "modifies."
-
 =cut
 
 has chord_qualities_minor4 => (
@@ -395,6 +392,84 @@ has chord_qualities_minor4 => (
     default => sub {
         no warnings 'qw';
         [qw(
+            m7b5 m7#5
+            m9
+            m7(9,11)
+            m11
+            m13
+        )],
+    },
+);
+
+=head2 chord_qualities_diminished
+
+  $chord_qualities_diminished = $md->chord_qualities_diminished;
+
+The named chord qualities that specify a single note addition or
+transformation to diminished chords.
+
+Default:
+
+  dim6
+  dim7
+
+=cut
+
+has chord_qualities_diminished => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(
+            dim6
+            dim7
+        )],
+    },
+);
+
+=head2 chord_qualities_augmented
+
+  $chord_qualities_augmented = $md->chord_qualities_augmented;
+
+The named chord qualities that specify a single note addition or
+transformation to augmented chords.
+
+Default:
+
+  augM7 aug7
+
+=cut
+
+has chord_qualities_augmented => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(
+            dim6
+            dim7
+        )],
+    },
+);
+
+=head2 chord_qualities_augmented4
+
+  $chord_qualities_augmented4 = $md->chord_qualities_augmented4;
+
+The named chord qualities that specify additions or transformations to
+augmented 7th chords.
+
+Default:
+
+  aug9
+
+=cut
+
+has chord_qualities_augmented4 => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        no warnings 'qw';
+        [qw(
+            aug9
         )],
     },
 );
