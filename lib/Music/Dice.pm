@@ -944,6 +944,39 @@ sub chord_quality_augmented_7 {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 chord_quality_roll
+
+  $result = $md->chord_quality_roll($note, $triad, $phrase);
+
+Return a chord quality, given a known B<triad, B<triad>, and
+B<phrase>.
+
+=cut
+
+sub chord_quality_roll {
+    my ($self, $note, $triad, $phrase) = @_;
+    my $quality = '';
+    if ($triad eq 'major') {
+        $quality = $self->chord_quality_major->roll;
+    }
+    elsif ($triad eq 'minor') {
+        $quality = $self->chord_quality_minor->roll;
+    }
+    elsif ($triad eq 'diminished') {
+        $quality = $self->chord_quality_diminished->roll;
+    }
+    elsif ($triad eq 'augmented') {
+        $quality = $self->chord_quality_augmented->roll;
+    }
+    elsif ($triad eq 'custom') {
+        my @custom;
+        my $item = $self->unique_item([ $note ]);
+        push @custom, $item;
+        push @custom, $self->unique_item([ $note, $item ]);
+    }
+    return $quality;
+}
+
 =head2 mode
 
   $result = $md->mode->roll;
