@@ -26,20 +26,20 @@ my $score = setup_score();
 
 my $cn = Music::Chord::Note->new;
 
-my $phrase = $d->rhythmic_phrase->roll;
-# print ddc $phrase;
-my @notes = map { $d->note->roll } 1 .. @$phrase;
-# print ddc \@notes;
-my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
-# print ddc \@triads;
-my @midi;
-for my $i (0 .. $#$phrase) {
-    my $quality = $d->chord_quality_roll($notes[$i], $triads[$i], $phrase->[$i]);
-    push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
-}
-# print ddc \@to_play;
-
 for (1 .. 4) {
+    my $phrase = $d->rhythmic_phrase->roll;
+    # print ddc $phrase;
+    my @notes = map { $d->note->roll } 1 .. @$phrase;
+    # print ddc \@notes;
+    my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
+    # print ddc \@triads;
+    my @midi;
+    for my $i (0 .. $#$phrase) {
+        my $quality = $d->chord_quality_roll($notes[$i], $triads[$i], $phrase->[$i]);
+        push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
+    }
+    # print ddc \@to_play;
+
     for my $spec (@midi) {
         print ddc $spec;
         my @tones = $cn->chord_with_octave($spec->[1], 4);
