@@ -32,39 +32,16 @@ my @notes = map { $d->note->roll } 1 .. @$phrase;
 # print ddc \@notes;
 my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
 # print ddc \@triads;
-my @named;
-my @to_play;
+my @midi;
 for my $i (0 .. $#$phrase) {
-    my $named = $i + 1 . ". $notes[$i]";
-    my $quality = '';
-    if ($triads[$i] eq 'major') {
-        $quality = $d->chord_quality_major->roll;
-    }
-    elsif ($triads[$i] eq 'minor') {
-        $quality = $d->chord_quality_minor->roll;
-    }
-    elsif ($triads[$i] eq 'diminished') {
-        $quality = $d->chord_quality_diminished->roll;
-    }
-    elsif ($triads[$i] eq 'augmented') {
-        $quality = $d->chord_quality_augmented->roll;
-    }
-    elsif ($triads[$i] eq 'custom') {
-        my @custom;
-        my $item = $d->unique_item([ $notes[$i] ]);
-        push @custom, $item;
-        push @custom, $d->unique_item([ $notes[$i], $item ]);
-        $named .= " @custom";
-    }
-    $named .= "$quality | $phrase->[$i]";
-    push @named, $named;
-    push @to_play, [ $phrase->[$i], "$notes[$i]$quality" ];
+    my $quality = $d->chord_quality_roll($notes[$i], $triads[$i], $phrase->[$i]);
+    push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
 }
-print join("\n", @named), "\n";
 # print ddc \@to_play;
 
 for (1 .. 4) {
-    for my $spec (@to_play) {
+    for my $spec (@midi) {
+        print ddc $spec;
         my @tones = $cn->chord_with_octave($spec->[1], 4);
         $score->n($spec->[0], midi_format(@tones))
     }
