@@ -1085,25 +1085,25 @@ sub remove_chord_num {
 
 ## UTILITY ##
 
-=head2 unique_note
+=head2 unique_item
 
-  $unique_note = $mb->unique_note(\@excludes);
-  $unique_note = $mb->unique_note(\@excludes, \@notes);
+  $item = $mb->unique_item(\@excludes);
+  $item = $mb->unique_item(\@excludes, \@items);
 
-Return a note from the B<notes> list, that is not in the B<excludes>
-list. If anote list is not given in the arguments, the object B<notes>
+Return an item from the B<items> list, that is not in the B<excludes>
+list. If an item list is not given in the arguments, the object B<notes>
 are used.
 
 =cut
 
-sub unique_note {
-    my ($self, $excludes, $notes) = @_;
-    $notes ||= $self->notes;
-    my $note = '';
-    while (!$note || grep { $_ eq $note } @$excludes) {
-        $note = $notes->[ int rand @$notes ];
+sub unique_item {
+    my ($self, $excludes, $items) = @_;
+    $items ||= $self->notes;
+    my $item = '';
+    while (!$item || grep { $_ eq $item } @$excludes) {
+        $item = $items->[ int rand @$items ];
     }
-    return $note;
+    return $item;
 }
 
 1;
