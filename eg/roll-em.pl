@@ -46,8 +46,6 @@ for (1 .. 4) {
         }
         push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
     }
-    # print ddc \@to_play;
-
     for my $spec (@midi) {
         print ddc $spec;
         my @tones;
