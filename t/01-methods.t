@@ -17,7 +17,7 @@ subtest defaults => sub {
     is_deeply $obj->chord_triads, [qw(major minor diminished augmented custom)], 'chord_triads';
     is_deeply $obj->chord_triad_weights, [qw(2 2 1 1 1)], 'chord_triad_weights';
     is_deeply $obj->chord_qualities_major, [qw(add2 sus2 add4 sus4 -5 -6 6 M7 7 add9)], 'chord_qualities_major';
-    is_deeply $obj->chord_qualities_major_7, [qw|7b5 7#5 69 M79 7b9 9 7#9 7(b9,13) 7(9,13) 9b5 M11 11 7#11 M13 13 7#13|], 'chord_qualities_major_7';
+    is_deeply $obj->chord_qualities_major_7, [qw|7sus4 7b5 7#5 69 M79 7b9 9 7#9 7(b9,13) 7(9,13) 9b5 M11 11 7#11 M13 13 7#13|], 'chord_qualities_major_7';
     is_deeply $obj->chord_qualities_minor, [qw(madd4 m6 mM7 m7)], 'chord_qualities_minor';
     is_deeply $obj->chord_qualities_minor_7, [qw|m7b5 m7#5 m9 m7(9,11) m11 m13|], 'chord_qualities_minor_7';
     is_deeply $obj->chord_qualities_diminished, [qw(dim6 dim7)], 'chord_qualities_diminished';
@@ -116,8 +116,8 @@ subtest rolls => sub {
 
 subtest utility => sub {
     my $obj = new_ok 'Music::Dice';
-    my $got = $obj->unique_note(['C']);
-    isnt $got, 'C', 'unique_note';
+    my $got = $obj->unique_item(['C']);
+    isnt $got, 'C', 'unique_item';
 };
 
 done_testing();
