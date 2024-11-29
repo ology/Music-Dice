@@ -63,7 +63,7 @@ C<Music::Dice> defines and rolls musical dice.
 
 =head2 scale_note
 
-  $note = $md->scale_note;
+  $note = $d->scale_note;
 
 The (uppercase) tonic of the scale.
 
@@ -79,7 +79,7 @@ has scale_note => (
 
 =head2 scale_name
 
-  $note = $md->scale_name;
+  $note = $d->scale_name;
 
 The (lowercase) name of the scale.
 
@@ -95,7 +95,7 @@ has scale_name => (
 
 =head2 flats
 
-  $flats = $md->flats;
+  $flats = $d->flats;
 
 Use either flats or sharps in the returned notes.
 
@@ -111,7 +111,7 @@ has flats => (
 
 =head2 beats
 
-  $beats = $md->beats;
+  $beats = $d->beats;
 
 The number of quarter-note beats in a rhythmic phrase.
 
@@ -127,7 +127,7 @@ has beats => (
 
 =head2 pool
 
-  $pool = $md->pool;
+  $pool = $d->pool;
 
 The pool of durations in a rhythmic phrase.
 
@@ -144,7 +144,7 @@ has pool => (
 
 =head2 octaves
 
-  $octaves = $md->octaves;
+  $octaves = $d->octaves;
 
 The octaves to choose from.
 
@@ -160,7 +160,7 @@ has octaves => (
 
 =head2 notes
 
-  $notes = $md->notes;
+  $notes = $d->notes;
 
 The user-definable named pitches from which to choose.
 
@@ -189,7 +189,7 @@ sub _build_notes {
 
 =head2 intervals
 
-  $intervals = $md->intervals;
+  $intervals = $d->intervals;
 
 Return the note B<intervals>.
 
@@ -214,7 +214,7 @@ sub _build_intervals {
 
 =head2 chord_triads
 
-  $chord_triads = $md->chord_triads;
+  $chord_triads = $d->chord_triads;
 
 The named chord triads, from which to choose. Rolling C<custom> means
 that three individual notes, or two intervals must be chosen.
@@ -245,7 +245,7 @@ has chord_triads => (
 
 =head2 chord_triad_weights
 
-  $chord_triad_weights = $md->chord_triad_weights;
+  $chord_triad_weights = $d->chord_triad_weights;
 
 The chord triad weights.
 
@@ -261,7 +261,7 @@ has chord_triad_weights => (
 
 =head2 chord_qualities_major
 
-  $chord_qualities_major = $md->chord_qualities_major;
+  $chord_qualities_major = $d->chord_qualities_major;
 
 The named chord qualities that specify a single note addition or
 transformation to major chords.
@@ -296,7 +296,7 @@ has chord_qualities_major => (
 
 =head2 chord_qualities_major_7
 
-  $chord_qualities_major_7 = $md->chord_qualities_major_7;
+  $chord_qualities_major_7 = $d->chord_qualities_major_7;
 
 The named chord qualities that specify additions or transformations to
 7th chords.
@@ -336,7 +336,7 @@ has chord_qualities_major_7 => (
 
 =head2 chord_qualities_minor
 
-  $chord_qualities_minor = $md->chord_qualities_minor;
+  $chord_qualities_minor = $d->chord_qualities_minor;
 
 The named chord qualities that specify a single note addition or
 transformation to minor chords.
@@ -365,7 +365,7 @@ has chord_qualities_minor => (
 
 =head2 chord_qualities_minor_7
 
-  $chord_qualities_minor_7 = $md->chord_qualities_minor_7;
+  $chord_qualities_minor_7 = $d->chord_qualities_minor_7;
 
 The named chord qualities that specify additions or transformations to
 minor 7th chords.
@@ -399,7 +399,7 @@ has chord_qualities_minor_7 => (
 
 =head2 chord_qualities_diminished
 
-  $chord_qualities_diminished = $md->chord_qualities_diminished;
+  $chord_qualities_diminished = $d->chord_qualities_diminished;
 
 The named chord qualities that specify a single note addition or
 transformation to diminished chords.
@@ -426,7 +426,7 @@ has chord_qualities_diminished => (
 
 =head2 chord_qualities_augmented
 
-  $chord_qualities_augmented = $md->chord_qualities_augmented;
+  $chord_qualities_augmented = $d->chord_qualities_augmented;
 
 The named chord qualities that specify a single note addition or
 transformation to augmented chords.
@@ -451,7 +451,7 @@ has chord_qualities_augmented => (
 
 =head2 chord_qualities_augmented_7
 
-  $chord_qualities_augmented_7 = $md->chord_qualities_augmented_7;
+  $chord_qualities_augmented_7 = $d->chord_qualities_augmented_7;
 
 The named chord qualities that specify additions or transformations to
 augmented 7th chords.
@@ -477,7 +477,7 @@ has chord_qualities_augmented_7 => (
 
 =head2 modes
 
-  $modes = $md->modes;
+  $modes = $d->modes;
 
 The named modes, from which to choose.
 
@@ -511,7 +511,7 @@ has modes => (
 
 =head2 tonnetzen
 
-  $tonnetzen = $md->tonnetzen;
+  $tonnetzen = $d->tonnetzen;
 
 The named tonnetz values for triad transformations.
 
@@ -535,7 +535,7 @@ has tonnetzen => (
 
 =head2 tonnetzen_7
 
-  $tonnetzen_7 = $md->tonnetzen_7;
+  $tonnetzen_7 = $d->tonnetzen_7;
 
 The named tonnetz values for 7th chord transformations.
 
@@ -562,7 +562,7 @@ has tonnetzen_7 => (
 
 =head2 rhythmic_phrase_constraints
 
-  $rhythmic_phrase_constraints = $md->rhythmic_phrase_constraints;
+  $rhythmic_phrase_constraints = $d->rhythmic_phrase_constraints;
 
 The number of rhythmic values in a phrase, given as an array reference.
 
@@ -578,7 +578,7 @@ has rhythmic_phrase_constraints => (
 
 =head2 chord_voices_nums
 
-  $chord_voices = $md->chord_voices_nums;
+  $chord_voices = $d->chord_voices_nums;
 
 The number of voices in a chord, given as an array reference.
 
@@ -594,7 +594,7 @@ has chord_voices_nums => (
 
 =head2 mdp
 
-  $mdp = $md->mdp;
+  $mdp = $d->mdp;
 
 The L<Music::Duration::Partition> object.
 
@@ -617,8 +617,8 @@ sub _build_mdp {
 
 =head2 new
 
-  $md = Music::Dice->new;
-  $md = Music::Dice->new( # override defaults
+  $d = Music::Dice->new;
+  $d = Music::Dice->new( # override defaults
     scale_note                  => $note,
     scale_name                  => $name,
     flats                       => $bool,
@@ -660,7 +660,7 @@ sub BUILD {
 
 =head2 octave
 
-  $result = $md->octave->roll;
+  $result = $d->octave->roll;
 
 Return an octave number.
 
@@ -676,7 +676,7 @@ sub octave {
 
 =head2 note
 
-  $result = $md->note->roll;
+  $result = $d->note->roll;
 
 Return one of the B<notes>, with equal probability.
 
@@ -692,7 +692,7 @@ sub note {
 
 =head2 interval
 
-  $result = $md->interval->roll;
+  $result = $d->interval->roll;
 
 Return one of the note B<intervals>, with equal probability.
 
@@ -708,7 +708,7 @@ sub interval {
 
 =head2 note_chromatic
 
-  $result = $md->note_chromatic->roll;
+  $result = $d->note_chromatic->roll;
 
 Return one of the chromatic scale notes, based on the given
 B<scale_note>, with equal probability.
@@ -727,7 +727,7 @@ sub note_chromatic {
 
 =head2 interval_chromatic
 
-  $result = $md->interval_chromatic->roll;
+  $result = $d->interval_chromatic->roll;
 
 Return one of the chromatic intervals (12 C<1>s), with equal
 probability.
@@ -745,7 +745,7 @@ sub interval_chromatic {
 
 =head2 note_major
 
-  $result = $md->note_major->roll;
+  $result = $d->note_major->roll;
 
 Return one of the major scale notes, based on the given
 B<scale_note>, with equal probability.
@@ -764,7 +764,7 @@ sub note_major {
 
 =head2 interval_major
 
-  $result = $md->interval_major->roll;
+  $result = $d->interval_major->roll;
 
 Return one of the major intervals, with equal probability.
 
@@ -781,7 +781,7 @@ sub interval_major {
 
 =head2 note_minor
 
-  $result = $md->note_minor->roll;
+  $result = $d->note_minor->roll;
 
 Return one of the natural minor scale notes, based on the given
 B<scale_note>, with equal probability.
@@ -800,7 +800,7 @@ sub note_minor {
 
 =head2 interval_minor
 
-  $result = $md->interval_minor->roll;
+  $result = $d->interval_minor->roll;
 
 Return one of the minor intervals, with equal probability.
 
@@ -817,7 +817,7 @@ sub interval_minor {
 
 =head2 chord_triad
 
-  $result = $md->chord_triad->roll;
+  $result = $d->chord_triad->roll;
 
 Return a chord triad. If C<custom> is rolled, then three C<notes>
 must be rolled for, separately.
@@ -834,7 +834,7 @@ sub chord_triad {
 
 =head2 chord_quality_major
 
-  $result = $md->chord_quality_major->roll;
+  $result = $d->chord_quality_major->roll;
 
 Return a chord quality to modify a major chord triad.
 
@@ -850,7 +850,7 @@ sub chord_quality_major {
 
 =head2 chord_quality_major_7
 
-  $result = $md->chord_quality_major_7->roll;
+  $result = $d->chord_quality_major_7->roll;
 
 Return a chord quality to modify a 7th chord.
 
@@ -866,7 +866,7 @@ sub chord_quality_major_7 {
 
 =head2 chord_quality_minor
 
-  $result = $md->chord_quality_minor->roll;
+  $result = $d->chord_quality_minor->roll;
 
 Return a chord quality to modify a minor chord triad.
 
@@ -882,7 +882,7 @@ sub chord_quality_minor {
 
 =head2 chord_quality_minor_7
 
-  $result = $md->chord_quality_minor_7->roll;
+  $result = $d->chord_quality_minor_7->roll;
 
 Return a chord quality to modify a minor 7th chord.
 
@@ -898,7 +898,7 @@ sub chord_quality_minor_7 {
 
 =head2 chord_quality_diminished
 
-  $result = $md->chord_quality_diminished->roll;
+  $result = $d->chord_quality_diminished->roll;
 
 Return a chord quality to modify a diminished chord triad.
 
@@ -914,7 +914,7 @@ sub chord_quality_diminished {
 
 =head2 chord_quality_augmented
 
-  $result = $md->chord_quality_augmented->roll;
+  $result = $d->chord_quality_augmented->roll;
 
 Return a chord quality to modify an augmented chord triad.
 
@@ -930,7 +930,7 @@ sub chord_quality_augmented {
 
 =head2 chord_quality_augmented_7
 
-  $result = $md->chord_quality_augmented_7->roll;
+  $result = $d->chord_quality_augmented_7->roll;
 
 Return a chord quality to modify an augmented 7th chord.
 
@@ -946,14 +946,14 @@ sub chord_quality_augmented_7 {
 
 =head2 chord_quality_roll
 
-  $result = $md->chord_quality_roll($triad);
+  $result = $d->chord_quality_roll($note, $triad);
 
-Return a chord quality, given a known B<triad>.
+Return a chord quality, given a B<note> and a known B<triad>.
 
 =cut
 
 sub chord_quality_roll {
-    my ($self, $triad) = @_;
+    my ($self, $note, $triad) = @_;
     my $quality = '';
     if ($triad eq 'major') {
         $quality = $self->chord_quality_major->roll;
@@ -967,12 +967,19 @@ sub chord_quality_roll {
     elsif ($triad eq 'augmented') {
         $quality = $self->chord_quality_augmented->roll;
     }
+    elsif ($triad eq 'custom') {
+        my @custom;
+        my $item = $self->unique_item([ $note ]);
+        push @custom, $item;
+        push @custom, $self->unique_item([ $note, $item ]);
+        $quality = " @custom";
+    }
     return $quality;
 }
 
 =head2 mode
 
-  $result = $md->mode->roll;
+  $result = $d->mode->roll;
 
 Return a mode.
 
@@ -988,7 +995,7 @@ sub mode {
 
 =head2 tonnetz
 
-  $result = $md->tonnetz->roll;
+  $result = $d->tonnetz->roll;
 
 Return one of the B<tonnetzen>, with equal probability.
 
@@ -1004,7 +1011,7 @@ sub tonnetz {
 
 =head2 tonnetz_7
 
-  $result = $md->tonnetz_7->roll;
+  $result = $d->tonnetz_7->roll;
 
 Return one of the B<tonnetzen_7>, with equal probability.
 
@@ -1022,7 +1029,7 @@ sub tonnetz_7 {
 
 =head2 rhythmic_value
 
-  $result = $md->rhythmic_value->roll;
+  $result = $d->rhythmic_value->roll;
 
 Return a single rhythmic value.
 
@@ -1038,7 +1045,7 @@ sub rhythmic_value {
 
 =head2 rhythmic_phrase
 
-  $result = $md->rhythmic_phrase->roll;
+  $result = $d->rhythmic_phrase->roll;
 
 Return a rhythmic phrase, given the number of B<beats>.
 
@@ -1054,7 +1061,7 @@ sub rhythmic_phrase {
 
 =head2 rhythmic_phrase_constrained
 
-  $result = $md->rhythmic_phrase_constrained->roll;
+  $result = $d->rhythmic_phrase_constrained->roll;
 
 Return a constrained rhythmic phrase, given the
 B<rhythmic_phrase_constraints> (number of rhythmic values).
@@ -1077,7 +1084,7 @@ sub rhythmic_phrase_constrained {
 
 =head2 chord_voices_nums
 
-  $result = $md->chord_voices_nums->roll;
+  $result = $d->chord_voices_nums->roll;
 
 Return one of the B<chord_voices_nums> with equal probability.
 
@@ -1093,7 +1100,7 @@ sub chord_voices_num {
 
 =head2 remove_chord_num
 
-  $result = $md->remove_chord_num->roll;
+  $result = $d->remove_chord_num->roll;
 
 Return a value between C<0> and one less than the first
 B<chord_voices_num> entry.
