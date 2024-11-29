@@ -49,7 +49,7 @@ for my $i (0 .. $#$phrase) {
         push @custom, $d->unique_item([ $notes[$i], $item ]);
         $named .= " @custom";
     }
-    $named .= " $quality | $phrase->[$i]";
+    $named .= "$quality | $phrase->[$i]";
     push @named, $named;
 }
 # print ddc \@named;
