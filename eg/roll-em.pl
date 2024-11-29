@@ -28,14 +28,22 @@ my $cn = Music::Chord::Note->new;
 
 for (1 .. 4) {
     my $phrase = $d->rhythmic_phrase->roll;
-    # print ddc $phrase;
     my @notes = map { $d->note->roll } 1 .. @$phrase;
-    # print ddc \@notes;
     my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
-    # print ddc \@triads;
     my @midi;
     for my $i (0 .. $#$phrase) {
-        my $quality = $d->chord_quality_roll($notes[$i], $triads[$i], $phrase->[$i]);
+        my $notes;
+        my $quality;
+        if ($triads[$i] eq 'custom') {
+            my @custom;
+            my $item = $d->unique_item([ $notes[$i] ]);
+            push @custom, $item;
+            push @custom, $d->unique_item([ $notes[$i], $item ]);
+            $quality = " @custom";
+        }
+        else {
+            $quality = $d->chord_quality_roll($triads[$i]);
+        }
         push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
     }
     # print ddc \@to_play;
