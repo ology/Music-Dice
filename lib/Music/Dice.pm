@@ -52,7 +52,7 @@ use namespace::clean;
   my $phrase = $d->rhythmic_phrase->roll;
   my @notes  = map { $d->note->roll } 1 .. @$phrase;
   my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
-  my @named  = map { "$notes[$i] $triads[$i] | $phrase->[$i]" } 0 .. $#$phrase;
+  my @named  = map { "$notes[$_] $triads[$_] | $phrase->[$_]" } 0 .. $#$phrase;
   print join("\n", @named), "\n";
 
 =head1 DESCRIPTION
