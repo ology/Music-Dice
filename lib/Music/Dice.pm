@@ -44,8 +44,8 @@ use namespace::clean;
 
   # for example:
   my $phrase    = $d->rhythmic_phrase->roll;
-  my @notes     = map { $d->note->roll }          1 .. @$phrase;
-  my @triads    = map { $d->chord_triad->roll }   1 .. @$phrase;
+  my @notes     = map { $d->note->roll }           1 .. @$phrase;
+  my @triads    = map { $d->chord_triad->roll }    1 .. @$phrase;
   my @qualities = map { $d->chord_quality1->roll } 1 .. @$phrase; 
   my @named;
   for my $i (0 .. $#$phrase) {
