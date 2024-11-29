@@ -67,6 +67,5 @@ for my $spec (@to_play) {
     my @tones = $cn->chord($spec->[1]);
     $score->n($spec->[0], midi_format(@tones))
 }
-
 $score->write_score("$0.mid");
 
