@@ -26,24 +26,30 @@ my @notes = map { $d->note->roll } 1 .. @$phrase;
 # print ddc \@notes;
 my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
 # print ddc \@triads;
-my @qualities = map { $d->chord_quality->roll } 1 .. @$phrase; 
-# print ddc \@qualities;
 my @named;
 for my $i (0 .. $#$phrase) {
     my $named = $i + 1 . ". $notes[$i]";
-    if ($qualities[$i] ne 'm7b5') {
-        if ($triads[$i] eq 'custom') {
-            my @custom;
-            my $item = $d->unique_item([ $notes[$i] ]);
-            push @custom, $item;
-            push @custom, $d->unique_item([ $notes[$i], $item ]);
-            $named .= " @custom";
-        }
-        else {
-            $named .= " $triads[$i]";
-        }
+    my $quality = '';
+    if ($triads[$i] eq 'major') {
+        $quality = $d->chord_quality_major->roll;
     }
-    $named .= " $qualities[$i] | $phrase->[$i]";
+    elsif ($triads[$i] eq 'minor') {
+        $quality = $d->chord_quality_minor->roll;
+    }
+    elsif ($triads[$i] eq 'diminished') {
+        $quality = $d->chord_quality_diminished->roll;
+    }
+    elsif ($triads[$i] eq 'augmented') {
+        $quality = $d->chord_quality_augmented->roll;
+    }
+    elsif ($triads[$i] eq 'custom') {
+        my @custom;
+        my $item = $d->unique_item([ $notes[$i] ]);
+        push @custom, $item;
+        push @custom, $d->unique_item([ $notes[$i], $item ]);
+        $named .= " @custom";
+    }
+    $named .= " $quality | $phrase->[$i]";
     push @named, $named;
 }
 # print ddc \@named;
