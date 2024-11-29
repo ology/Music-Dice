@@ -22,7 +22,7 @@ use namespace::clean;
   use Music::Dice ();
   my $d = Music::Dice->new;
   # basics
-  my $roll = $md->note->roll;
+  my $roll = $d->note->roll;
   $roll = $d->interval->roll;
   $roll = $d->note_chromatic->roll;
   $roll = $d->interval_chromatic->roll;
