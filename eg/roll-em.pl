@@ -4,6 +4,8 @@ use warnings;
 
 use Data::Dumper::Compact qw(ddc);
 use Getopt::Long qw(GetOptions);
+use MIDI::Util qw(setup_score);
+use Music::Chord::Note ();
 use Music::Dice ();
 
 my %opt = (
@@ -20,6 +22,10 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
 
+my $score = setup_score();
+
+my $cn = Music::Chord::Note->new;
+
 my $phrase = $d->rhythmic_phrase->roll;
 # print ddc $phrase;
 my @notes = map { $d->note->roll } 1 .. @$phrase;
@@ -27,6 +33,7 @@ my @notes = map { $d->note->roll } 1 .. @$phrase;
 my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
 # print ddc \@triads;
 my @named;
+my @to_play;
 for my $i (0 .. $#$phrase) {
     my $named = $i + 1 . ". $notes[$i]";
     my $quality = '';
@@ -51,6 +58,15 @@ for my $i (0 .. $#$phrase) {
     }
     $named .= "$quality | $phrase->[$i]";
     push @named, $named;
+    push @to_play, [ $phrase->[$i], "$notes[$i]$quality" ];
 }
-# print ddc \@named;
 print join("\n", @named), "\n";
+# print ddc \@to_play;
+
+for my $spec (@to_play) {
+    my @tones = $cn->chord($spec->[1]);
+    $score->n($spec->[0], @tones)
+}
+
+$score->write_score("$0.mid");
+
