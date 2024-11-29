@@ -47,4 +47,3 @@ for (1 .. 4) {
     }
 }
 $score->write_score("$0.mid");
-
