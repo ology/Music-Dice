@@ -50,7 +50,13 @@ for (1 .. 4) {
 
     for my $spec (@midi) {
         print ddc $spec;
-        my @tones = $cn->chord_with_octave($spec->[1], 4);
+        my @tones;
+        if ($spec->[1] =~ /\s+/) {
+            @tones = split /\s+/, $spec->[1];
+        }
+        else {
+            @tones = $cn->chord_with_octave($spec->[1], 4);
+        }
         $score->n($spec->[0], midi_format(@tones))
     }
 }
