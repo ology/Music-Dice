@@ -26,24 +26,15 @@ my $score = setup_score(patch => 4);
 
 my $cn = Music::Chord::Note->new;
 
+my $phrase = $d->rhythmic_phrase->roll;
+
 for (1 .. 4) {
-    my $phrase = $d->rhythmic_phrase->roll;
     my @notes = map { $d->note->roll } 1 .. @$phrase;
     my @triads = map { $d->chord_triad->roll } 1 .. @$phrase;
     my @midi;
     for my $i (0 .. $#$phrase) {
         my $notes;
-        my $quality;
-        if ($triads[$i] eq 'custom') {
-            my @custom;
-            my $item = $d->unique_item([ $notes[$i] ]);
-            push @custom, $item;
-            push @custom, $d->unique_item([ $notes[$i], $item ]);
-            $quality = " @custom";
-        }
-        else {
-            $quality = $d->chord_quality_roll($triads[$i]);
-        }
+        my $quality = $d->chord_quality_roll($notes[$i], $triads[$i]);
         push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
     }
     for my $spec (@midi) {
