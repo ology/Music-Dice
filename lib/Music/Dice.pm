@@ -946,15 +946,14 @@ sub chord_quality_augmented_7 {
 
 =head2 chord_quality_roll
 
-  $result = $md->chord_quality_roll($note, $triad, $phrase);
+  $result = $md->chord_quality_roll($triad);
 
-Return a chord quality, given a known B<triad, B<triad>, and
-B<phrase>.
+Return a chord quality, given a known B<triad>.
 
 =cut
 
 sub chord_quality_roll {
-    my ($self, $note, $triad, $phrase) = @_;
+    my ($self, $triad) = @_;
     my $quality = '';
     if ($triad eq 'major') {
         $quality = $self->chord_quality_major->roll;
@@ -967,13 +966,6 @@ sub chord_quality_roll {
     }
     elsif ($triad eq 'augmented') {
         $quality = $self->chord_quality_augmented->roll;
-    }
-    elsif ($triad eq 'custom') {
-        my @custom;
-        my $item = $self->unique_item([ $note ]);
-        push @custom, $item;
-        push @custom, $self->unique_item([ $note, $item ]);
-        $quality = "@custom";
     }
     return $quality;
 }
