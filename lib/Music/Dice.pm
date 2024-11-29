@@ -31,7 +31,7 @@ use namespace::clean;
   $roll = $md->note_minor->roll;
   $roll = $md->interval_minor->roll;
   $roll = $md->chord_triad->roll;
-  $roll = $md->chord_quality->roll;
+  $roll = $md->chord_quality1->roll;
   $roll = $md->mode->roll;
   $roll = $md->tonnetz3->roll;
   $roll = $md->tonnetz4->roll;
@@ -46,7 +46,7 @@ use namespace::clean;
   my $phrase    = $d->rhythmic_phrase->roll;
   my @notes     = map { $d->note->roll }          1 .. @$phrase;
   my @triads    = map { $d->chord_triad->roll }   1 .. @$phrase;
-  my @qualities = map { $d->chord_quality->roll } 1 .. @$phrase; 
+  my @qualities = map { $d->chord_quality1->roll } 1 .. @$phrase; 
   my @named;
   for my $i (0 .. $#$phrase) {
       my $named = $notes[$i];
@@ -271,9 +271,9 @@ has chord_triad_weights => (
     default => sub { [qw(2 2 1 1 1)] },
 );
 
-=head2 chord_qualities3
+=head2 chord_qualities1
 
-  $chord_qualities3 = $md->chord_qualities3;
+  $chord_qualities1 = $md->chord_qualities1;
 
 The user-definable named chord qualities, from which to choose.
 
@@ -294,7 +294,7 @@ rolled, it should replace the triad it "modifies."
 
 =cut
 
-has chord_qualities3 => (
+has chord_qualities1 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
@@ -469,8 +469,8 @@ sub _build_mdp {
     modes               => \@modes,
     tonnetzen3          => \@tonnetzen3,
     tonnetzen4          => \@tonnetzen4,
-    chord_qualities3    => \@qualities3,
-    chord_qualities4    => \@qualities4,
+    chord_qualities1    => \@qualities1,
+    chord_qualities2    => \@qualities2,
     chord_voices_nums   => \@voices,
     rhythmic_phrase_constraints => \@constraints,
   );
@@ -665,18 +665,18 @@ sub chord_triad {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 chord_quality3
+=head2 chord_quality1
 
-  $result = $md->chord_quality3->roll;
+  $result = $md->chord_quality1->roll;
 
 Return a chord quality to modify a chord triad.
 
 =cut
 
-sub chord_quality3 {
+sub chord_quality1 {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->chord_qualities3, [ (1) x @{ $self->chord_qualities3 } ])
+        return choose_weighted($self->chord_qualities1, [ (1) x @{ $self->chord_qualities1 } ])
     };
     return Games::Dice::Advanced->new($d);
 }
