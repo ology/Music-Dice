@@ -444,8 +444,7 @@ has chord_qualities_augmented => (
     isa     => ArrayRef[Str],
     default => sub {
         [qw(
-            dim6
-            dim7
+            augM7 aug7
         )],
     },
 );
