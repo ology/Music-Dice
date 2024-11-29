@@ -275,16 +275,49 @@ has chord_triad_weights => (
 
   $chord_qualities1 = $md->chord_qualities1;
 
-The user-definable named chord qualities, from which to choose.
+The named chord qualities that specify a single note addition or
+transformation.
 
 Default:
 
-  sus4
+  add2 sus2
+  add4 sus4
+  -5
+  -6 6
+  M7 7
+  add9
+
+=cut
+
+has chord_qualities1 => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        no warnings 'qw';
+        [qw(
+            add2 sus2
+            add4 sus4
+            -5
+            -6 6
+            M7 7
+            add9
+        )],
+    },
+);
+
+=head2 chord_qualities2
+
+  $chord_qualities2 = $md->chord_qualities2;
+
+The named chord qualities that specify either two note additions or
+transformations, or addition/transformation to four or more note (e.g.
+7th, m7b5, etc.) chords.
+
+Default:
+
   b5 #5
-  6 69
-  maj7 minmaj7
-  7 m7
-  add9 b9 9 #9
+  69
+  b9 9 #9
   11 #11
   13 #13
   m7b5
@@ -294,7 +327,7 @@ rolled, it should replace the triad it "modifies."
 
 =cut
 
-has chord_qualities1 => (
+has chord_qualities2 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
