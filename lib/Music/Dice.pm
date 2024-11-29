@@ -545,9 +545,9 @@ has tonnetzen3 => (
     },
 );
 
-=head2 tonnetzen4
+=head2 tonnetzen_7
 
-  $tonnetzen4 = $md->tonnetzen4;
+  $tonnetzen_7 = $md->tonnetzen_7;
 
 The named tonnetz values for 7th chord transformations.
 
@@ -565,7 +565,7 @@ Default:
 
 =cut
 
-has tonnetzen4 => (
+has tonnetzen_7 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub { [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)],
@@ -631,21 +631,26 @@ sub _build_mdp {
 
   $md = Music::Dice->new;
   $md = Music::Dice->new( # override defaults
-    scale_note          => $note,
-    scale_name          => $name,
-    flats               => $bool,
-    beats               => $beats,
-    pool                => \@pool, # or 'all'
-    notes               => \@notes,
-    intervals           => \@intervals,
-    chord_triads        => \@triads,
-    chord_triad_weights => \@triad_weights,
-    modes               => \@modes,
-    tonnetzen3          => \@tonnetzen3,
-    tonnetzen4          => \@tonnetzen4,
-    chord_qualities1    => \@qualities1,
-    chord_qualities2    => \@qualities2,
-    chord_voices_nums   => \@voices,
+    scale_note                  => $note,
+    scale_name                  => $name,
+    flats                       => $bool,
+    beats                       => $beats,
+    pool                        => \@pool, # or 'all'
+    notes                       => \@notes,
+    intervals                   => \@intervals,
+    chord_triads                => \@triads,
+    chord_triad_weights         => \@triad_weights,
+    chord_qualities_major       => \@chord_qualities_major,
+    chord_qualities_major_7     => \@chord_qualities_major_7,
+    chord_qualities_minor       => \@chord_qualities_minor,
+    chord_qualities_minor_7     => \@chord_qualities_minor_7,
+    chord_qualities_diminished  => \@chord_qualities_diminished,
+    chord_qualities_augmented   => \@chord_qualities_augmented,
+    chord_qualities_augmented_7 => \@chord_qualities_augmented_7,
+    modes                       => \@modes,
+    tonnetzen3                  => \@tonnetzen3,
+    tonnetzen_7                 => \@tonnetzen_7,
+    chord_voices_nums           => \@voices,
     rhythmic_phrase_constraints => \@constraints,
   );
 
@@ -891,14 +896,14 @@ sub tonnetz3 {
 
   $result = $md->tonnetz4->roll;
 
-Return one of the B<tonnetzen4>, with equal probability.
+Return one of the B<tonnetzen_7>, with equal probability.
 
 =cut
 
 sub tonnetz4 {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->tonnetzen4, [ (1) x @{ $self->tonnetzen4 } ])
+        return choose_weighted($self->tonnetzen_7, [ (1) x @{ $self->tonnetzen_7 } ])
     };
     return Games::Dice::Advanced->new($d);
 }
