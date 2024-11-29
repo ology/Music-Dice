@@ -648,7 +648,7 @@ sub _build_mdp {
     chord_qualities_augmented   => \@chord_qualities_augmented,
     chord_qualities_augmented_7 => \@chord_qualities_augmented_7,
     modes                       => \@modes,
-    tonnetzen3                  => \@tonnetzen3,
+    tonnetzen                   => \@tonnetzen,
     tonnetzen_7                 => \@tonnetzen_7,
     chord_voices_nums           => \@voices,
     rhythmic_phrase_constraints => \@constraints,
@@ -880,27 +880,27 @@ sub mode {
 
   $result = $md->tonnetz->roll;
 
-Return one of the B<tonnetzen3>, with equal probability.
+Return one of the B<tonnetzen>, with equal probability.
 
 =cut
 
 sub tonnetz {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->tonnetzen3, [ (1) x @{ $self->tonnetzen3 } ])
+        return choose_weighted($self->tonnetzen, [ (1) x @{ $self->tonnetzen } ])
     };
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 tonnetz4
+=head2 tonnetz_7
 
-  $result = $md->tonnetz4->roll;
+  $result = $md->tonnetz_7->roll;
 
 Return one of the B<tonnetzen_7>, with equal probability.
 
 =cut
 
-sub tonnetz4 {
+sub tonnetz_7 {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->tonnetzen_7, [ (1) x @{ $self->tonnetzen_7 } ])
