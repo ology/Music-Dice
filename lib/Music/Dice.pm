@@ -20,33 +20,33 @@ use namespace::clean;
 =head1 SYNOPSIS
 
   use Music::Dice ();
-  my $md = Music::Dice->new;
+  my $d = Music::Dice->new;
   # basics
   my $roll = $md->note->roll;
-  $roll = $md->interval->roll;
-  $roll = $md->note_chromatic->roll;
-  $roll = $md->interval_chromatic->roll;
-  $roll = $md->note_major->roll;
-  $roll = $md->interval_major->roll;
-  $roll = $md->note_minor->roll;
-  $roll = $md->interval_minor->roll;
-  $roll = $md->chord_triad->roll;
-  $roll = $md->chord_quality_major->roll;
-  $roll = $md->chord_quality_major_7->roll;
-  $roll = $md->chord_quality_minor->roll;
-  $roll = $md->chord_quality_minor_7->roll;
-  $roll = $md->chord_quality_diminished->roll;
-  $roll = $md->chord_quality_augmented->roll;
-  $roll = $md->chord_quality_augmented_7->roll;
-  $roll = $md->mode->roll;
-  $roll = $md->tonnetz->roll;
-  $roll = $md->tonnetz_7->roll;
-  $roll = $md->rhythm->roll;
-  $roll = $md->rhythmic_phrase->roll;
+  $roll = $d->interval->roll;
+  $roll = $d->note_chromatic->roll;
+  $roll = $d->interval_chromatic->roll;
+  $roll = $d->note_major->roll;
+  $roll = $d->interval_major->roll;
+  $roll = $d->note_minor->roll;
+  $roll = $d->interval_minor->roll;
+  $roll = $d->chord_triad->roll;
+  $roll = $d->chord_quality_major->roll;
+  $roll = $d->chord_quality_major_7->roll;
+  $roll = $d->chord_quality_minor->roll;
+  $roll = $d->chord_quality_minor_7->roll;
+  $roll = $d->chord_quality_diminished->roll;
+  $roll = $d->chord_quality_augmented->roll;
+  $roll = $d->chord_quality_augmented_7->roll;
+  $roll = $d->mode->roll;
+  $roll = $d->tonnetz->roll;
+  $roll = $d->tonnetz_7->roll;
+  $roll = $d->rhythm->roll;
+  $roll = $d->rhythmic_phrase->roll;
   # gameplay
-  $roll = $md->chord_voices_nums->roll;
-  $roll = $md->remove_chord_num->roll;
-  $roll = $md->rhythmic_phrase_constrained->roll;
+  $roll = $d->chord_voices_nums->roll;
+  $roll = $d->remove_chord_num->roll;
+  $roll = $d->rhythmic_phrase_constrained->roll;
 
   # for example:
   my $phrase = $d->rhythmic_phrase->roll;
