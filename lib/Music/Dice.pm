@@ -49,28 +49,10 @@ use namespace::clean;
   $roll = $md->rhythmic_phrase_constrained->roll;
 
   # for example:
-  my $phrase    = $d->rhythmic_phrase->roll;
-  my @notes     = map { $d->note->roll }           1 .. @$phrase;
-  my @triads    = map { $d->chord_triad->roll }    1 .. @$phrase;
-  my @qualities = map { $d->chord_quality1->roll } 1 .. @$phrase; 
-  my @named;
-  for my $i (0 .. $#$phrase) {
-      my $named = $notes[$i];
-      if ($qualities[$i] ne 'm7b5') {
-          if ($triads[$i] eq 'custom') {
-              my @custom;
-              my $n = $d->unique_note([ $notes[$i] ]);
-              push @custom, $n;
-              push @custom, $d->unique_note([ $notes[$i], $n ]);
-              $named .= " @custom";
-          }
-          else {
-              $named .= " $triads[$i]";
-          }
-      }
-      $named .= " $qualities[$i] | $phrase->[$i]";
-      push @named, $named;
-  }
+  my $phrase = $d->rhythmic_phrase->roll;
+  my @notes  = map { $d->note->roll }           1 .. @$phrase;
+  my @triads = map { $d->chord_triad->roll }    1 .. @$phrase;
+  my @named  = map { "$notes[$i] $triads[$i] | $phrase->[$i]" } 0 .. $#$phrase;
   print join("\n", @named), "\n";
 
 =head1 DESCRIPTION
