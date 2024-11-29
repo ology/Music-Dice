@@ -306,12 +306,12 @@ has chord_qualities_major => (
     },
 );
 
-=head2 chord_qualities_major4
+=head2 chord_qualities_major_7
 
-  $chord_qualities_major4 = $md->chord_qualities_major4;
+  $chord_qualities_major_7 = $md->chord_qualities_major_7;
 
 The named chord qualities that specify additions or transformations to
-major 7th chords.
+7th chords.
 
 Please see L<Music::Chord::Note> for the known chords.
 
@@ -328,7 +328,7 @@ Default:
 
 =cut
 
-has chord_qualities_major4 => (
+has chord_qualities_major_7 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
@@ -375,9 +375,9 @@ has chord_qualities_minor => (
     },
 );
 
-=head2 chord_qualities_minor4
+=head2 chord_qualities_minor_7
 
-  $chord_qualities_minor4 = $md->chord_qualities_minor4;
+  $chord_qualities_minor_7 = $md->chord_qualities_minor_7;
 
 The named chord qualities that specify additions or transformations to
 minor 7th chords.
@@ -394,7 +394,7 @@ Default:
 
 =cut
 
-has chord_qualities_minor4 => (
+has chord_qualities_minor_7 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
@@ -461,9 +461,9 @@ has chord_qualities_augmented => (
     },
 );
 
-=head2 chord_qualities_augmented4
+=head2 chord_qualities_augmented_7
 
-  $chord_qualities_augmented4 = $md->chord_qualities_augmented4;
+  $chord_qualities_augmented_7 = $md->chord_qualities_augmented_7;
 
 The named chord qualities that specify additions or transformations to
 augmented 7th chords.
@@ -476,7 +476,7 @@ Default:
 
 =cut
 
-has chord_qualities_augmented4 => (
+has chord_qualities_augmented_7 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
