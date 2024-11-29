@@ -81,7 +81,7 @@ has scale_note => (
 
   $note = $md->scale_name;
 
-The (lowecase) name of the scale.
+The (lowercase) name of the scale.
 
 Default: C<chromatic>
 
