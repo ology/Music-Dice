@@ -844,18 +844,114 @@ sub chord_triad {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 chord_quality1
+=head2 chord_quality_major
 
-  $result = $md->chord_quality1->roll;
+  $result = $md->chord_quality_major->roll;
 
-Return a chord quality to modify a chord triad.
+Return a chord quality to modify a major chord triad.
 
 =cut
 
-sub chord_quality1 {
+sub chord_quality_major {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->chord_qualities1, [ (1) x @{ $self->chord_qualities1 } ])
+        return choose_weighted($self->chord_qualities_major, [ (1) x @{ $self->chord_qualities_major } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 chord_quality_major_7
+
+  $result = $md->chord_quality_major_7->roll;
+
+Return a chord quality to modify a 7th chord.
+
+=cut
+
+sub chord_quality_major_7 {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities_major_7, [ (1) x @{ $self->chord_qualities_major_7 } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 chord_quality_minor
+
+  $result = $md->chord_quality_minor->roll;
+
+Return a chord quality to modify a minor chord triad.
+
+=cut
+
+sub chord_quality_minor {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities_minor, [ (1) x @{ $self->chord_qualities_minor } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 chord_quality_minor_7
+
+  $result = $md->chord_quality_minor_7->roll;
+
+Return a chord quality to modify a minor 7th chord.
+
+=cut
+
+sub chord_quality_minor_7 {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities_minor_7, [ (1) x @{ $self->chord_qualities_minor_7 } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 chord_quality_diminished
+
+  $result = $md->chord_quality_diminished->roll;
+
+Return a chord quality to modify a diminished chord triad.
+
+=cut
+
+sub chord_quality_diminished {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities_diminished, [ (1) x @{ $self->chord_qualities_diminished } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 chord_quality_augmented
+
+  $result = $md->chord_quality_augmented->roll;
+
+Return a chord quality to modify an augmented chord triad.
+
+=cut
+
+sub chord_quality_augmented {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities_augmented, [ (1) x @{ $self->chord_qualities_augmented } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 chord_quality_augmented_7
+
+  $result = $md->chord_quality_augmented_7->roll;
+
+Return a chord quality to modify an augmented 7th chord.
+
+=cut
+
+sub chord_quality_augmented_7 {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->chord_qualities_augmented_7, [ (1) x @{ $self->chord_qualities_augmented_7 } ])
     };
     return Games::Dice::Advanced->new($d);
 }
