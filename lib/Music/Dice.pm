@@ -33,8 +33,8 @@ use namespace::clean;
   $roll = $md->chord_triad->roll;
   $roll = $md->chord_quality1->roll;
   $roll = $md->mode->roll;
-  $roll = $md->tonnetz3->roll;
-  $roll = $md->tonnetz4->roll;
+  $roll = $md->tonnetz->roll;
+  $roll = $md->tonnetz_7->roll;
   $roll = $md->rhythm->roll;
   $roll = $md->rhythmic_phrase->roll;
   # gameplay
@@ -521,9 +521,9 @@ has modes => (
     },
 );
 
-=head2 tonnetzen3
+=head2 tonnetzen
 
-  $tonnetzen3 = $md->tonnetzen3;
+  $tonnetzen = $md->tonnetzen;
 
 The named tonnetz values for triad transformations.
 
@@ -538,7 +538,7 @@ Default:
 
 =cut
 
-has tonnetzen3 => (
+has tonnetzen => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub { [qw(P R L N S H)],
@@ -876,15 +876,15 @@ sub mode {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 tonnetz3
+=head2 tonnetz
 
-  $result = $md->tonnetz3->roll;
+  $result = $md->tonnetz->roll;
 
 Return one of the B<tonnetzen3>, with equal probability.
 
 =cut
 
-sub tonnetz3 {
+sub tonnetz {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->tonnetzen3, [ (1) x @{ $self->tonnetzen3 } ])
