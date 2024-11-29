@@ -278,6 +278,8 @@ has chord_triad_weights => (
 The named chord qualities that specify a single note addition or
 transformation to major chords.
 
+Please see L<Music::Chord::Note> for the known chords.
+
 Default:
 
   add2 sus2
@@ -310,6 +312,8 @@ has chord_qualities_major => (
 
 The named chord qualities that specify additions or transformations to
 major 7th chords.
+
+Please see L<Music::Chord::Note> for the known chords.
 
 Default:
 
@@ -349,6 +353,8 @@ has chord_qualities_major4 => (
 The named chord qualities that specify a single note addition or
 transformation to minor chords.
 
+Please see L<Music::Chord::Note> for the known chords.
+
 Default:
 
   madd4
@@ -375,6 +381,8 @@ has chord_qualities_minor => (
 
 The named chord qualities that specify additions or transformations to
 minor 7th chords.
+
+Please see L<Music::Chord::Note> for the known chords.
 
 Default:
 
@@ -408,6 +416,8 @@ has chord_qualities_minor4 => (
 The named chord qualities that specify a single note addition or
 transformation to diminished chords.
 
+Please see L<Music::Chord::Note> for the known chords.
+
 Default:
 
   dim6
@@ -433,6 +443,8 @@ has chord_qualities_diminished => (
 The named chord qualities that specify a single note addition or
 transformation to augmented chords.
 
+Please see L<Music::Chord::Note> for the known chords.
+
 Default:
 
   augM7 aug7
@@ -455,6 +467,8 @@ has chord_qualities_augmented => (
 
 The named chord qualities that specify additions or transformations to
 augmented 7th chords.
+
+Please see L<Music::Chord::Note> for the known chords.
 
 Default:
 
