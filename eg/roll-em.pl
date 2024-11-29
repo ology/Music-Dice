@@ -34,7 +34,7 @@ for (1 .. 4) {
     my @midi;
     for my $i (0 .. $#$phrase) {
         my $notes;
-        my $quality = $d->chord_quality_roll($notes[$i], $triads[$i]);
+        my $quality = $d->chord_quality_triad_roll($notes[$i], $triads[$i]);
         push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
     }
     for my $spec (@midi) {
