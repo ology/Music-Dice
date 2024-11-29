@@ -271,12 +271,12 @@ has chord_triad_weights => (
     default => sub { [qw(2 2 1 1 1)] },
 );
 
-=head2 chord_qualities1
+=head2 chord_qualities_major
 
-  $chord_qualities1 = $md->chord_qualities1;
+  $chord_qualities_major = $md->chord_qualities_major;
 
 The named chord qualities that specify a single note addition or
-transformation.
+transformation to major chords.
 
 Default:
 
@@ -289,11 +289,10 @@ Default:
 
 =cut
 
-has chord_qualities1 => (
+has chord_qualities_major => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        no warnings 'qw';
         [qw(
             add2 sus2
             add4 sus4
@@ -305,43 +304,97 @@ has chord_qualities1 => (
     },
 );
 
-=head2 chord_qualities2
+=head2 chord_qualities_major4
 
-  $chord_qualities2 = $md->chord_qualities2;
+  $chord_qualities_major4 = $md->chord_qualities_major4;
 
-The named chord qualities that specify either two note additions or
-transformations, or addition/transformation to four or more note (e.g.
-7th, m7b5, etc.) chords.
+The named chord qualities that specify additions or transformations to
+major 7th chords.
 
 Default:
 
-  b5 #5
+  7b5 7#5
   69
-  b9 9 #9
-  11 #11
-  13 #13
-  m7b5
+  M79
+  7b9 9 7#9
+  7(b9,13) 7(9,13)
+  9b5
+  M11 11 7#11
+  M13 13 7#13
+
+=cut
+
+has chord_qualities_major4 => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        no warnings 'qw';
+        [qw(
+            7b5 7#5
+            69
+            M79
+            7b9 9 7#9
+            7(b9,13) 7(9,13)
+            9b5
+            M11 11 7#11
+            M13 13 7#13
+        )],
+    },
+);
+
+=head2 chord_qualities_minor
+
+  $chord_qualities_minor = $md->chord_qualities_minor;
+
+The named chord qualities that specify a single note addition or
+transformation to minor chords.
+
+Default:
+
+  madd4
+  m6
+  mM7 m7
+
+=cut
+
+has chord_qualities_minor => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(
+            madd4
+            m6
+            mM7 m7
+        )],
+    },
+);
+
+=head2 chord_qualities_minor4
+
+  $chord_qualities_minor4 = $md->chord_qualities_minor4;
+
+The named chord qualities that specify additions or transformations to
+minor 7th chords.
+
+Default:
+
+  m7b5 m7#5
+  m9
+  m7(9,11)
+  m11
+  m13
 
 Where C<m7b5> is the half-diminished chord ("ø"). If this quality is
 rolled, it should replace the triad it "modifies."
 
 =cut
 
-has chord_qualities2 => (
+has chord_qualities_minor4 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
         no warnings 'qw';
         [qw(
-            sus4
-            b5 #5
-            6 69
-            maj7 minmaj7
-            7 m7
-            add9 b9 9 #9
-            b11 11 #11
-            b13 13 #13
-            m7b5
         )],
     },
 );
