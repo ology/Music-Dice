@@ -305,7 +305,7 @@ Please see L<Music::Chord::Note> for the known chords.
 
 Default:
 
-  7b5 7#5
+  7sus4 7b5 7#5
   69
   M79
   7b9 9 7#9
@@ -322,7 +322,7 @@ has chord_qualities_major_7 => (
     default => sub {
         no warnings 'qw';
         [qw(
-            7b5 7#5
+            7sus4 7b5 7#5
             69
             M79
             7b9 9 7#9
