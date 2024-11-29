@@ -271,9 +271,9 @@ has chord_triad_weights => (
     default => sub { [qw(2 2 1 1 1)] },
 );
 
-=head2 chord_qualities
+=head2 chord_qualities3
 
-  $chord_qualities = $md->chord_qualities;
+  $chord_qualities3 = $md->chord_qualities3;
 
 The user-definable named chord qualities, from which to choose.
 
@@ -285,8 +285,8 @@ Default:
   maj7 minmaj7
   7 m7
   add9 b9 9 #9
-  b11 11 #11
-  b13 13 #13
+  11 #11
+  13 #13
   m7b5
 
 Where C<m7b5> is the half-diminished chord ("ø"). If this quality is
@@ -294,7 +294,7 @@ rolled, it should replace the triad it "modifies."
 
 =cut
 
-has chord_qualities => (
+has chord_qualities3 => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
@@ -469,7 +469,8 @@ sub _build_mdp {
     modes               => \@modes,
     tonnetzen3          => \@tonnetzen3,
     tonnetzen4          => \@tonnetzen4,
-    chord_qualities     => \@qualities,
+    chord_qualities3    => \@qualities3,
+    chord_qualities4    => \@qualities4,
     chord_voices_nums   => \@voices,
     rhythmic_phrase_constraints => \@constraints,
   );
@@ -664,18 +665,18 @@ sub chord_triad {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 chord_quality
+=head2 chord_quality3
 
-  $result = $md->chord_quality->roll;
+  $result = $md->chord_quality3->roll;
 
 Return a chord quality to modify a chord triad.
 
 =cut
 
-sub chord_quality {
+sub chord_quality3 {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->chord_qualities, [ (1) x @{ $self->chord_qualities } ])
+        return choose_weighted($self->chord_qualities3, [ (1) x @{ $self->chord_qualities3 } ])
     };
     return Games::Dice::Advanced->new($d);
 }
