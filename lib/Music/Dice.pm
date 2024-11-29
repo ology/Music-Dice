@@ -944,15 +944,15 @@ sub chord_quality_augmented_7 {
     return Games::Dice::Advanced->new($d);
 }
 
-=head2 chord_quality_roll
+=head2 chord_quality_triad_roll
 
-  $result = $d->chord_quality_roll($note, $triad);
+  $result = $d->chord_quality_triad_roll($note, $triad);
 
 Return a chord quality, given a B<note> and a known B<triad>.
 
 =cut
 
-sub chord_quality_roll {
+sub chord_quality_triad_roll {
     my ($self, $note, $triad) = @_;
     my $quality = '';
     if ($triad eq 'major') {
