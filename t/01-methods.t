@@ -15,6 +15,7 @@ subtest defaults => sub {
     is_deeply $obj->notes, [qw(C Db D Eb E F Gb G Ab A Bb B)], 'notes';
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
     is_deeply $obj->chord_triads, [qw(major minor diminished augmented custom)], 'chord_triads';
+    is_deeply $obj->chord_triad_weights, [qw(2 2 1 1 1)], 'chord_triad_weights';
     is_deeply $obj->chord_qualities1, [qw(sus4 b5 #5 6 69 maj7 minmaj7 7 m7 add9 b9 9 #9 b11 11 #11 b13 13 #13 m7b5)], 'chord_qualities1';
     is_deeply $obj->modes, [qw(ionian dorian phrygian lydian mixolydian aeolian locrian)], 'modes';
     is_deeply $obj->tonnetzen3, [qw(P R L N S H)], 'tonnetzen3';
