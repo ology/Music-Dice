@@ -38,6 +38,7 @@ use namespace::clean;
   $roll = $d->chord_quality_diminished->roll;
   $roll = $d->chord_quality_augmented->roll;
   $roll = $d->chord_quality_augmented_7->roll;
+  $roll = $d->chord_quality_triad_roll('C', 'major');
   $roll = $d->mode->roll;
   $roll = $d->tonnetz->roll;
   $roll = $d->tonnetz_7->roll;
