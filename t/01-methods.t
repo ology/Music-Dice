@@ -132,6 +132,9 @@ subtest utility => sub {
     my $obj = new_ok 'Music::Dice';
     my $got = $obj->unique_item(['C']);
     isnt $got, 'C', 'unique_item';
+    my ($degree, $triad) = $obj->mode_degree_triad_roll('ionian');
+    ok defined $degree, 'mode_degree_triad_roll';
+    ok defined $triad, 'mode_degree_triad_roll';
 };
 
 done_testing();
