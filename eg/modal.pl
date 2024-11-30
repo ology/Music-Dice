@@ -42,7 +42,7 @@ for (1 .. 4) {
         my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
         my $chord = "$scale[$index]$type";
         print "Degree: $degree => $chord | $phrase->[$i]\n";
-        my @tones = $cn->chord_with_octave("$chord", $opt{octave});
+        my @tones = $cn->chord_with_octave($chord, $opt{octave});
         $score->n($phrase->[$i], midi_format(@tones))
     }
 }
