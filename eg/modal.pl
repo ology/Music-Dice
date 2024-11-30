@@ -37,7 +37,7 @@ for my $i (0 .. $#$phrase) {
     my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
     my $index = $degree - 1;
     my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
-    print "$note $mode: $degree => $scale[$index]$type\n";
+    print "$note $mode: $degree => $scale[$index]$type | $phrase->[$i]\n";
     my @tones = $cn->chord_with_octave("$scale[$index]$type", 4);
     $score->n($phrase->[$i], midi_format(@tones))
 }
