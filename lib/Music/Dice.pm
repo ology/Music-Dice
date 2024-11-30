@@ -1244,7 +1244,6 @@ C<diminished>), given a B<mode> name.
 sub mode_degree_triad_roll {
     my ($self, $mode) = @_;
     my $roman = $self->$mode->roll;
-warn __PACKAGE__,' L',__LINE__,' ',,"R: $roman\n";
     my $mtr = Music::ToRoman->new(scale_name => $mode);
     my ($degree, $triad) = $mtr->get_scale_degree($roman);
     return $degree, $triad;
