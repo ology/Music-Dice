@@ -23,7 +23,7 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
 
-my $score = setup_score(patch => 4);
+my $score = setup_score(patch => 4, bpm => 80);
 
 my $cn = Music::Chord::Note->new;
 
