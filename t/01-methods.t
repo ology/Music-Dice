@@ -109,6 +109,9 @@ subtest rolls => sub {
     ok defined $got, "aeolian: $got";
     $got = $obj->locrian->roll;
     ok defined $got, "locrian: $got";
+    my ($degree, $triad) = $obj->mode_degree_triad_roll('ionian');
+    ok defined $degree, 'mode_degree_triad_roll';
+    ok defined $triad, 'mode_degree_triad_roll';
     $got = $obj->tonnetz->roll;
     ok defined $got, "tonnetz: $got";
     $got = $obj->tonnetz_7->roll;
@@ -132,9 +135,6 @@ subtest utility => sub {
     my $obj = new_ok 'Music::Dice';
     my $got = $obj->unique_item(['C']);
     isnt $got, 'C', 'unique_item';
-    my ($degree, $triad) = $obj->mode_degree_triad_roll('ionian');
-    ok defined $degree, 'mode_degree_triad_roll';
-    ok defined $triad, 'mode_degree_triad_roll';
 };
 
 done_testing();
