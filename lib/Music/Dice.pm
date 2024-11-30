@@ -51,10 +51,10 @@ use namespace::clean;
   $roll = $d->tonnetz_7->roll;
   $roll = $d->rhythm->roll;
   $roll = $d->rhythmic_phrase->roll;
+  $roll = $d->rhythmic_phrase_constrained->roll;
   # gameplay
   $roll = $d->chord_voices_nums->roll;
   $roll = $d->remove_chord_num->roll;
-  $roll = $d->rhythmic_phrase_constrained->roll;
 
   # for example:
   my $phrase = $d->rhythmic_phrase->roll;
