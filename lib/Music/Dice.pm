@@ -560,7 +560,7 @@ has dorian_mask => (
 
 The mask of Phrygian mode triad types.
 
-Default: C<[i II III iv vo IV vii]>
+Default: C<[i II III iv vo VI vii]>
 
 =cut
 
@@ -568,7 +568,7 @@ has phrygian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(i II III iv vo IV vii)],
+        [qw(i II III iv vo VI vii)],
     },
 );
 
@@ -578,7 +578,7 @@ has phrygian_mask => (
 
 The mask of Lydian mode triad types.
 
-Default: C<[I II iii ivo V iv vii]>
+Default: C<[I II iii ivo V vi vii]>
 
 =cut
 
@@ -586,7 +586,7 @@ has lydian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(I II iii ivo V iv vii)],
+        [qw(I II iii ivo V vi vii)],
     },
 );
 
@@ -596,7 +596,7 @@ has lydian_mask => (
 
 The mask of Mixolydian mode triad types.
 
-Default: C<[I ii iiio IV v iv VII]>
+Default: C<[I ii iiio IV v vi VII]>
 
 =cut
 
@@ -604,7 +604,7 @@ has mixolydian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(I ii iiio IV v iv VII)],
+        [qw(I ii iiio IV v vi VII)],
     },
 );
 
@@ -614,7 +614,7 @@ has mixolydian_mask => (
 
 The mask of Aeolian mode triad types.
 
-Default: C<[i iio III iv v IV VII]>
+Default: C<[i iio III iv v VI VII]>
 
 =cut
 
@@ -622,7 +622,7 @@ has aeolian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(i iio III iv v IV VII)],
+        [qw(i iio III iv v VI VII)],
     },
 );
 
@@ -632,7 +632,7 @@ has aeolian_mask => (
 
 The mask of Locrian mode triad types.
 
-Default: C<[io II iii iv V IV vii]>
+Default: C<[io II iii iv V VI vii]>
 
 =cut
 
@@ -640,7 +640,7 @@ has locrian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(io II iii iv V IV vii)],
+        [qw(io II iii iv V VI vii)],
     },
 );
 
