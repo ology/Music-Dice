@@ -1090,24 +1090,16 @@ Return a chord quality, given a B<note> and a known B<triad>.
 sub chord_quality_triad_roll {
     my ($self, $note, $triad) = @_;
     my $quality = '';
-    if ($triad eq 'major') {
-        $quality = $self->chord_quality_major->roll;
-    }
-    elsif ($triad eq 'minor') {
-        $quality = $self->chord_quality_minor->roll;
-    }
-    elsif ($triad eq 'diminished') {
-        $quality = $self->chord_quality_diminished->roll;
-    }
-    elsif ($triad eq 'augmented') {
-        $quality = $self->chord_quality_augmented->roll;
-    }
-    elsif ($triad eq 'custom') {
+    if ($triad eq 'custom') {
         my @custom;
         my $item = $self->unique_item([ $note ]);
         push @custom, $item;
         push @custom, $self->unique_item([ $note, $item ]);
         $quality = " @custom";
+    }
+    else {
+        my $method = 'chord_quality_' . $triad;
+        $quality = $self->$method->roll;
     }
     return $quality;
 }
