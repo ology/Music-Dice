@@ -524,7 +524,7 @@ has modes => (
 
 The mask of Ionian mode triad types.
 
-Default: C<[I ii iii IV V iv viio]>
+Default: C<[I ii iii IV V vi viio]>
 
 =cut
 
@@ -532,7 +532,7 @@ has ionian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(I ii iii IV V iv viio)],
+        [qw(I ii iii IV V vi viio)],
     },
 );
 
