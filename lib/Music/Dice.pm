@@ -12,6 +12,7 @@ use List::Util::WeightedChoice qw(choose_weighted);
 use MIDI::Util qw(midi_dump);
 use Music::Duration::Partition ();
 use Music::Scales qw(get_scale_notes get_scale_nums);
+use Music::ToRoman ();
 use Types::Standard qw(ArrayRef Int Str);
 use namespace::clean;
 
@@ -1363,6 +1364,23 @@ sub remove_chord_num {
 }
 
 ## UTILITY ##
+
+=head2 mode_degree_triad
+
+  ($degree, $triad) = $d->mode_degree_triad($mode);
+
+Return a modal degree and triad type (C<major>, C<minor>,
+C<diminished>), given a B<mode> name.
+
+=cut
+
+sub mode_degree_triad {
+    my ($self, $mode) = @_;
+    my $roman = $self->$mode->roll;
+    my $mtr = Music::ToRoman->new(scale_name => $mode);
+    my ($degree, $triad) = $mtr->get_scale_degree($roman);
+    return $degree, $triad;
+}
 
 =head2 unique_item
 
