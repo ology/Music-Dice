@@ -40,6 +40,13 @@ use namespace::clean;
   $roll = $d->chord_quality_augmented_7->roll;
   $roll = $d->chord_quality_triad_roll('C', 'major');
   $roll = $d->mode->roll;
+  $roll = $d->ionian->roll;
+  $roll = $d->dorian->roll;
+  $roll = $d->phrygian->roll;
+  $roll = $d->lydian->roll;
+  $roll = $d->mixolydian->roll;
+  $roll = $d->aeolian->roll;
+  $roll = $d->locrian->roll;
   $roll = $d->tonnetz->roll;
   $roll = $d->tonnetz_7->roll;
   $roll = $d->rhythm->roll;
@@ -568,7 +575,7 @@ has phrygian_mask => (
 
   $lydian_mask = $d->lydian_mask;
 
-The mask of Ionian mode triad types.
+The mask of Lydian mode triad types.
 
 Default: C<[I II iii ivo V iv vii]>
 
@@ -586,7 +593,7 @@ has lydian_mask => (
 
   $mixolydian_mask = $d->mixolydian_mask;
 
-The mask of Ionian mode triad types.
+The mask of Mixolydian mode triad types.
 
 Default: C<[I ii iiio IV v iv VII]>
 
@@ -604,7 +611,7 @@ has mixolydian_mask => (
 
   $aeolian_mask = $d->aeolian_mask;
 
-The mask of Ionian mode triad types.
+The mask of Aeolian mode triad types.
 
 Default: C<[i iio III iv v IV VII]>
 
@@ -622,7 +629,7 @@ has aeolian_mask => (
 
   $locrian_mask = $d->locrian_mask;
 
-The mask of Ionian mode triad types.
+The mask of Locrian mode triad types.
 
 Default: C<[io II iii iv V IV vii]>
 
@@ -1116,6 +1123,118 @@ sub mode {
     my ($self) = @_;
     my $d = sub {
         return choose_weighted($self->modes, [ (1) x @{ $self->modes } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 ionian
+
+  $result = $d->ionian->roll;
+
+Return a value from the Ionian mode mask of chord types.
+
+=cut
+
+sub ionian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->ionian_mask, [ (1) x @{ $self->ionian_mask } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 dorian
+
+  $result = $d->dorian->roll;
+
+Return a value from the Dorian mode mask of chord types.
+
+=cut
+
+sub dorian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->dorian_mask, [ (1) x @{ $self->dorian_mask } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 phrygian
+
+  $result = $d->phrygian->roll;
+
+Return a value from the Phrygian mode mask of chord types.
+
+=cut
+
+sub phrygian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->phrygian_mask, [ (1) x @{ $self->phrygian_mask } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 lydian
+
+  $result = $d->lydian->roll;
+
+Return a value from the Lydian mode mask of chord types.
+
+=cut
+
+sub lydian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->lydian_mask, [ (1) x @{ $self->lydian_mask } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 mixolydian
+
+  $result = $d->mixolydian->roll;
+
+Return a value from the Mixolydian mode mask of chord types.
+
+=cut
+
+sub mixolydian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->mixolydian_mask, [ (1) x @{ $self->mixolydian_mask } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 aeolian
+
+  $result = $d->aeolian->roll;
+
+Return a value from the Aeolian mode mask of chord types.
+
+=cut
+
+sub aeolian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->aeolian_mask, [ (1) x @{ $self->aeolian_mask } ])
+    };
+    return Games::Dice::Advanced->new($d);
+}
+
+=head2 locrian
+
+  $result = $d->locrian->roll;
+
+Return a value from the Ionian mode mask of chord types.
+
+=cut
+
+sub locrian {
+    my ($self) = @_;
+    my $d = sub {
+        return choose_weighted($self->locrian_mask, [ (1) x @{ $self->locrian_mask } ])
     };
     return Games::Dice::Advanced->new($d);
 }
