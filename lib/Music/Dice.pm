@@ -1240,6 +1240,23 @@ sub locrian {
     return Games::Dice::Advanced->new($d);
 }
 
+=head2 mode_degree_triad_roll
+
+  ($degree, $triad) = $d->mode_degree_triad_roll($mode);
+
+Return a modal degree and triad type (C<major>, C<minor>,
+C<diminished>), given a B<mode> name.
+
+=cut
+
+sub mode_degree_triad_roll {
+    my ($self, $mode) = @_;
+    my $roman = $self->$mode->roll;
+    my $mtr = Music::ToRoman->new(scale_name => $mode);
+    my ($degree, $triad) = $mtr->get_scale_degree($roman);
+    return $degree, $triad;
+}
+
 =head2 tonnetz
 
   $result = $d->tonnetz->roll;
@@ -1364,23 +1381,6 @@ sub remove_chord_num {
 }
 
 ## UTILITY ##
-
-=head2 mode_degree_triad
-
-  ($degree, $triad) = $d->mode_degree_triad($mode);
-
-Return a modal degree and triad type (C<major>, C<minor>,
-C<diminished>), given a B<mode> name.
-
-=cut
-
-sub mode_degree_triad {
-    my ($self, $mode) = @_;
-    my $roman = $self->$mode->roll;
-    my $mtr = Music::ToRoman->new(scale_name => $mode);
-    my ($degree, $triad) = $mtr->get_scale_degree($roman);
-    return $degree, $triad;
-}
 
 =head2 unique_item
 
