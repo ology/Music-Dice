@@ -542,7 +542,7 @@ has ionian_mask => (
 
 The mask of Dorian mode triad types.
 
-Default: C<[i ii III IV v ivo VII]>
+Default: C<[i ii III IV v vio VII]>
 
 =cut
 
@@ -550,7 +550,7 @@ has dorian_mask => (
     is      => 'ro',
     isa     => ArrayRef[Str],
     default => sub {
-        [qw(i ii III IV v ivo VII)],
+        [qw(i ii III IV v vio VII)],
     },
 );
 
@@ -1244,6 +1244,7 @@ C<diminished>), given a B<mode> name.
 sub mode_degree_triad_roll {
     my ($self, $mode) = @_;
     my $roman = $self->$mode->roll;
+warn __PACKAGE__,' L',__LINE__,' ',,"R: $roman\n";
     my $mtr = Music::ToRoman->new(scale_name => $mode);
     my ($degree, $triad) = $mtr->get_scale_degree($roman);
     return $degree, $triad;
