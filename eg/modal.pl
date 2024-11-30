@@ -33,7 +33,7 @@ my $mode   = $d->mode->roll;
 my @scale  = get_scale_notes($note, $mode);
 print "@scale\n";
 
-for (1 .. 2) {
+for (1 .. 4) {
     for my $i (0 .. $#$phrase) {
         my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
         my $index = $degree - 1;
