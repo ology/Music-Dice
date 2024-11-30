@@ -54,7 +54,7 @@ use namespace::clean;
   $roll = $d->rhythmic_phrase->roll;
   $roll = $d->rhythmic_phrase_constrained->roll;
   # gameplay
-  $roll = $d->chord_voices_nums->roll;
+  $roll = $d->chord_voices_num->roll;
   $roll = $d->remove_chord_num->roll;
 
   # for example:
@@ -1338,11 +1338,11 @@ sub rhythmic_phrase_constrained {
 
 ## GAMEPLAY ##
 
-=head2 chord_voices_nums
+=head2 chord_voices_num
 
-  $result = $d->chord_voices_nums->roll;
+  $result = $d->chord_voices_num->roll;
 
-Return one of the B<chord_voices_nums> with equal probability.
+Return one of the B<chord_voices_num> with equal probability.
 
 =cut
 
