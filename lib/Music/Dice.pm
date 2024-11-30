@@ -510,6 +510,132 @@ has modes => (
     },
 );
 
+=head2 ionian_mask
+
+  $ionian_mask = $d->ionian_mask;
+
+The mask of Ionian mode triad types.
+
+Default: C<[I ii iii IV V iv viio]>
+
+=cut
+
+has ionian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(I ii iii IV V iv viio)],
+    },
+);
+
+=head2 dorian_mask
+
+  $dorian_mask = $d->dorian_mask;
+
+The mask of Dorian mode triad types.
+
+Default: C<[i ii III IV v ivo VII]>
+
+=cut
+
+has dorian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(i ii III IV v ivo VII)],
+    },
+);
+
+=head2 phrygian_mask
+
+  $phrygian_mask = $d->phrygian_mask;
+
+The mask of Phrygian mode triad types.
+
+Default: C<[i II III iv vo IV vii]>
+
+=cut
+
+has phrygian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(i II III iv vo IV vii)],
+    },
+);
+
+=head2 lydian_mask
+
+  $lydian_mask = $d->lydian_mask;
+
+The mask of Ionian mode triad types.
+
+Default: C<[I II iii ivo V iv vii]>
+
+=cut
+
+has lydian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(I II iii ivo V iv vii)],
+    },
+);
+
+=head2 mixolydian_mask
+
+  $mixolydian_mask = $d->mixolydian_mask;
+
+The mask of Ionian mode triad types.
+
+Default: C<[I ii iiio IV v iv VII]>
+
+=cut
+
+has mixolydian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(I ii iiio IV v iv VII)],
+    },
+);
+
+=head2 aeolian_mask
+
+  $aeolian_mask = $d->aeolian_mask;
+
+The mask of Ionian mode triad types.
+
+Default: C<[i iio III iv v IV VII]>
+
+=cut
+
+has aeolian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(i iio III iv v IV VII)],
+    },
+);
+
+=head2 locrian_mask
+
+  $locrian_mask = $d->locrian_mask;
+
+The mask of Ionian mode triad types.
+
+Default: C<[io II iii iv V IV vii]>
+
+=cut
+
+has locrian_mask => (
+    is      => 'ro',
+    isa     => ArrayRef[Str],
+    default => sub {
+        [qw(io II iii iv V IV vii)],
+    },
+);
+
 =head2 tonnetzen
 
   $tonnetzen = $d->tonnetzen;
