@@ -31,11 +31,14 @@ my $phrase = $d->rhythmic_phrase->roll;
 my $note   = $d->note->roll;
 my $mode   = $d->mode->roll;
 my @scale  = get_scale_notes($note, $mode);
-warn __PACKAGE__,' L',__LINE__,' ',,"@scale\n";
+print "@scale\n";
 
 for my $i (0 .. $#$phrase) {
     my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
     my $index = $degree - 1;
-warn __PACKAGE__,' L',__LINE__,' ',,"$note $mode: $degree = $scale[$index] $triad\n";
+    my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
+    print "$note $mode: $degree => $scale[$index]$type\n";
+    my @tones = $cn->chord_with_octave("$scale[$index]$type", 4);
+    $score->n($phrase->[$i], midi_format(@tones))
 }
-
+$score->write_score("$0.mid");
