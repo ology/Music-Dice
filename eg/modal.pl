@@ -31,7 +31,7 @@ my $phrase = $d->rhythmic_phrase->roll;
 my $note   = $d->note->roll;
 my $mode   = $d->mode->roll;
 my @scale  = get_scale_notes($note, $mode);
-print "@scale\n";
+print "$mode: @scale\n";
 
 for (1 .. 4) {
     for my $i (0 .. $#$phrase) {
