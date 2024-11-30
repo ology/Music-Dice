@@ -10,12 +10,14 @@ use Music::Dice ();
 use Music::Scales qw(get_scale_notes);
 
 my %opt = (
-    tonic => 'C',
-    scale => 'major',
+    tonic  => 'C',
+    scale  => 'major',
+    octave => 4,
 );
 GetOptions(\%opt,
     'tonic=s',
     'scale=s',
+    'octave=i',
 );
 
 my $d = Music::Dice->new(
@@ -39,7 +41,7 @@ for (1 .. 4) {
         my $index = $degree - 1;
         my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
         print "Degree: $degree => $scale[$index]$type | $phrase->[$i]\n";
-        my @tones = $cn->chord_with_octave("$scale[$index]$type", 4);
+        my @tones = $cn->chord_with_octave("$scale[$index]$type", $opt{octave});
         $score->n($phrase->[$i], midi_format(@tones))
     }
 }
