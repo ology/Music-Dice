@@ -1,6 +1,7 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+    - Fix the eg/{melody,modal}.pl semantics.
 
 0.0103 2024-12-01 11:41:00
     - Add the eg/melody.pl program.
