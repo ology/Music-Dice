@@ -63,10 +63,6 @@ sub harmony {
 
 sub melody {
     set_chan_patch($score, 1, 5);
-    my $x = Music::Dice->new(
-        scale_note => $tonic,
-        scale_name => $mode,
-    );
     for my $i (0 .. $#$m_phrase) {
         my $note = $x->note->roll . ($opt{octave} + 1);
         $score->n($m_phrase->[$i], midi_format($note))
