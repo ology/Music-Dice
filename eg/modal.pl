@@ -30,10 +30,15 @@ my $score = setup_score(patch => 0, bpm => 80);
 my $cn = Music::Chord::Note->new;
 
 my $phrase = $d->rhythmic_phrase->roll;
-my $note   = $d->note->roll;
+my $tonic  = $d->note->roll;
 my $mode   = $d->mode->roll;
-my @scale  = get_scale_notes($note, $mode);
-print "$note $mode: @scale\n";
+my @scale  = get_scale_notes($tonic, $mode);
+print "$tonic $mode: @scale\n";
+
+$d = Music::Dice->new(
+    scale_note => $tonic,
+    scale_name => $mode,
+);
 
 for (1 .. 4) {
     for my $i (0 .. $#$phrase) {
