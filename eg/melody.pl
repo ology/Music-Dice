@@ -22,14 +22,14 @@ GetOptions(\%opt,
     'bpm=i',
 );
 
+my $score = setup_score(bpm => $opt{bpm});
+
+my $cn = Music::Chord::Note->new;
+
 my $d = Music::Dice->new(
     scale_note => $opt{tonic},
     scale_name => $opt{scale},
 );
-
-my $score = setup_score(bpm => $opt{bpm});
-
-my $cn = Music::Chord::Note->new;
  
 my $factor   = 7; # for volume changes
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
