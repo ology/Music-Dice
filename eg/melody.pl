@@ -14,6 +14,7 @@ my %opt = (
     scale  => 'major',
     octave => 4,
     bpm    => 80,
+    factor => 7, # for volume changes
 );
 GetOptions(\%opt,
     'tonic=s',
@@ -31,7 +32,6 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
  
-my $factor   = 7; # for volume changes
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
 # print "H: @{ $c_phrase }\n";
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
@@ -57,7 +57,7 @@ $score->write_score("$0.mid");
 sub harmony {
     set_chan_patch($score, 0, 4);
     my $volume = $score->Volume;
-    $score->Volume($volume - $factor);
+    $score->Volume($volume - $opt{factor});
     for my $i (0 .. $#$c_phrase) {
         my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
         my $index = $degree - 1;
@@ -81,7 +81,7 @@ sub melody {
 sub bass {
     set_chan_patch($score, 2, 33);
     my $volume = $score->Volume;
-    $score->Volume($volume + $factor);
+    $score->Volume($volume + $opt{factor});
     my $note = $d->note->roll . ($opt{octave} - 1);
     $score->n('wn', midi_format($note));
     $score->Volume($volume);
