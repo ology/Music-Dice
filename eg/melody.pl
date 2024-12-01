@@ -28,7 +28,8 @@ my $d = Music::Dice->new(
 my $score = setup_score(bpm => 80);
 
 my $cn = Music::Chord::Note->new;
-
+ 
+my $factor   = 7; # for volume changes
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
 my $tonic    = $d->note->roll;
@@ -50,6 +51,8 @@ $score->write_score("$0.mid");
 
 sub harmony {
     set_chan_patch($score, 0, 4);
+    my $volume = $score->Volume;
+    $score->Volume($volume - $factor);
     for my $i (0 .. $#$c_phrase) {
         my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
         my $index = $degree - 1;
@@ -57,22 +60,24 @@ sub harmony {
         my $chord = "$scale[$index]$type";
         print "Degree: $degree => $chord | $c_phrase->[$i]\n";
         my @tones = $cn->chord_with_octave($chord, $opt{octave});
-        $score->n($c_phrase->[$i], midi_format(@tones))
+        $score->n($c_phrase->[$i], midi_format(@tones));
     }
+    $score->Volume($volume);
 }
 
 sub melody {
     set_chan_patch($score, 1, 5);
     for my $i (0 .. $#$m_phrase) {
         my $note = $x->note->roll . ($opt{octave} + 1);
-        $score->n($m_phrase->[$i], midi_format($note))
+        $score->n($m_phrase->[$i], midi_format($note));
     }
 }
 
 sub bass {
     set_chan_patch($score, 2, 33);
-    for my $i (0 .. $#$m_phrase) {
-        my $note = $x->note->roll . ($opt{octave} - 1);
-        $score->n($m_phrase->[$i], midi_format($note))
-    }
+    my $volume = $score->Volume;
+    $score->Volume($volume + $factor);
+    my $note = $x->note->roll . ($opt{octave} - 1);
+    $score->n('wn', midi_format($note));
+    $score->Volume($volume);
 }
