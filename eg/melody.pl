@@ -33,7 +33,9 @@ my $d = Music::Dice->new(
  
 my $factor   = 7; # for volume changes
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
+# print "H: @{ $c_phrase }\n";
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
+# print "M: @{ $m_phrase }\n";
 my $tonic    = $d->note->roll;
 my $mode     = $d->mode->roll;
 my @scale    = get_scale_notes($tonic, $mode);
