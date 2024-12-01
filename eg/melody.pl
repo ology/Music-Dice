@@ -39,6 +39,7 @@ print "$tonic $mode: @scale\n";
 $score->synch(
     \&harmony,
     \&melody,
+    \&bass,
 ) for 1 .. 8;
 $score->write_score("$0.mid");
 
@@ -63,6 +64,18 @@ sub melody {
     );
     for my $i (0 .. $#$m_phrase) {
         my $note = $x->note->roll . ($opt{octave} + 1);
+        $score->n($m_phrase->[$i], midi_format($note))
+    }
+}
+
+sub bass {
+    set_chan_patch($score, 2, 33);
+    my $x = Music::Dice->new(
+        scale_note => $tonic,
+        scale_name => $mode,
+    );
+    for my $i (0 .. $#$m_phrase) {
+        my $note = $x->note->roll . ($opt{octave} - 2);
         $score->n($m_phrase->[$i], midi_format($note))
     }
 }
