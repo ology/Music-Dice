@@ -27,7 +27,7 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
 
-my $score = setup_score(bpm => 80);
+my $score = setup_score(bpm => $opt{bpm});
 
 my $cn = Music::Chord::Note->new;
  
