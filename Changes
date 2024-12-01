@@ -1,6 +1,8 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+
+0.0104 2024-12-01 13:13:08
     - Fix the eg/{melody,modal}.pl semantics.
 
 0.0103 2024-12-01 11:41:00
