@@ -1,6 +1,7 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+    - Add the eg/single-note-line.pl program.
 
 0.0101 2024-11-30 15:06:03
     - Fix ugly typo in code.
