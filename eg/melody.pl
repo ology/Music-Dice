@@ -38,6 +38,7 @@ my $tonic    = $d->note->roll;
 my $mode     = $d->mode->roll;
 my @scale    = get_scale_notes($tonic, $mode);
 print "$tonic $mode: @scale\n";
+print "degree => chord | duruation\n";
 
 $d = Music::Dice->new(
     scale_note => $tonic,
@@ -60,7 +61,7 @@ sub harmony {
         my $index = $degree - 1;
         my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
         my $chord = "$scale[$index]$type";
-        print "Degree: $degree => $chord | $c_phrase->[$i]\n";
+        print "$degree => $chord | $c_phrase->[$i]\n";
         my @tones = $cn->chord_with_octave($chord, $opt{octave});
         $score->n($c_phrase->[$i], midi_format(@tones));
     }
