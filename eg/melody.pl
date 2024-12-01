@@ -12,7 +12,7 @@ use Music::Scales qw(get_scale_notes);
 my %opt = (
     tonic  => 'C',
     scale  => 'major',
-    octave => 3,
+    octave => 4,
 );
 GetOptions(\%opt,
     'tonic=s',
@@ -62,7 +62,7 @@ sub melody {
         scale_name => $mode,
     );
     for my $i (0 .. $#$m_phrase) {
-        my $note = $x->note->roll . ($opt{octave} + 2);
+        my $note = $x->note->roll . ($opt{octave} + 1);
         $score->n($m_phrase->[$i], midi_format($note))
     }
 }
