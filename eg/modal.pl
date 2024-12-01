@@ -22,14 +22,14 @@ GetOptions(\%opt,
     'bpm=i',
 );
 
+my $score = setup_score(patch => 0, bpm => $opt{bpm});
+
+my $cn = Music::Chord::Note->new;
+
 my $d = Music::Dice->new(
     scale_note => $opt{tonic},
     scale_name => $opt{scale},
 );
-
-my $score = setup_score(patch => 0, bpm => $opt{bpm});
-
-my $cn = Music::Chord::Note->new;
 
 my $phrase = $d->rhythmic_phrase->roll;
 my $tonic  = $d->note->roll;
