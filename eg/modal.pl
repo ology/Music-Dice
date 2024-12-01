@@ -13,11 +13,13 @@ my %opt = (
     tonic  => 'C',
     scale  => 'major',
     octave => 4,
+    bpm    => 80,
 );
 GetOptions(\%opt,
     'tonic=s',
     'scale=s',
     'octave=i',
+    'bpm=i',
 );
 
 my $d = Music::Dice->new(
@@ -25,7 +27,7 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
 
-my $score = setup_score(patch => 0, bpm => 80);
+my $score = setup_score(patch => 0, bpm => $opt{bpm});
 
 my $cn = Music::Chord::Note->new;
 
