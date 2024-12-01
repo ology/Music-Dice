@@ -39,7 +39,7 @@ print "$tonic $mode: @scale\n";
 $score->synch(
     \&harmony,
     \&melody,
-) for 1 .. 4;
+) for 1 .. 8;
 $score->write_score("$0.mid");
 
 sub harmony {
