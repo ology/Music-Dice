@@ -63,7 +63,6 @@ sub melody {
     );
     for my $i (0 .. $#$m_phrase) {
         my $note = $x->note->roll . ($opt{octave} + 1);
-        print "Note: $note\n";
         $score->n($m_phrase->[$i], midi_format($note))
     }
 }
