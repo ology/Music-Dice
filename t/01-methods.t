@@ -124,11 +124,6 @@ subtest rolls => sub {
     $got = $obj->rhythmic_phrase_constrained->roll;
     ok defined $got, "rhythmic_phrase_constrained: @$got";
     is @$got, 4, 'rhythmic_phrase_constrained: 4';
-    # gameplay
-    $got = $obj->chord_voices_num->roll;
-    ok defined $got, "chord_voices_num: $got";
-    $got = $obj->remove_chord_num->roll;
-    ok defined $got, "remove_chord_num: $got";
 };
 
 subtest utility => sub {
