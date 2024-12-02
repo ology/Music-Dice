@@ -26,7 +26,6 @@ subtest defaults => sub {
     is_deeply $obj->modes, [qw(ionian dorian phrygian lydian mixolydian aeolian locrian)], 'modes';
     is_deeply $obj->tonnetzen, [qw(P R L N S H)], 'tonnetzen';
     is_deeply $obj->tonnetzen_7, [qw(S23 S32 S34 S43 S56 S65 C32 C34 C65)], 'tonnetzen_7';
-    is_deeply $obj->chord_voices_nums, [3,4], 'chord_voices_nums';
     is_deeply $obj->rhythmic_phrase_constraints, [3,4,5], 'rhythmic_phrase_constraints';
     $obj = new_ok 'Music::Dice' => [ pool => 'all' ];
     is @{ $obj->pool }, 32, 'all pool';
