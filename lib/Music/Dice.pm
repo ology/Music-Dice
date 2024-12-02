@@ -53,9 +53,6 @@ use namespace::clean;
   $roll = $d->rhythm->roll;
   $roll = $d->rhythmic_phrase->roll;
   $roll = $d->rhythmic_phrase_constrained->roll;
-  # gameplay
-  $roll = $d->chord_voices_num->roll;
-  $roll = $d->remove_chord_num->roll;
 
   # for example:
   my $phrase = $d->rhythmic_phrase->roll;
@@ -711,22 +708,6 @@ has rhythmic_phrase_constraints => (
     default => sub { [ 3, 4, 5 ] },
 );
 
-=head2 chord_voices_nums
-
-  $chord_voices = $d->chord_voices_nums;
-
-The number of voices in a chord, given as an array reference.
-
-Default: C<[3,4]>
-
-=cut
-
-has chord_voices_nums => (
-    is      => 'ro',
-    isa     => ArrayRef[Int],
-    default => sub { [ 3, 4 ] },
-);
-
 =head2 mdp
 
   $mdp = $d->mdp;
@@ -773,7 +754,6 @@ sub _build_mdp {
     modes                       => \@modes,
     tonnetzen                   => \@tonnetzen,
     tonnetzen_7                 => \@tonnetzen_7,
-    chord_voices_nums           => \@voices,
     rhythmic_phrase_constraints => \@constraints,
   );
 
@@ -1332,42 +1312,6 @@ sub rhythmic_phrase_constrained {
             $motif = $self->mdp->motif;
         }
         return $motif;
-    };
-    return Games::Dice::Advanced->new($d);
-}
-
-## GAMEPLAY ##
-
-=head2 chord_voices_num
-
-  $result = $d->chord_voices_num->roll;
-
-Return one of the B<chord_voices_num> with equal probability.
-
-=cut
-
-sub chord_voices_num {
-    my ($self) = @_;
-    my $d = sub {
-        return choose_weighted($self->chord_voices_nums, [ (1) x @{ $self->chord_voices_nums } ])
-    };
-    return Games::Dice::Advanced->new($d);
-}
-
-=head2 remove_chord_num
-
-  $result = $d->remove_chord_num->roll;
-
-Return a value between C<0> and one less than the first
-B<chord_voices_num> entry.
-
-=cut
-
-sub remove_chord_num {
-    my ($self) = @_;
-    my $d = sub {
-        my $choices = [ 0 .. $self->chord_voices_nums->[0] - 1 ];
-        return choose_weighted($choices, [ (1) x @$choices ])
     };
     return Games::Dice::Advanced->new($d);
 }
