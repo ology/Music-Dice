@@ -63,6 +63,17 @@ sub harmony {
         my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
         my $index = $degree - 1;
         my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
+        if ($i == $#$c_phrase) {
+            if ($triad eq 'diminished') {
+                $type = $d->chord_quality_diminished->roll;
+            }
+            elsif ($triad eq 'minor') {
+                $type = $d->chord_quality_minor->roll;
+            }
+            else {
+                $type = $d->chord_quality_major->roll;
+            }
+        }
         my $chord = "$scale[$index]$type";
         print "$degree => $chord | $c_phrase->[$i]\n";
         my @tones = $cn->chord_with_octave($chord, $opt{octave});
