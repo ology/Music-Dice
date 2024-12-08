@@ -353,7 +353,7 @@ Default:
 
   madd4
   m6
-  mM7 m7
+  m7
 
 =cut
 
@@ -364,7 +364,7 @@ has chord_qualities_minor => (
         [qw(
             madd4
             m6
-            mM7 m7
+            m7
         )],
     },
 );
