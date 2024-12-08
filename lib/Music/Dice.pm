@@ -131,10 +131,10 @@ has beats => (
     default => sub { 4 },
 );
 
-=head2 pool
+=head2 phrase_pool
 
-  $pool = $d->pool;
-  $d->pool(\@pool);
+  $pool = $d->phrase_pool;
+  $d->phrase_pool(\@pool);
 
 The pool of durations in a rhythmic phrase.
 
@@ -145,7 +145,7 @@ C<MIDI::Simple::Length> hash (all the known MIDI-Perl durations).
 
 =cut
 
-has pool => (
+has phrase_pool => (
     is => 'rw',
 );
 
@@ -156,7 +156,7 @@ has pool => (
 
 The weights of the duration pool, in a rhythmic phrase.
 
-Default: C<1> for each C<pool> member (equal probability)
+Default: C<1> for each B<phrase_pool> member (equal probability)
 
 =cut
 
@@ -171,7 +171,7 @@ has phrase_weights => (
 
 The groups of the duration pool, in a rhythmic phrase.
 
-Default: C<1> for each C<pool> member (equal probability)
+Default: C<1> for each B<phrase_pool> member (equal probability)
 
 =cut
 
@@ -755,7 +755,7 @@ sub _build_mdp {
     my ($self) = @_;
     my $mdp = Music::Duration::Partition->new(
         size    => $self->beats,
-        pool    => $self->pool,
+        pool    => $self->phrase_pool,
         weights => $self->phrase_weights,
         groups  => $self->phrase_groups ,
     );
@@ -772,7 +772,7 @@ sub _build_mdp {
     scale_name                  => $name,
     flats                       => $bool,
     beats                       => $beats,
-    pool                        => \@pool, # or 'all'
+    phrase_pool                 => \@pool, # or 'all'
     phrase_weights              => \@weights,
     phrase_groups               => \@groups,
     notes                       => \@notes,
@@ -800,14 +800,14 @@ Create a new C<Music::Dice> object.
 
 sub BUILD {
     my ($self, $args) = @_;
-    if (exists $args->{pool} && !ref $args->{pool} && $args->{pool} eq 'all') {
-        $self->pool([ sort keys %{ midi_dump('length') } ]);
+    if (exists $args->{phrase_pool} && !ref $args->{phrase_pool} && $args->{phrase_pool} eq 'all') {
+        $self->phrase_pool([ sort keys %{ midi_dump('length') } ]);
     }
     else {
-        $self->pool([qw(wn dhn hn dqn qn den en)]);
+        $self->phrase_pool([qw(wn dhn hn dqn qn den en)]);
     }
-    $self->phrase_weights([ (1) x @{ $self->pool } ]);
-    $self->phrase_groups([ (1) x @{ $self->pool } ]);
+    $self->phrase_weights([ (1) x @{ $self->phrase_pool } ]);
+    $self->phrase_groups([ (1) x @{ $self->phrase_pool } ]);
 }
 
 =head2 octave
@@ -1311,7 +1311,7 @@ Return a single rhythmic value.
 sub rhythmic_value {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->pool, [ (1) x @{ $self->pool } ])
+        return choose_weighted($self->phrase_pool, [ (1) x @{ $self->phrase_pool } ])
     };
     return Games::Dice::Advanced->new($d);
 }
