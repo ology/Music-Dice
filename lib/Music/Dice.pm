@@ -134,6 +134,7 @@ has beats => (
 =head2 pool
 
   $pool = $d->pool;
+  $d->pool(\@pool);
 
 The pool of durations in a rhythmic phrase.
 
@@ -145,6 +146,21 @@ C<MIDI::Simple::Length> hash (all the known MIDI-Perl durations).
 =cut
 
 has pool => (
+    is => 'rw',
+);
+
+=head2 phrase_weights
+
+  $phrase_weights = $d->phrase_weights;
+  $d->phrase_weights(\@weights);
+
+The weights of the duration pool, in a rhythmic phrase.
+
+Default: C<1> for each C<pool> member (equal probability)
+
+=cut
+
+has phrase_weights => (
     is => 'rw',
 );
 
@@ -723,8 +739,9 @@ has mdp => (
 sub _build_mdp {
     my ($self) = @_;
     my $mdp = Music::Duration::Partition->new(
-        size => $self->beats,
-        pool => $self->pool,
+        size    => $self->beats,
+        pool    => $self->pool,
+        weights => $self->phrase_weights,
     );
     return $mdp;
 }
@@ -740,6 +757,7 @@ sub _build_mdp {
     flats                       => $bool,
     beats                       => $beats,
     pool                        => \@pool, # or 'all'
+    phrase_weights              => \@weights,
     notes                       => \@notes,
     intervals                   => \@intervals,
     chord_triads                => \@triads,
@@ -771,6 +789,7 @@ sub BUILD {
     else {
         $self->pool([qw(wn dhn hn dqn qn den en)]);
     }
+    $self->phrase_weights([ (1) x @{ $self->pool } ]);
 }
 
 =head2 octave
