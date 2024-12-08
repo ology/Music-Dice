@@ -35,13 +35,15 @@ my $d = Music::Dice->new(
 );
  
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
-# print "H: @{ $c_phrase }\n";
-my $pool   = $d->pool;
-my $groups = $d->phrase_groups;
+print "H: @{ $c_phrase }\n";
+my $pool    = $d->pool;
+my $weights = $d->phrase_weights;
+my $groups  = $d->phrase_groups;
 $d->pool([ @$pool, qw(tqn) ]);
+$d->phrase_weights([ @$weights, 2 ]);
 $d->phrase_groups([ @$groups, 3 ]);
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
-# print "M: @{ $m_phrase }\n";
+print "M: @{ $m_phrase }\n";
 my $tonic    = $d->note->roll;
 my $mode     = $d->mode->roll;
 my @scale    = get_scale_notes($tonic, $mode);
