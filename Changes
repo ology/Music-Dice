@@ -2,6 +2,7 @@ Revision history for Music-Dice
 
 {{$NEXT}}
     - Remove the mM7 chord quality, because.. it is always ugly, imho.
+    - Complicate the eg/melody program in order to exercise more types of rolls.
 
 0.0105 2024-12-02 00:40:09
     - Remove questionable "gameplay" numeric rolling.
