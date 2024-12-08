@@ -164,6 +164,21 @@ has phrase_weights => (
     is => 'rw',
 );
 
+=head2 phrase_groups
+
+  $phrase_groups = $d->phrase_groups;
+  $d->phrase_groups(\@groups);
+
+The groups of the duration pool, in a rhythmic phrase.
+
+Default: C<1> for each C<pool> member (equal probability)
+
+=cut
+
+has phrase_groups => (
+    is => 'rw',
+);
+
 =head2 octaves
 
   $octaves = $d->octaves;
@@ -742,6 +757,7 @@ sub _build_mdp {
         size    => $self->beats,
         pool    => $self->pool,
         weights => $self->phrase_weights,
+        groups  => $self->phrase_groups ,
     );
     return $mdp;
 }
@@ -758,6 +774,7 @@ sub _build_mdp {
     beats                       => $beats,
     pool                        => \@pool, # or 'all'
     phrase_weights              => \@weights,
+    phrase_groups               => \@groups,
     notes                       => \@notes,
     intervals                   => \@intervals,
     chord_triads                => \@triads,
@@ -790,6 +807,7 @@ sub BUILD {
         $self->pool([qw(wn dhn hn dqn qn den en)]);
     }
     $self->phrase_weights([ (1) x @{ $self->pool } ]);
+    $self->phrase_groups([ (1) x @{ $self->pool } ]);
 }
 
 =head2 octave

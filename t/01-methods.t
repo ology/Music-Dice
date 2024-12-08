@@ -12,6 +12,7 @@ subtest defaults => sub {
     is $obj->beats, 4, 'beats';
     is_deeply $obj->pool, [qw(wn dhn hn dqn qn den en)], 'pool';
     is_deeply $obj->phrase_weights, [(1) x @{$obj->pool } ], 'phrase_weights';
+    is_deeply $obj->phrase_groups, [(1) x @{$obj->pool } ], 'phrase_groups';
     is_deeply $obj->octaves, [2 .. 6], 'octaves';
     is_deeply $obj->notes, [qw(C Db D Eb E F Gb G Ab A Bb B)], 'notes';
     is_deeply $obj->intervals, [ (1) x 12 ], 'intervals';
