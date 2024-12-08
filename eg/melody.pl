@@ -10,18 +10,20 @@ use Music::Dice ();
 use Music::Scales qw(get_scale_notes);
 
 my %opt = (
-    tonic   => 'C',
-    scale   => 'major',
-    octave  => 4,
-    bpm     => 80,
-    factor  => 7, # for volume changes
-    quality => 0, # use chord qualities
+    tonic    => 'C',
+    scale    => 'major',
+    octave   => 4,
+    bpm      => 80,
+    factor   => 7, # for volume changes
+    triplets => 0, # add triplets to the melody phrase
+    quality  => 0, # use chord qualities
 );
 GetOptions(\%opt,
     'tonic=s',
     'scale=s',
     'octave=i',
     'bpm=i',
+    'triplets',
     'quality',
 );
 
@@ -36,12 +38,14 @@ my $d = Music::Dice->new(
  
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
 print "H: @{ $c_phrase }\n";
-my $pool    = $d->phrase_pool;
-my $weights = $d->phrase_weights;
-my $groups  = $d->phrase_groups;
-$d->phrase_pool([ @$pool, qw(tqn) ]);
-$d->phrase_weights([ @$weights, 2 ]);
-$d->phrase_groups([ @$groups, 3 ]);
+if ($opt{triplets}) {
+    my $pool    = $d->phrase_pool;
+    my $weights = $d->phrase_weights;
+    my $groups  = $d->phrase_groups;
+    $d->phrase_pool([ @$pool, qw(thn tqn) ]);
+    $d->phrase_weights([ @$weights, 2, 2 ]);
+    $d->phrase_groups([ @$groups, 3, 3 ]);
+}
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
 print "M: @{ $m_phrase }\n";
 my $tonic    = $d->note->roll;
