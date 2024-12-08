@@ -36,10 +36,10 @@ my $d = Music::Dice->new(
  
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
 print "H: @{ $c_phrase }\n";
-my $pool    = $d->pool;
+my $pool    = $d->phrase_pool;
 my $weights = $d->phrase_weights;
 my $groups  = $d->phrase_groups;
-$d->pool([ @$pool, qw(tqn) ]);
+$d->phrase_pool([ @$pool, qw(tqn) ]);
 $d->phrase_weights([ @$weights, 2 ]);
 $d->phrase_groups([ @$groups, 3 ]);
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
