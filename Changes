@@ -2,7 +2,7 @@ Revision history for Music-Dice
 
 {{$NEXT}}
     - Remove the mM7 chord quality, because.. it is always ugly, imho.
-    - Complicate the eg/melody program in order to exercise more types of rolls.
+    - Complicate the eg/melody program in order to exercise more things.
     - Add the phrase_weights attribute.
     - Add the phrase_groups attribute.
     - Rename "pool" to "phrase_pool".
