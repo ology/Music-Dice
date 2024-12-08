@@ -739,29 +739,6 @@ has rhythmic_phrase_constraints => (
     default => sub { [ 3, 4, 5 ] },
 );
 
-=head2 mdp
-
-  $mdp = $d->mdp;
-
-The L<Music::Duration::Partition> object.
-
-=cut
-
-has mdp => (
-    is => 'lazy',
-);
-
-sub _build_mdp {
-    my ($self) = @_;
-    my $mdp = Music::Duration::Partition->new(
-        size    => $self->beats,
-        pool    => $self->phrase_pool,
-        weights => $self->phrase_weights,
-        groups  => $self->phrase_groups ,
-    );
-    return $mdp;
-}
-
 =head1 METHODS
 
 =head2 new
@@ -1311,7 +1288,7 @@ Return a single rhythmic value.
 sub rhythmic_value {
     my ($self) = @_;
     my $d = sub {
-        return choose_weighted($self->phrase_pool, [ (1) x @{ $self->phrase_pool } ])
+        return choose_weighted($self->phrase_pool, [ (1) x @{ $self->phrase_weights } ])
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -1326,8 +1303,14 @@ Return a rhythmic phrase, given the number of B<beats>.
 
 sub rhythmic_phrase {
     my ($self) = @_;
+    my $mdp = Music::Duration::Partition->new(
+        size    => $self->beats,
+        pool    => $self->phrase_pool,
+        weights => $self->phrase_weights,
+        groups  => $self->phrase_groups ,
+    );
     my $d = sub {
-        return $self->mdp->motif;
+        return $mdp->motif;
     };
     return Games::Dice::Advanced->new($d);
 }
@@ -1343,10 +1326,16 @@ B<rhythmic_phrase_constraints> (number of rhythmic values).
 
 sub rhythmic_phrase_constrained {
     my ($self) = @_;
+    my $mdp = Music::Duration::Partition->new(
+        size    => $self->beats,
+        pool    => $self->phrase_pool,
+        weights => $self->phrase_weights,
+        groups  => $self->phrase_groups ,
+    );
     my $d = sub {
         my $motif;
         while (!$motif || !grep { $_ == @$motif } @{ $self->rhythmic_phrase_constraints }) {
-            $motif = $self->mdp->motif;
+            $motif = $mdp->motif;
         }
         return $motif;
     };
