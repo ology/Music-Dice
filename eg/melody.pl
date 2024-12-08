@@ -41,6 +41,7 @@ my $mode     = $d->mode->roll;
 my @scale    = get_scale_notes($tonic, $mode);
 print "$tonic $mode: @scale\n";
 print "degree => chord | duruation\n";
+my @bass_notes;
 
 $d = Music::Dice->new(
     scale_note => $tonic,
@@ -66,6 +67,7 @@ sub harmony {
         print "$degree => $chord | $c_phrase->[$i]\n";
         my @tones = $cn->chord_with_octave($chord, $opt{octave});
         $score->n($c_phrase->[$i], midi_format(@tones));
+        push @bass_notes, $scale[$index] if $i == 0;
     }
     $score->Volume($volume);
 }
@@ -82,7 +84,7 @@ sub bass {
     set_chan_patch($score, 2, 33);
     my $volume = $score->Volume;
     $score->Volume($volume + $opt{factor});
-    my $note = $d->note->roll . ($opt{octave} - 1);
+    my $note = shift(@bass_notes) . ($opt{octave} - 1);
     $score->n('wn', midi_format($note));
     $score->Volume($volume);
 }
