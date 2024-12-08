@@ -10,17 +10,19 @@ use Music::Dice ();
 use Music::Scales qw(get_scale_notes);
 
 my %opt = (
-    tonic  => 'C',
-    scale  => 'major',
-    octave => 4,
-    bpm    => 80,
-    factor => 7, # for volume changes
+    tonic   => 'C',
+    scale   => 'major',
+    octave  => 4,
+    bpm     => 80,
+    factor  => 7, # for volume changes
+    quality => 0, # use chord qualities
 );
 GetOptions(\%opt,
     'tonic=s',
     'scale=s',
     'octave=i',
     'bpm=i',
+    'quality',
 );
 
 my $score = setup_score(bpm => $opt{bpm});
@@ -63,7 +65,7 @@ sub harmony {
         my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
         my $index = $degree - 1;
         my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
-        if ($i == $#$c_phrase) {
+        if ($opt{quality} && $i == $#$c_phrase) {
             if ($triad eq 'diminished') {
                 $type = $d->chord_quality_diminished->roll;
             }
