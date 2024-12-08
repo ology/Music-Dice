@@ -1384,6 +1384,8 @@ L<Music::Duration::Partition>
 
 L<Music::Scales>
 
+L<usic::ToRoman>
+
 L<Types::Standard>
 
 =cut
