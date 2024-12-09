@@ -39,22 +39,29 @@ my $d = Music::Dice->new(
 # get the initial settings by rolling
 my $h_phrase = $d->rhythmic_phrase->roll; # harmony
 print "Harmony rhythm: @{ $h_phrase }\n";
+# define the "melody"
+my $pool    = $d->phrase_pool;
+my $weights = $d->phrase_weights;
+my $groups  = $d->phrase_groups;
+$d->phrase_pool([ @$pool, qw(sn) ]);
+$d->phrase_weights([ @$weights, 1 ]);
+$d->phrase_groups([ @$groups, 1 ]);
 if ($opt{triplets}) {
-    my $pool    = $d->phrase_pool;
-    my $weights = $d->phrase_weights;
-    my $groups  = $d->phrase_groups;
+    $pool    = $d->phrase_pool;
+    $weights = $d->phrase_weights;
+    $groups  = $d->phrase_groups;
     $d->phrase_pool([ @$pool, qw(thn tqn) ]);
     $d->phrase_weights([ @$weights, 2, 2 ]);
     $d->phrase_groups([ @$groups, 3, 3 ]);
 }
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
 print "Melody rhythm: @{ $m_phrase }\n";
-my $tonic    = $d->note->roll;
-my $mode     = $d->mode->roll;
-my @scale    = get_scale_notes($tonic, $mode);
+my $tonic = $d->note->roll;
+my $mode  = $d->mode->roll;
+my @scale = get_scale_notes($tonic, $mode);
 print "$tonic $mode: @scale\n";
 print "degree => chord | duration\n";
-my @bass_notes;
+my @bass_notes; # global bucket defined by the harmony
 
 # get a new set of dice with the new tonic and mode
 $d = Music::Dice->new(
