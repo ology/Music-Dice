@@ -38,7 +38,7 @@ my $d = Music::Dice->new(
  
 # get the initial settings by rolling
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
-print "H: @{ $c_phrase }\n";
+print "Harmony rhythm: @{ $c_phrase }\n";
 if ($opt{triplets}) {
     my $pool    = $d->phrase_pool;
     my $weights = $d->phrase_weights;
@@ -48,7 +48,7 @@ if ($opt{triplets}) {
     $d->phrase_groups([ @$groups, 3, 3 ]);
 }
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
-print "M: @{ $m_phrase }\n";
+print "Melody rhythm: @{ $m_phrase }\n";
 my $tonic    = $d->note->roll;
 my $mode     = $d->mode->roll;
 my @scale    = get_scale_notes($tonic, $mode);
