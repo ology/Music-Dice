@@ -40,16 +40,10 @@ my $d = Music::Dice->new(
 my $h_phrase = $d->rhythmic_phrase->roll; # harmony
 print "Harmony rhythm: @{ $h_phrase }\n";
 # define the "melody"
-my $pool    = $d->phrase_pool;
-my $weights = $d->phrase_weights;
-my $groups  = $d->phrase_groups;
-$d->phrase_pool([ @$pool, qw(sn) ]);
-$d->phrase_weights([ @$weights, 1 ]);
-$d->phrase_groups([ @$groups, 1 ]);
 if ($opt{triplets}) {
-    $pool    = $d->phrase_pool;
-    $weights = $d->phrase_weights;
-    $groups  = $d->phrase_groups;
+    my $pool    = $d->phrase_pool;
+    my $weights = $d->phrase_weights;
+    my $groups  = $d->phrase_groups;
     $d->phrase_pool([ @$pool, qw(thn tqn) ]);
     $d->phrase_weights([ @$weights, 2, 2 ]);
     $d->phrase_groups([ @$groups, 3, 3 ]);
