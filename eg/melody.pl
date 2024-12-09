@@ -37,8 +37,8 @@ my $d = Music::Dice->new(
 );
  
 # get the initial settings by rolling
-my $c_phrase = $d->rhythmic_phrase->roll; # harmony
-print "Harmony rhythm: @{ $c_phrase }\n";
+my $h_phrase = $d->rhythmic_phrase->roll; # harmony
+print "Harmony rhythm: @{ $h_phrase }\n";
 if ($opt{triplets}) {
     my $pool    = $d->phrase_pool;
     my $weights = $d->phrase_weights;
@@ -74,11 +74,11 @@ sub harmony {
     set_chan_patch($score, 0, 4);
     my $volume = $score->Volume;
     $score->Volume($volume - $opt{factor});
-    for my $i (0 .. $#$c_phrase) {
+    for my $i (0 .. $#$h_phrase) {
         my ($degree, $triad) = $d->mode_degree_triad_roll($mode);
         my $index = $degree - 1;
         my $type = $triad eq 'diminished' ? 'dim' : $triad eq 'minor' ? 'm' : '';
-        if ($opt{quality} && $i == $#$c_phrase) {
+        if ($opt{quality} && $i == $#$h_phrase) {
             if ($triad eq 'diminished') {
                 $type = $d->chord_quality_diminished->roll;
             }
@@ -90,9 +90,9 @@ sub harmony {
             }
         }
         my $chord = "$scale[$index]$type";
-        print "$degree => $chord | $c_phrase->[$i]\n";
+        print "$degree => $chord | $h_phrase->[$i]\n";
         my @tones = $cn->chord_with_octave($chord, $opt{octave});
-        $score->n($c_phrase->[$i], midi_format(@tones));
+        $score->n($h_phrase->[$i], midi_format(@tones));
         push @bass_notes, $scale[$index] if $i == 0;
     }
     $score->Volume($volume);
