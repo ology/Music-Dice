@@ -55,6 +55,7 @@ print "$tonic $mode: @scale\n";
 print "degree => chord | duration\n";
 my @bass_notes;
 
+# get a new set of dice with the new tonic and mode
 $d = Music::Dice->new(
     scale_note => $tonic,
     scale_name => $mode,
