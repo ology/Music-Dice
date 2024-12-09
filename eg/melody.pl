@@ -52,7 +52,7 @@ my $tonic    = $d->note->roll;
 my $mode     = $d->mode->roll;
 my @scale    = get_scale_notes($tonic, $mode);
 print "$tonic $mode: @scale\n";
-print "degree => chord | duruation\n";
+print "degree => chord | duration\n";
 my @bass_notes;
 
 $d = Music::Dice->new(
