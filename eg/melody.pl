@@ -43,9 +43,9 @@ if ($opt{triplets}) {
     my $pool    = $d->phrase_pool;
     my $weights = $d->phrase_weights;
     my $groups  = $d->phrase_groups;
-    $d->phrase_pool([ @$pool, qw(sn thn tqn) ]);
-    $d->phrase_weights([ @$weights, 1, 2, 2 ]);
-    $d->phrase_groups([ @$groups, 1, 3, 3 ]);
+    $d->phrase_pool([ @$pool, qw(thn tqn) ]);
+    $d->phrase_weights([ @$weights, 2, 2 ]);
+    $d->phrase_groups([ @$groups, 3, 3 ]);
 }
 my $m_phrase = $d->rhythmic_phrase->roll; # melody
 print "Melody rhythm: @{ $m_phrase }\n";
