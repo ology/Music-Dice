@@ -36,6 +36,7 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
  
+# get the initial settings by rolling
 my $c_phrase = $d->rhythmic_phrase->roll; # harmony
 print "H: @{ $c_phrase }\n";
 if ($opt{triplets}) {
@@ -61,6 +62,7 @@ $d = Music::Dice->new(
     scale_name => $mode,
 );
 
+# play the parts simultaneously
 $score->synch(
     \&harmony,
     \&melody,
