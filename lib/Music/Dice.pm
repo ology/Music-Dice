@@ -67,6 +67,22 @@ C<Music::Dice> defines and rolls musical dice.
 
 =head1 ATTRIBUTES
 
+=head2 semitones
+
+  $semitones = $d->semitones;
+
+The number of semitones in the notes of the chromatic scale.
+
+Default: C<12>
+
+=cut
+
+has semitones => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
+    default => sub { 12 },
+);
+
 =head2 scale_note
 
   $note = $d->scale_note;
@@ -233,7 +249,7 @@ Return the note B<intervals>.
 This list is computed, if the B<scale_name> is given, and the
 B<intervals> are I<not> given in the object constructor.
 
-Default: 12 C<1>s (for the chromatic scale)
+Default: C<1> for each of the defined B<semitones>
 
 =cut
 
@@ -245,7 +261,7 @@ sub _build_intervals {
     my ($self) = @_;
     my @nums = get_scale_nums($self->scale_name);
     my @intervals = map { $nums[$_] - $nums[$_ - 1] } 1 .. $#nums;
-    push @intervals, 12 - $nums[-1];
+    push @intervals, $self->semitones - $nums[-1];
     return \@intervals;
 }
 
@@ -858,15 +874,14 @@ sub note_chromatic {
 
   $result = $d->interval_chromatic->roll;
 
-Return one of the chromatic intervals (12 C<1>s), with equal
-probability.
+Return one of the chromatic intervals, with equal probability.
 
 =cut
 
 sub interval_chromatic {
     my ($self) = @_;
     my $d = sub {
-        my $choices = [ (1) x 12 ];
+        my $choices = [ (1) x $self->semitones ];
         return choose_weighted($choices, $choices);
     };
     return Games::Dice::Advanced->new($d);
