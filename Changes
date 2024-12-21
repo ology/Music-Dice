@@ -1,6 +1,8 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+
+0.0202 2024-12-20 23:35:03
     - Add the semitones attribute.
     - Add the identity attribute and intervals.
 
