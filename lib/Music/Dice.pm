@@ -2,7 +2,7 @@ package Music::Dice;
 
 # ABSTRACT: Define and roll musical dice
 
-our $VERSION = '0.0201';
+our $VERSION = '0.0202';
 
 use Moo;
 use strictures 2;
