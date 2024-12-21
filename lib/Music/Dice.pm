@@ -761,6 +761,7 @@ has rhythmic_phrase_constraints => (
 
   $d = Music::Dice->new;
   $d = Music::Dice->new( # override defaults
+    semitones                   => $semitones,
     scale_note                  => $note,
     scale_name                  => $name,
     flats                       => $bool,
