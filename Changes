@@ -1,11 +1,11 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+    - Add the semitones attribute.
+    - Add the identity attribute and intervals.
 
 0.0201 2024-12-09 16:01:03
     - Improve the eg/melody program a bit.
-    - Add the semitones attribute.
-    - Add the identity attribute and intervals.
 
 0.0200 2024-12-08 02:23:16
     - Remove the mM7 chord quality, because.. it is always ugly, imho.
