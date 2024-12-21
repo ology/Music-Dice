@@ -262,8 +262,29 @@ sub _build_intervals {
     my @nums = get_scale_nums($self->scale_name);
     my @intervals = map { $nums[$_] - $nums[$_ - 1] } 1 .. $#nums;
     push @intervals, $self->semitones - $nums[-1];
+    if ($self->identity) {
+        unshift @intervals, 0;
+        push @intervals, $self->semitones;
+    }
     return \@intervals;
 }
+
+=head2 identity
+
+  $identity = $d->identity;
+
+To include unison (C<0>) and the octave (the number of B<semitones>),
+in the list of intervals.
+
+Default: C<0>
+
+=cut
+
+has identity => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
+    default => sub { 0 },
+);
 
 =head2 chord_triads
 
@@ -764,12 +785,13 @@ has rhythmic_phrase_constraints => (
     semitones                   => $semitones,
     scale_note                  => $note,
     scale_name                  => $name,
-    flats                       => $bool,
+    flats                       => $flats,
     beats                       => $beats,
     phrase_pool                 => \@pool, # or 'all'
     phrase_weights              => \@weights,
     phrase_groups               => \@groups,
     notes                       => \@notes,
+    identity                    => $identity,
     intervals                   => \@intervals,
     chord_triads                => \@triads,
     chord_triad_weights         => \@triad_weights,
