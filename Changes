@@ -1,6 +1,7 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+    - Fix Music::Duration::Partition prereq version.
 
 0.0202 2024-12-20 23:35:03
     - Add the semitones attribute.
