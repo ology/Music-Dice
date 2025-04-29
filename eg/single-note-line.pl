@@ -7,9 +7,9 @@ use MIDI::Util qw(setup_score midi_format play_fluidsynth);
 use Music::Dice ();
 
 my %opt = (
-    tonic  => 'C',
-    scale  => 'major',
-    octave => 5,
+    tonic     => 'C',
+    scale     => 'major',
+    octave    => 5,
     soundfont => '/Users/gene/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
 );
