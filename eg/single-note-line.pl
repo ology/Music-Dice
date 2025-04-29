@@ -3,13 +3,15 @@ use strict;
 use warnings;
 
 use Getopt::Long qw(GetOptions);
-use MIDI::Util qw(setup_score midi_format);
+use MIDI::Util qw(setup_score midi_format play_fluidsynth);
 use Music::Dice ();
 
 my %opt = (
     tonic  => 'C',
     scale  => 'major',
     octave => 5,
+    soundfont => '/Users/gene/Music/soundfont/FluidR3_GM.sf2',
+    midi_file => "$0.mid",
 );
 GetOptions(\%opt,
     'tonic=s',
@@ -32,4 +34,6 @@ for (1 .. 4) {
         $score->n($phrase->[$i], midi_format($note))
     }
 }
-$score->write_score("$0.mid");
+
+# $score->write_score($opt{midi_file});
+play_fluidsynth($score, $opt{midi_file}, $opt{soundfont});
