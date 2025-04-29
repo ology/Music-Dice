@@ -1,6 +1,8 @@
 Revision history for Music-Dice
 
 {{$NEXT}}
+
+0.0204 2025-04-29 16:40:34
     - Fix copyright.
     - Enhance the eg/*.pl programs.
 
