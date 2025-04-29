@@ -27,7 +27,9 @@ my $d = Music::Dice->new(
 );
 
 my $score = setup_score(
-    patch => $opt{patch}, bpm => $opt{bpm});
+    patch => $opt{patch},
+    bpm   => $opt{bpm},
+);
 
 my $phrase = $d->rhythmic_phrase->roll;
 
