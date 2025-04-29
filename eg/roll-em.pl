@@ -4,7 +4,7 @@ use warnings;
 
 use Data::Dumper::Compact qw(ddc);
 use Getopt::Long qw(GetOptions);
-use MIDI::Util qw(setup_score midi_format);
+use MIDI::Util qw(setup_score midi_format play_fluidsynth);
 use Music::Chord::Note ();
 use Music::Dice ();
 
