@@ -11,7 +11,7 @@ my %opt = (
     scale     => 'major',
     octave    => 5,
     patch     => 0,
-    bpm       => 80,
+    bpm       => 90,
     soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
 );
@@ -19,6 +19,10 @@ GetOptions(\%opt,
     'tonic=s',
     'scale=s',
     'octave=i',
+    'patch=i',
+    'bpm=i',
+    'soundfont=s',
+    'midi_file=s',
 );
 
 my $d = Music::Dice->new(
