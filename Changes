@@ -2,6 +2,7 @@ Revision history for Music-Dice
 
 {{$NEXT}}
     - Fix copyright.
+    - Enhance the eg/*.pl programs.
 
 0.0203 2025-04-04 08:59:15
     - Fix Music::Duration::Partition prereq version (rt#157625).
