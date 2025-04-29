@@ -10,6 +10,8 @@ my %opt = (
     tonic     => 'C',
     scale     => 'major',
     octave    => 5,
+    patch     => 0,
+    bpm       => 80,
     soundfont => '/Users/gene/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
 );
@@ -24,7 +26,8 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
 
-my $score = setup_score(patch => 0, bpm => 80);
+my $score = setup_score(
+    patch => $opt{patch}, bpm => $opt{bpm});
 
 my $phrase = $d->rhythmic_phrase->roll;
 
