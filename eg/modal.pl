@@ -10,16 +10,20 @@ use Music::Dice ();
 use Music::Scales qw(get_scale_notes);
 
 my %opt = (
-    tonic  => 'C',
-    scale  => 'major',
-    octave => 4,
-    bpm    => 80,
+    tonic     => 'C',
+    scale     => 'major',
+    octave    => 4,
+    bpm       => 80,
+    soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
+    midi_file => "$0.mid",
 );
 GetOptions(\%opt,
     'tonic=s',
     'scale=s',
     'octave=i',
     'bpm=i',
+    'soundfont=s',
+    'midi_file=s',
 );
 
 my $score = setup_score(patch => 0, bpm => $opt{bpm});
@@ -54,4 +58,6 @@ for (1 .. 4) {
         $score->n($phrase->[$i], midi_format(@tones))
     }
 }
-$score->write_score("$0.mid");
+
+# $score->write_score($opt{midi_file});
+play_fluidsynth($score, $opt{midi_file}, $opt{soundfont});
