@@ -11,12 +11,14 @@ use Music::Dice ();
 my %opt = (
     tonic     => 'C',
     scale     => 'major',
+    octave    => 4,
     soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
 );
 GetOptions(\%opt,
     'tonic=s',
     'scale=s',
+    'octave=i',
     'soundfont=s',
     'midi_file=s',
 );
@@ -48,7 +50,7 @@ for (1 .. 4) {
             @tones = split /\s+/, $spec->[1];
         }
         else {
-            @tones = $cn->chord_with_octave($spec->[1], 4);
+            @tones = $cn->chord_with_octave($spec->[1], $opt{octave});
         }
         $score->n($spec->[0], midi_format(@tones))
     }
