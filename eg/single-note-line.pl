@@ -12,7 +12,7 @@ my %opt = (
     octave    => 5,
     patch     => 0,
     bpm       => 80,
-    soundfont => '/Users/gene/Music/soundfont/FluidR3_GM.sf2',
+    soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
 );
 GetOptions(\%opt,
