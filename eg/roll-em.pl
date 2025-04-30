@@ -14,6 +14,7 @@ my %opt = (
     octave    => 4,
     soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
+    quality   => 0,
 );
 GetOptions(\%opt,
     'tonic=s',
@@ -21,6 +22,7 @@ GetOptions(\%opt,
     'octave=i',
     'soundfont=s',
     'midi_file=s',
+    'quality',
 );
 
 my $d = Music::Dice->new(
@@ -40,7 +42,9 @@ for (1 .. 4) {
     my @midi;
     for my $i (0 .. $#$phrase) {
         my $notes;
-        my $quality = $d->chord_quality_triad_roll($notes[$i], $triads[$i]);
+        my $quality = $opt{quality}
+            ? $d->chord_quality_triad_roll($notes[$i], $triads[$i])
+            : '';
         push @midi, [ $phrase->[$i], "$notes[$i]$quality" ];
     }
     for my $spec (@midi) {
