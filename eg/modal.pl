@@ -23,6 +23,7 @@ GetOptions(\%opt,
     'scale=s',
     'octave=i',
     'bpm=i',
+    'patch=i',
     'soundfont=s',
     'midi_file=s',
 );
