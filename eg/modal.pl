@@ -14,6 +14,7 @@ my %opt = (
     scale     => 'major',
     octave    => 4,
     bpm       => 80,
+    patch     => 0,
     soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
 );
@@ -26,7 +27,10 @@ GetOptions(\%opt,
     'midi_file=s',
 );
 
-my $score = setup_score(patch => 0, bpm => $opt{bpm});
+my $score = setup_score(
+    patch => $opt{patch},
+    bpm   => $opt{bpm},
+);
 
 my $cn = Music::Chord::Note->new;
 
