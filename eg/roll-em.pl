@@ -12,6 +12,7 @@ my %opt = (
     tonic     => 'C',
     scale     => 'major',
     octave    => 4,
+    patch     => 0,
     soundfont => $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2',
     midi_file => "$0.mid",
     quality   => 0,
@@ -20,6 +21,7 @@ GetOptions(\%opt,
     'tonic=s',
     'scale=s',
     'octave=i',
+    'patch=i',
     'soundfont=s',
     'midi_file=s',
     'quality',
@@ -30,7 +32,7 @@ my $d = Music::Dice->new(
     scale_name => $opt{scale},
 );
 
-my $score = setup_score(patch => 4);
+my $score = setup_score(patch => $opt{patch});
 
 my $cn = Music::Chord::Note->new;
 
