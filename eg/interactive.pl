@@ -29,7 +29,7 @@ for my $i (1 .. $max) {
         push @notes, $note;
     }
     @notes = uniq(@notes);
-    print ddc(\notes);
+    print ddc(\@notes);
     push @chords, \@notes;
 }
 
