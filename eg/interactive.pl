@@ -9,6 +9,7 @@ use Music::Dice ();
 use Term::Choose ();
 
 my $max = 4;
+my $loop = 2;
 my $choices = [1 .. 4];
 
 my @chords;
@@ -38,7 +39,7 @@ my $score = setup_score(
     bpm   => 100,
 );
 
-for (1 .. 2) {
+for (1 .. $loop) {
     $score->n('wn', midi_format(@$_)) for @chords;
 }
 
