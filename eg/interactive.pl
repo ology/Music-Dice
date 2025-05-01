@@ -37,7 +37,8 @@ my $score = setup_score(
 );
 
 for (1 .. $loop) {
-    $score->n('wn', midi_format(@$_)) for @chords;
+    $score->n('dhn', midi_format(@$_)) for @chords;
+    $score->r('qn');
 }
 
 play_fluidsynth($score, "$0.mid", $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2');
