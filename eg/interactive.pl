@@ -8,9 +8,9 @@ use MIDI::Util qw(setup_score midi_format play_fluidsynth);
 use Music::Dice ();
 use Term::Choose ();
 
-my $max = 4;
-my $loop = 2;
-my $choices = [1 .. 4];
+my $max     = 4; # maximum number of chords
+my $loop    = 2; # number of times to play the chord progression
+my $choices = [1 .. 4]; # number of notes to play
 
 my @chords;
 
