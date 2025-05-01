@@ -14,10 +14,7 @@ my $choices = [1 .. 4];
 
 my @chords;
 
-my $d = Music::Dice->new(
-    scale_note => 'C',
-    scale_name => 'major',
-);
+my $d = Music::Dice->new;
 
 for my $i (1 .. $max) {
     my $prompt = "How many notes in chord $i?";
