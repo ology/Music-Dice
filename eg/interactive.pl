@@ -28,9 +28,9 @@ for my $i (1 .. $max) {
         my $note = $d->note->roll;
         push @notes, $note;
     }
-    my @uniq = uniq(@notes);
-    print ddc(\@uniq);
-    push @chords, \@uniq;
+    @notes = uniq(@notes);
+    print ddc(\notes);
+    push @chords, \@notes;
 }
 
 my $score = setup_score(
