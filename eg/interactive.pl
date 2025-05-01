@@ -14,7 +14,7 @@ my $choices = [1 .. 4];
 my @chords;
 
 for my $i (1 .. $max) {
-    my $prompt = "How many notes in chord #$i?";
+    my $prompt = "How many notes in chord $i?";
     my $tc = Term::Choose->new({ prompt => $prompt });
     my $n = $tc->choose($choices);
 
