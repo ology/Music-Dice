@@ -38,6 +38,8 @@ my $score = setup_score(
     bpm   => 100,
 );
 
-$score->n('wn', midi_format(@$_)) for @chords;
+for (1 .. 2) {
+    $score->n('wn', midi_format(@$_)) for @chords;
+}
 
 play_fluidsynth($score, "$0.mid", $ENV{HOME} . '/Music/soundfont/FluidR3_GM.sf2');
